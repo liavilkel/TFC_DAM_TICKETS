@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">TFC_DAM_TICKETS</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="btn_login">Iniciar sesión</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="btn_registrarse">Registrarse</string>
 </resources>

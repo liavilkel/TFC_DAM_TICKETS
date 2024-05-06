@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "915748415619",
+    "project_id": "tfc-dam-monkeys",
+    "storage_bucket": "tfc-dam-monkeys.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915748415619:android:968ae161a8110c271653b6",
+        "android_client_info": {
+          "package_name": "com.example.tfc_dam_tickets"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC8QjKAFx1oj_88_v-Ju8RywVNF_A5UF8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
