@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.tfc_dam_tickets.R;
 import com.example.tfc_dam_tickets.model.User;
-import com.example.tfc_dam_tickets.persistence.DBContection;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
 import com.google.firebase.auth.FirebaseAuth;
 

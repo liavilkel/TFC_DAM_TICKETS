@@ -17,9 +17,6 @@
             android:name=".VentanaPrincipal"
             android:exported="false" />
         <activity
-            android:name=".NewAccount"
-            android:exported="false" />
-        <activity
             android:name=".autenticacion.Login"
             android:exported="true">
             <intent-filter>

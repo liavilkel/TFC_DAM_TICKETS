@@ -10,7 +10,6 @@ import com.example.tfc_dam_tickets.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -24,13 +23,13 @@ public class UserPersistence {
     static final String TELF = "phone_number";
     static final String TIPO = "type";
 
-    DBContection DBCon;
+    DBConnection DBCon;
     String conRes;
     Context context; // Add context
 
     public UserPersistence(Context context) {
         this.context = context; // Initialize context
-        DBCon = new DBContection();
+        DBCon = new DBConnection();
     }
 
     public int newUser(User user) {

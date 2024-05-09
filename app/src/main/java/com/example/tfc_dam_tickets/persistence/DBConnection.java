@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBContection {
+public class DBConnection {
 
     String username, password, ip, port, database;
 
