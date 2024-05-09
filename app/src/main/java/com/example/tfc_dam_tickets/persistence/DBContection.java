@@ -11,7 +11,7 @@ public class DBContection {
     Connection con;
     String username, password, ip, port, database;
 
-   public Connection connectionClass(){
+   public Connection getConection(){
        ip = "82.223.204.116";
        database = "resolver_rocket";
        username = "tfg_user";
@@ -26,7 +26,10 @@ public class DBContection {
        try {
            Class.forName("net.sourcefotge.jtds.jdbc.Driver");
            connectionURL= "jdbc:jtds:sqlserver://"+ ip + ":"+ port+";"+ "databasename="
-                   + database+";user="+username+";password="+password+";";
+                  + database+";user="+username+";password="+password+";";
+
+           //connectionURL= "jdbc:jtds:sqlserver://"+ ip + ":"+ port+";user="+username+";password="+password+";";
+
            connection = DriverManager.getConnection(connectionURL);
        } catch (Exception e) {
            Log.e("Error ", e.getMessage());

@@ -105,6 +105,46 @@
 
         />
 
+    <EditText
+        android:id="@+id/etPhoneNum"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/phone_numer"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginTop="20dp"
+        app:layout_constraintWidth_percent=".8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etConfirmPassword"
+        android:background="@drawable/et_text"
+        android:textSize="16sp"
+
+        />
+
+    <EditText
+        android:id="@+id/etComId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/company_id"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginTop="20dp"
+        app:layout_constraintWidth_percent=".8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPhoneNum"
+        android:background="@drawable/et_text"
+        android:textSize="16sp"
+
+        />
+
 
 
     <Button

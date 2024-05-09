@@ -12,18 +12,26 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.tfc_dam_tickets.R;
+import com.example.tfc_dam_tickets.model.User;
+import com.example.tfc_dam_tickets.persistence.DBContection;
+import com.example.tfc_dam_tickets.persistence.UserPersistence;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class RegistroFragment extends Fragment {
 
-    EditText etEmail, etNombre, etApellidos, etPass, etConfPass;
-    Button registrar;
+    static final String TIPO = "empleado";
+
+    EditText etEmail, etNombre, etApellidos, etPass, etConfPass, etPhoneNum, etComId;
+    Button btnRegistrar;
     float v = 0;
 
     FirebaseAuth mAuth;
+    UserPersistence userPer;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        userPer = new UserPersistence();
 
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.registro_tab_fragment,container,false);
 
@@ -34,15 +42,24 @@ public class RegistroFragment extends Fragment {
         etApellidos = viewGroup.findViewById(R.id.etApellidos);
         etPass = viewGroup.findViewById(R.id.etPassword);
         etConfPass = viewGroup.findViewById(R.id.etConfirmPassword);
-        registrar = viewGroup.findViewById(R.id.btnRegistrarse);
+        etPhoneNum = viewGroup.findViewById(R.id.etPhoneNum);
+        etComId = viewGroup.findViewById(R.id.etComId);
+        btnRegistrar = viewGroup.findViewById(R.id.btnRegistrarse);
 
         iniciarAnimacion();
 
-
-        registrar.setOnClickListener(new View.OnClickListener() {
+        btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = String.valueOf(etEmail.getText());
+
+                //userPer.newUser(new User(etEmail.getText().toString(), etPass.getText().toString(),
+                  //      etNombre.getText().toString(), etApellidos.getText().toString(),
+                    //    etPhoneNum.getText().toString(), TIPO, null));
+
+                userPer.newUser(new User("test@test.com", "password",
+                        "Liana", "Guapa",
+                        "112", TIPO, null));
+
             }
         });
 
@@ -55,21 +72,21 @@ public class RegistroFragment extends Fragment {
         etApellidos.setTranslationX(800);
         etPass.setTranslationX(800);
         etConfPass.setTranslationX(800);
-        registrar.setTranslationX(800);
+        btnRegistrar.setTranslationX(800);
 
         etEmail.setAlpha(v);
         etNombre.setAlpha(v);
         etApellidos.setAlpha(v);
         etPass.setAlpha(v);
         etConfPass.setAlpha(v);
-        registrar.setAlpha(v);
+        btnRegistrar.setAlpha(v);
 
         etEmail.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
         etNombre.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
         etApellidos.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
         etPass.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
         etConfPass.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
-        registrar.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        btnRegistrar.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
     }
 
 

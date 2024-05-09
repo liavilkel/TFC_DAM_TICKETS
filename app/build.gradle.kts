@@ -41,8 +41,10 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:2.7.6")
     implementation("androidx.navigation:navigation-ui:2.7.6")
     implementation("com.google.firebase:firebase-auth:23.0.0")
-    //DB CONECTION
-    implementation ("mysql:mysql-connector-java:5.1.49")
+    //DB CONNECTION
+    implementation("mysql:mysql-connector-java:8.0.33")
+
+
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

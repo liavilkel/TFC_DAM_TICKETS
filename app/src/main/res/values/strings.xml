@@ -7,4 +7,6 @@
     <string name="username">Username</string>
     <string name="confirm_password">Confirmar contraseña</string>
     <string name="btn_registrarse">Registrarse</string>
+    <string name="phone_numer">Número de teléfono</string>
+    <string name="company_id">Id de empresa</string>
 </resources>
