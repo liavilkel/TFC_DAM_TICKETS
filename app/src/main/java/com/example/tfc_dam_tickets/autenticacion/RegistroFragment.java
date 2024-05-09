@@ -31,7 +31,7 @@ public class RegistroFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        userPer = new UserPersistence();
+        userPer = new UserPersistence(getContext());
 
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.registro_tab_fragment,container,false);
 
@@ -56,8 +56,8 @@ public class RegistroFragment extends Fragment {
                   //      etNombre.getText().toString(), etApellidos.getText().toString(),
                     //    etPhoneNum.getText().toString(), TIPO, null));
 
-                userPer.newUser(new User("test@test.com", "password",
-                        "Liana", "Guapa",
+                userPer.newUser(new User("test2@test.com", "password",
+                        "Liana2", "Guapa",
                         "112", TIPO, null));
 
             }
@@ -73,6 +73,8 @@ public class RegistroFragment extends Fragment {
         etPass.setTranslationX(800);
         etConfPass.setTranslationX(800);
         btnRegistrar.setTranslationX(800);
+        etPhoneNum.setTranslationX(800);
+        etComId.setTranslationX(800);
 
         etEmail.setAlpha(v);
         etNombre.setAlpha(v);
@@ -80,6 +82,8 @@ public class RegistroFragment extends Fragment {
         etPass.setAlpha(v);
         etConfPass.setAlpha(v);
         btnRegistrar.setAlpha(v);
+        etPhoneNum.setAlpha(v);
+        etComId.setAlpha(v);
 
         etEmail.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
         etNombre.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
@@ -87,6 +91,8 @@ public class RegistroFragment extends Fragment {
         etPass.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
         etConfPass.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
         btnRegistrar.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        etPhoneNum.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        etComId.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
     }
 
 

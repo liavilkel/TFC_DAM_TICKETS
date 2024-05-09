@@ -1,14 +1,22 @@
 package com.example.tfc_dam_tickets.persistence;
 
+import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+import android.widget.Toast;
+
 import com.example.tfc_dam_tickets.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class UserPersistence {
 
-    static final String TABLA = "resolver_rocker.Users"; //resolver_rocker.Users
+    static final String TABLA = "resolver_rocket.Users";
     static final String EMAIL = "email";
     static final String CONT = "password";
     static final String NOMBRE = "name";
@@ -16,52 +24,65 @@ public class UserPersistence {
     static final String TELF = "phone_number";
     static final String TIPO = "type";
 
-    DBContection con;
+    DBContection DBCon;
+    String conRes;
+    Context context; // Add context
 
-    public UserPersistence() {
-        con = new DBContection();
+    public UserPersistence(Context context) {
+        this.context = context; // Initialize context
+        DBCon = new DBContection();
     }
 
-    public int  newUser(User user) {
-
+    public int newUser(User user) {
         String query = "INSERT INTO " + TABLA
                 + " ( " + EMAIL + ", " + CONT + ", " + NOMBRE + ", " + APE + ", " + TELF + ", " + TIPO +
-                ") VALUES (?, ?, ?, ?, ?, ?";
+                ") VALUES (?, ?, ?, ?, ?, ?)"; // Corrected the SQL syntax here
 
         int res = 0;
-        Connection connection = null;
-        PreparedStatement stmt = null;
 
-        try {
+        try (Connection connection = DBCon.getConection();
+             PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
 
-            connection = con.getConection();
-            stmt = connection.prepareStatement(query);
+            if (stmt != null) {
+                stmt.setString(1, user.getEmail());
+                stmt.setString(2, user.getPassword());
+                stmt.setString(3, user.getName());
+                stmt.setString(4, user.getLastName());
+                stmt.setString(5, user.getPhone_num());
+                stmt.setString(6, user.getType());
 
-            stmt.setString(1, user.getEmail());
-            stmt.setString(2, user.getPassword());
-            stmt.setString(3, user.getName());
-            stmt.setString(4, user.getLastName());
-            stmt.setString(5, user.getPhone_num());
-            stmt.setString(6, user.getType());
-
+                res = stmt.executeUpdate(); // Execute the insert statement
+                Log.d("UserPersistence", "User inserted successfully");
+            } else {
+                res = -1;
+                System.err.println("Failed to make connection!");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             res = -1;
-        } finally {
-            try {
-                if (stmt != null)
-                    stmt.close();
-
-               // if (con != null)
-                    //connection.close();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
-
         return res;
-
     }
 
+    public void connect() {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> {
+            try {
+                try (Connection con = DBCon.getConection()) {
+                    if (con == null) {
+                        conRes = "Unable to connect with server";
+                    } else {
+                        conRes = "Connected with server";
+                    }
+                }
+            } catch (Exception e) {
+                conRes = "Connection failed: " + e.getMessage();
+            }
+
+            // Use Handler to show Toast on main thread
+            new Handler(Looper.getMainLooper()).post(() -> {
+                Toast.makeText(context, conRes, Toast.LENGTH_SHORT).show();
+            });
+        });
+    }
 }
