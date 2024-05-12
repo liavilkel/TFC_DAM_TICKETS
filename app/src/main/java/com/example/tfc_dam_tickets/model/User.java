@@ -2,9 +2,10 @@ package com.example.tfc_dam_tickets.model;
 
 public class User {
 
-    String email, password, name, lastName, phone_num, type, comId;
+    String email, password, name, lastName, phone_num, type;
+    Integer comId;
 
-    public User(String email, String password, String name, String lastName, String phone_num, String type, String comId) {
+    public User(String email, String password, String name, String lastName, String phone_num, String type, Integer comId) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -62,11 +63,6 @@ public class User {
         this.type = type;
     }
 
-    public String getComId() {
-        return comId;
-    }
-
-    public void setComId(String comId) {
-        this.comId = comId;
-    }
+    public Integer getComId() {return comId;}
+    public void setComId(Integer comId) {this.comId = comId;}
 }

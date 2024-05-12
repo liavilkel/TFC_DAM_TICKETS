@@ -54,11 +54,6 @@ public class RegistroFragment extends Fragment {
                 userPer.newUser(new User(etEmail.getText().toString(), etPass.getText().toString(),
                         etNombre.getText().toString(), etApellidos.getText().toString(),
                         etPhoneNum.getText().toString(), TIPO, null));
-
-                //userPer.newUser(new User("test3@test.com", "password2",
-                  //      "Liana2", "Guapa",
-                    //    "112", TIPO, null));
-
             }
         });
 
