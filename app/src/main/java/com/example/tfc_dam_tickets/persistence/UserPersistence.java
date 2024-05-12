@@ -8,8 +8,12 @@ import android.widget.Toast;
 
 import com.example.tfc_dam_tickets.model.User;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -22,6 +26,7 @@ public class UserPersistence {
     static final String APE = "last_name";
     static final String TELF = "phone_number";
     static final String TIPO = "type";
+    static final String CLIENT_ID = "client_id";
 
     DBConnection DBCon;
     String conRes;
@@ -35,7 +40,7 @@ public class UserPersistence {
     public int newUser(User user) {
         String query = "INSERT INTO " + TABLA
                 + " ( " + EMAIL + ", " + CONT + ", " + NOMBRE + ", " + APE + ", " + TELF + ", " + TIPO +
-                ") VALUES (?, ?, ?, ?, ?, ?)"; // Corrected the SQL syntax here
+                ") VALUES (?, ?, ?, ?, ?, ?)";
 
         int res = 0;
 
@@ -43,8 +48,11 @@ public class UserPersistence {
              PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
 
             if (stmt != null) {
+
+                String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+
                 stmt.setString(1, user.getEmail());
-                stmt.setString(2, user.getPassword());
+                stmt.setString(2, hashedPassword);
                 stmt.setString(3, user.getName());
                 stmt.setString(4, user.getLastName());
                 stmt.setString(5, user.getPhone_num());
@@ -61,6 +69,26 @@ public class UserPersistence {
             res = -1;
         }
         return res;
+    }
+
+    public boolean verifyUser(String email, String plainPassword) {
+        String query = "SELECT " + CONT + " FROM " + TABLA + " WHERE " + EMAIL + " = ?";
+        try (Connection connection = DBCon.getConection();
+             PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
+
+            if (stmt != null) {
+                stmt.setString(1, email);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        String storedHash = rs.getString(CONT);
+                        return BCrypt.checkpw(plainPassword, storedHash);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public void connect() {

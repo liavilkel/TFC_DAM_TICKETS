@@ -43,10 +43,8 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:23.0.0")
     //DB CONNECTION
     implementation("mysql:mysql-connector-java:5.1.49")
-
-    //implementation("org.mariadb.jdbc:mariadb-java-client:2.7.3")
-    //implementation("org.sqldroid:sqldroid:1.0.3")
-
+    // HASHING
+    implementation("org.mindrot:jbcrypt:0.4")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

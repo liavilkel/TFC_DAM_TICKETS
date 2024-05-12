@@ -51,13 +51,10 @@ public class RegistroFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //userPer.newUser(new User(etEmail.getText().toString(), etPass.getText().toString(),
-                  //      etNombre.getText().toString(), etApellidos.getText().toString(),
-                    //    etPhoneNum.getText().toString(), TIPO, null));
+                userPer.newUser(new User(etEmail.getText().toString(), etPass.getText().toString(),
+                        etNombre.getText().toString(), etApellidos.getText().toString(),
+                        etPhoneNum.getText().toString(), TIPO, null));
 
-                userPer.newUser(new User("test@test.com", "password",
-                        "Test", "Test",
-                        "112", TIPO, "1"));
 
             }
         });
