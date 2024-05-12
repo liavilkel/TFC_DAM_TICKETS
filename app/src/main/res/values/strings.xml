@@ -10,4 +10,5 @@
     <string name="phone_numer">Número de teléfono</string>
     <string name="company_id">Id de empresa</string>
     <string name="btn_add_new">+</string>
+    <string name="tv_nom_categoria">Nombre de la categoría</string>
 </resources>
