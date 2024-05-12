@@ -8,24 +8,21 @@ import android.widget.Toast;
 import com.example.tfc_dam_tickets.model.Ticket;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class TicketPersistence {
 
-    static final String TABLA = "resolver_rocket.Users";
-    static final String ID_TICKET = "ticket_id";
-    static final String USER_OPEN = "user_open";
-    static final String USER_CLOSE = "user_close";
-    static final String CAT_ID = "cat_ID";
-    static final String CLIENT_ID = "client_id";
-    static final String TITLE = "title";
-    static final String DESC = "description";
-    static final String TS_OPEN = "ts_open";
-    static final String TS_CLOSE = "ts_close";
-    static final String STATUS = "status";
-    static final String SOLUTION = "solution";
+    static final String TABLA = "resolver_rocket.Tickets";
+    static final String CAT = "cat_id";
 
     DBConnection DBCon;
     String conRes;
@@ -36,39 +33,40 @@ public class TicketPersistence {
         DBCon = new DBConnection();
     }
 
-
-
-
-    public ArrayList<Ticket>cargarTodosTickets(){
-
+    public ArrayList<Ticket> getTicketsByCat(int cat) {
         ArrayList<Ticket> tickets = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLA + " WHERE " + CAT +  " = ?";
 
-
-
+        try (Connection connection = DBCon.getConection();
+             PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
+            if (stmt != null) {
+                stmt.setInt(1, cat);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        Ticket ticket = new Ticket(
+                                rs.getLong("ticket_id"),
+                                rs.getLong("cat_id"),
+                                rs.getLong("client_id"),
+                                rs.getString("user_open"),
+                                rs.getString("user_close"),
+                                rs.getString("title"),
+                                rs.getString("description"),
+                                rs.getString("status"),
+                                rs.getString("solution"),
+                                toLocalDateTime(rs.getTimestamp("ts_open")),
+                                toLocalDateTime(rs.getTimestamp("ts_close"))
+                        );
+                        tickets.add(ticket);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return tickets;
     }
 
-
-   public void connect() {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(() -> {
-            try {
-                try (Connection con = DBCon.getConection()) {
-                    if (con == null) {
-                        conRes = "Unable to connect with server";
-                    } else {
-                        conRes = "Connected with server";
-                    }
-                }
-            } catch (Exception e) {
-                conRes = "Connection failed: " + e.getMessage();
-            }
-
-            // Use Handler to show Toast on main thread
-            new Handler(Looper.getMainLooper()).post(() -> {
-                Toast.makeText(context, conRes, Toast.LENGTH_SHORT).show();
-            });
-        });
+    private LocalDateTime toLocalDateTime(Timestamp timestamp) {
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp.getTime()), ZoneId.systemDefault());
     }
-
 }

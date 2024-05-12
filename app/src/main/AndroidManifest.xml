@@ -20,10 +20,11 @@
         <activity
 
             android:name=".ActivityCategorias"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".autenticacion.Login"
-            android:exported="true" >
+            android:exported="true"
+            android:theme="@style/Theme.TFC_DAM_TICKETS.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

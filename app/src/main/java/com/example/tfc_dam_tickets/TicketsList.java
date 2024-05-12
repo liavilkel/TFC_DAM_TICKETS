@@ -37,7 +37,7 @@ public class TicketsList extends AppCompatActivity {
         cargarTickets();
     }
     private void cargarTickets() {
-        ArrayList<Ticket> tickets = ticketPersistence.cargarTodosTickets();
+        ArrayList<Ticket> tickets = ticketPersistence.getTicketsByCat(0);
         adapterTicket = new AdapterTicket(tickets);
         recyclerViewTickets.setAdapter(adapterTicket);
     }
