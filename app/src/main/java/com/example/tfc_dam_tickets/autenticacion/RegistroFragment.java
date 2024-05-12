@@ -55,7 +55,6 @@ public class RegistroFragment extends Fragment {
                         etNombre.getText().toString(), etApellidos.getText().toString(),
                         etPhoneNum.getText().toString(), TIPO, null));
 
-
             }
         });
 
