@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import com.example.tfc_dam_tickets.model.User;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.concurrent.ExecutorService;
@@ -22,6 +24,7 @@ public class UserPersistence {
     static final String APE = "last_name";
     static final String TELF = "phone_number";
     static final String TIPO = "type";
+    static final String CLIENT_ID = "client_id";
 
     DBConnection DBCon;
     String conRes;
@@ -35,7 +38,7 @@ public class UserPersistence {
     public int newUser(User user) {
         String query = "INSERT INTO " + TABLA
                 + " ( " + EMAIL + ", " + CONT + ", " + NOMBRE + ", " + APE + ", " + TELF + ", " + TIPO +
-                ") VALUES (?, ?, ?, ?, ?, ?)"; // Corrected the SQL syntax here
+                ") VALUES (?, ?, ?, ?, ?, ?)";
 
         int res = 0;
 
@@ -43,8 +46,11 @@ public class UserPersistence {
              PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
 
             if (stmt != null) {
+
+                String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+
                 stmt.setString(1, user.getEmail());
-                stmt.setString(2, user.getPassword());
+                stmt.setString(2, hashedPassword);
                 stmt.setString(3, user.getName());
                 stmt.setString(4, user.getLastName());
                 stmt.setString(5, user.getPhone_num());
