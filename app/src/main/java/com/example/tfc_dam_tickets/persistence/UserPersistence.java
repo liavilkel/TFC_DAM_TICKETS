@@ -12,6 +12,8 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -67,6 +69,26 @@ public class UserPersistence {
             res = -1;
         }
         return res;
+    }
+
+    public boolean verifyUser(String email, String plainPassword) {
+        String query = "SELECT " + CONT + " FROM " + TABLA + " WHERE " + EMAIL + " = ?";
+        try (Connection connection = DBCon.getConection();
+             PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
+
+            if (stmt != null) {
+                stmt.setString(1, email);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        String storedHash = rs.getString(CONT);
+                        return BCrypt.checkpw(plainPassword, storedHash);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public void connect() {

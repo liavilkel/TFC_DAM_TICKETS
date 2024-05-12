@@ -14,15 +14,19 @@ import androidx.fragment.app.Fragment;
 
 import com.example.tfc_dam_tickets.R;
 import com.example.tfc_dam_tickets.VentanaPrincipal;
+import com.example.tfc_dam_tickets.persistence.UserPersistence;
 
 public class LoginFragment extends Fragment {
 
+    UserPersistence userPer;
     EditText email, pass;
     Button login;
     float v = 0;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        userPer = new UserPersistence(getContext());
 
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.login_tab_fragment,container,false);
 
@@ -35,8 +39,12 @@ public class LoginFragment extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), VentanaPrincipal.class);
-                startActivity(intent);
+
+                if (userPer.verifyUser(email.getText().toString(), pass.getText().toString())){
+                    Intent intent = new Intent(getActivity(), VentanaPrincipal.class);
+                    startActivity(intent);
+                }
+
             }
         });
 
