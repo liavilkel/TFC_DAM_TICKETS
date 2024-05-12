@@ -6,4 +6,6 @@
     <dimen name="margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_size">16sp</dimen>
+    <dimen name="cornerRadius">8dp</dimen>
+    <dimen name="margin_cardview">5dp</dimen>
 </resources>

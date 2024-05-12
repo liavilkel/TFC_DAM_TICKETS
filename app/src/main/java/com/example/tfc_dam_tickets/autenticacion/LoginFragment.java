@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.tfc_dam_tickets.R;
-import com.example.tfc_dam_tickets.VentanaPrincipal;
+import com.example.tfc_dam_tickets.ActivityCategorias;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
 
 public class LoginFragment extends Fragment {
@@ -39,7 +39,8 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (userPer.verifyUser(email.getText().toString(), pass.getText().toString())){
-                    Intent intent = new Intent(getActivity(), VentanaPrincipal.class);
+
+                    Intent intent = new Intent(getActivity(), ActivityCategorias.class);
                     intent.putExtra("email", email.getText().toString());
                     startActivity(intent);
                 }

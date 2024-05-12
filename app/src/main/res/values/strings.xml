@@ -9,6 +9,7 @@
     <string name="btn_registrarse">Registrarse</string>
     <string name="phone_numer">Número de teléfono</string>
     <string name="company_id">Id de empresa</string>
+<<<<<<< HEAD
     <string name="no_email">Por favor, introduza una dirección de correo electrónico.</string>
     <string name="no_name">Por favor, introduzca un nombre.</string>
     <string name="no_lastname">Por favor, introduzca sus apellidos.</string>
@@ -21,4 +22,9 @@
     <string name="user_registered">Usuario registrado exitosamente.</string>
     <string name="unable_to_resgister">No se ha podido registrar el usuario.</string>
     <string name="email_in_use">La dirección de correo ya está en uso.</string>
+=======
+    <string name="btn_add_new">+</string>
+    <string name="tv_nom_categoria">Nombre de la categoría</string>
+    <string name="tvCategorias">Elige una de las siguientes categorías:</string>
+>>>>>>> 9ca1b5ae7c261578cae48cea2c87ba8ef37f0407
 </resources>

@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.tfc_dam_tickets.ActivityCategorias;
 import com.example.tfc_dam_tickets.R;
-import com.example.tfc_dam_tickets.VentanaPrincipal;
 import com.example.tfc_dam_tickets.model.User;
 import com.example.tfc_dam_tickets.persistence.ClientPersistence;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
@@ -75,7 +75,7 @@ public class RegistroFragment extends Fragment {
                                                                 etPhoneNum.getText().toString().trim(), TIPO, Long.valueOf(etComId.getText().toString())));
                                                         if (res == 1) {
                                                             Toast.makeText(getContext(), R.string.user_registered, Toast.LENGTH_SHORT).show();
-                                                            Intent intent = new Intent(getActivity(), VentanaPrincipal.class);
+                                                            Intent intent = new Intent(getActivity(), ActivityCategorias.class);
                                                             intent.putExtra("email", etEmail.getText().toString().trim());
                                                             startActivity(intent);
                                                         } else {
