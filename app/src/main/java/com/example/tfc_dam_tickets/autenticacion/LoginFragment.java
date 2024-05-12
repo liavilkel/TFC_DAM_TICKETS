@@ -25,7 +25,6 @@ public class LoginFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         userPer = new UserPersistence(getContext());
 
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.login_tab_fragment,container,false);
@@ -39,12 +38,12 @@ public class LoginFragment extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (userPer.verifyUser(email.getText().toString(), pass.getText().toString())){
+
                     Intent intent = new Intent(getActivity(), ActivityCategorias.class);
+                    intent.putExtra("email", email.getText().toString());
                     startActivity(intent);
                 }
-
             }
         });
 
@@ -66,6 +65,7 @@ public class LoginFragment extends Fragment {
         login.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
 
     }
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
