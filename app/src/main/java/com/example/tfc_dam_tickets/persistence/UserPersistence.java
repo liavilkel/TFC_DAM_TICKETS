@@ -44,7 +44,7 @@ public class UserPersistence {
 
         int res = 0;
 
-        try (Connection connection = DBCon.getConection();
+        try (Connection connection = DBCon.getConnection();
              PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
 
             if (stmt != null) {
@@ -74,7 +74,7 @@ public class UserPersistence {
 
     public boolean verifyUser(String email, String plainPassword) {
         String query = "SELECT " + CONT + " FROM " + TABLA + " WHERE " + EMAIL + " = ?";
-        try (Connection connection = DBCon.getConection();
+        try (Connection connection = DBCon.getConnection();
              PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
 
             if (stmt != null) {
@@ -96,7 +96,7 @@ public class UserPersistence {
         String query = "SELECT COUNT(*) FROM " + TABLA + " WHERE " + EMAIL + " = ?";
         int count = 0;
 
-        try (Connection connection = DBCon.getConection();
+        try (Connection connection = DBCon.getConnection();
              PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
 
             if (stmt != null) {
@@ -119,7 +119,7 @@ public class UserPersistence {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
             try {
-                try (Connection con = DBCon.getConection()) {
+                try (Connection con = DBCon.getConnection()) {
                     if (con == null) {
                         conRes = "Unable to connect with server";
                     } else {

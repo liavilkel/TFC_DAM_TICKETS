@@ -19,7 +19,7 @@ public class ClientPersistence {
 
     public boolean clientExists(String clientId) {
         String query = "SELECT COUNT(*) AS count FROM " + TABLA + " WHERE " + CLIENT_ID + " = ?";
-        try (Connection connection = dbConnection.getConection();
+        try (Connection connection = dbConnection.getConnection();
              PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
 
             if (stmt != null) {
