@@ -1,5 +1,6 @@
 package com.example.tfc_dam_tickets.adapterUtils;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class AdapterTicket extends RecyclerView.Adapter<AdapterTicket.TicketViewHolder> {
 
     private ArrayList<Ticket> ticketsList;
+    Context context;
 
     public AdapterTicket(ArrayList<Ticket> ticketsList) {
         this.ticketsList = ticketsList;
@@ -25,7 +27,7 @@ public class AdapterTicket extends RecyclerView.Adapter<AdapterTicket.TicketView
     @Override
     public TicketViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View v = LayoutInflater.from(parent.getContext())
+        View v = LayoutInflater.from(context)
                 .inflate(R.layout.ticket_item, parent, false);
 
         return new TicketViewHolder(v);
