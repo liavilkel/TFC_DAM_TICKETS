@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 public class TicketsList extends AppCompatActivity {
@@ -26,6 +28,12 @@ public class TicketsList extends AppCompatActivity {
         //Inicializar el Boton de registrar nuevo ticket
         btnAdd = findViewById(R.id.btnAddTicket);
 
-
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TicketsList.this, ActivityNuevoTicket.class);
+                startActivity(intent);
+            }
+        });
     }
 }

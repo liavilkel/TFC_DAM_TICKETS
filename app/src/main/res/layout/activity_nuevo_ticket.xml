@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin"
+    tools:context=".ActivityNuevoTicket">
+
+    <!-- Insertar Título -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint= "@string/titulo_ticket"
+                android:text=" " />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Insertar Descripción -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etTitulo">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" "
+                android:hint="@string/descripcion_ticket" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_candelar"
+            android:layout_marginStart="@dimen/margin_btn"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btnAceptar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_guardar"
+            android:layout_marginEnd="@dimen/margin_btn"/>
+    </LinearLayout>
+
+</RelativeLayout>
