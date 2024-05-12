@@ -43,13 +43,13 @@ public class TicketPersistence {
 
         ArrayList<Ticket> tickets = new ArrayList<>();
 
-        //TODO:
+
 
         return tickets;
     }
 
 
-   /* public void connect() {
+   public void connect() {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
             try {
@@ -69,6 +69,6 @@ public class TicketPersistence {
                 Toast.makeText(context, conRes, Toast.LENGTH_SHORT).show();
             });
         });
-    }*/
+    }
 
 }

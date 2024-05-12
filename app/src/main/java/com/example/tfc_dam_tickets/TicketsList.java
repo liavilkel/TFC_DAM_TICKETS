@@ -26,20 +26,17 @@ public class TicketsList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tickets_list);
 
-
-        //Inicializar el RecyclerVire de tickets
         recyclerViewTickets = findViewById(R.id.rvTicketsList);
         recyclerViewTickets.setHasFixedSize(true);
         recyclerViewTickets.setLayoutManager(new LinearLayoutManager(this));
 
-        //Inicializar el Boton de registrar nuevo ticket
         btnAdd = findViewById(R.id.btnAddTicket);
 
         ticketPersistence = new TicketPersistence(this);
 
-        loadTickets();
+        cargarTickets();
     }
-    private void loadTickets() {
+    private void cargarTickets() {
         ArrayList<Ticket> tickets = ticketPersistence.cargarTodosTickets();
         adapterTicket = new AdapterTicket(tickets);
         recyclerViewTickets.setAdapter(adapterTicket);
