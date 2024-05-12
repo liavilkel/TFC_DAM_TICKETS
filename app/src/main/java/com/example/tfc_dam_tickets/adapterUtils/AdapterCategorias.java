@@ -37,15 +37,12 @@ public class AdapterCategorias extends RecyclerView.Adapter<AdapterCategorias.Vi
         Category categoria = categorias.get(position);
         holder.tvNomCategoria.setText(categoria.getName());
 
-        //cuando pulsamos a un item
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Category activityCategorias = categorias.get(holder.getAdapterPosition());
                 Intent i = new Intent(context, TicketsList.class);
+                i.putExtra("id", categoria.getCatId());
                 context.startActivity(i);
-
-
             }
         });
     }
