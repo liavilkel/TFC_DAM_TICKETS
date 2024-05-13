@@ -19,9 +19,11 @@ public class AdapterTicket extends RecyclerView.Adapter<AdapterTicket.TicketView
     private ArrayList<Ticket> ticketsList;
     Context context;
 
-    public AdapterTicket(ArrayList<Ticket> ticketsList) {
+    public AdapterTicket(Context context, ArrayList<Ticket> ticketsList) {
+        this.context = context;
         this.ticketsList = ticketsList;
     }
+
 
     @NonNull
     @Override
@@ -39,6 +41,8 @@ public class AdapterTicket extends RecyclerView.Adapter<AdapterTicket.TicketView
         holder.tvIdTicket.setText(String.valueOf(ticket.getTicketId()));
 
        //TODO: FECHA Y HORA
+        holder.tvFecha.setText(String.valueOf(ticket.getTsOpen().getMonth()));
+        holder.tvHora.setText(String.valueOf(ticket.getTsOpen().getHour()));
 
 
         holder.tvCliente.setText(String.valueOf(ticket.getClientId()));

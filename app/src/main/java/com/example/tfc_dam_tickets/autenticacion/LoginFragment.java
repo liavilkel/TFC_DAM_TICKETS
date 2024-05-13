@@ -41,7 +41,7 @@ public class LoginFragment extends Fragment {
                 if (userPer.verifyUser(email.getText().toString(), pass.getText().toString())){
 
                     Intent intent = new Intent(getActivity(), ActivityCategorias.class);
-                    intent.putExtra("email", email.getText().toString());
+                    intent.putExtra("email", email.getText().toString().trim());
                     startActivity(intent);
                 }
             }

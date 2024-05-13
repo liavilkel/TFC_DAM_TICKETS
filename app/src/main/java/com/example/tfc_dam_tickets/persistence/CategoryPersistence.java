@@ -20,13 +20,13 @@ import java.util.concurrent.Executors;
 public class CategoryPersistence {
 
     static final String TABLA = "resolver_rocket.Categories "; // Cambiar por el nombre de tu tabla de categorías
-    static final String ORDER = "order";
+    static final String ORDER = "orderr";
+
     static final String NOMBRE = "name";
     static final String ACTIVE = "active";
     static final String CAT_ID = "cat_id";
 
     DBConnection DBCon;
-    String conRes;
     Context context; // Agregar contexto
 
     public CategoryPersistence(Context context) {
@@ -34,51 +34,40 @@ public class CategoryPersistence {
         DBCon = new DBConnection();
     }
 
-    public List<Category> obtenerCategorias() {
-        List<Category> categorias = new ArrayList<>();
-        String query = "SELECT * FROM " + TABLA + " ORDER BY " + NOMBRE;
+    public List<Category> getCategoryByPermission(List<Integer> allowedCategoryIds) {
+        List<Category> categories = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLA + " WHERE " + CAT_ID + " IN (";
 
-        try (Connection connection = DBCon.getConection();
-             PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
+        for (int i = 0; i < allowedCategoryIds.size(); i++) {
+            if (i > 0) {
+                query += ",";
+            }
+            query += "?";
+        }
+        query += ") ORDER BY " + ORDER;
 
-            if (stmt != null) {
-                try (ResultSet rs = stmt.executeQuery()) {
-                    while (rs.next()) {
-                        int catId = rs.getInt(CAT_ID);
-                        int order = rs.getInt(ORDER);
-                        String name = rs.getString(NOMBRE);
-                        long active = rs.getLong(ACTIVE);
+        try (Connection connection = DBCon.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query)) {
 
-                        Category categoria = new Category(catId, order, name, active);
-                        categorias.add(categoria);
-                    }
+            for (int i = 0; i < allowedCategoryIds.size(); i++) {
+                stmt.setInt(i + 1, allowedCategoryIds.get(i));
+            }
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    int catId = rs.getInt(CAT_ID);
+                    int order = rs.getInt(ORDER);
+                    String name = rs.getString(NOMBRE);
+                    long active = rs.getLong(ACTIVE);
+
+                    Category category = new Category(catId, order, name, active);
+                    categories.add(category);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return categorias;
+        return categories;
     }
 
-    public void conectar() {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(() -> {
-            try {
-                try (Connection con = DBCon.getConection()) {
-                    if (con == null) {
-                        conRes = "No se puede conectar con el servidor";
-                    } else {
-                        conRes = "Conectado con el servidor";
-                    }
-                }
-            } catch (Exception e) {
-                conRes = "Error de conexión: " + e.getMessage();
-            }
-
-            // Usar Handler para mostrar Toast en el hilo principal
-            new Handler(Looper.getMainLooper()).post(() -> {
-                Toast.makeText(context, conRes, Toast.LENGTH_SHORT).show();
-            });
-        });
-    }
 }

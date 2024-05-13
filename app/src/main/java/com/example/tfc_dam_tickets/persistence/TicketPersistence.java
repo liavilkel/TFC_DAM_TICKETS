@@ -37,7 +37,7 @@ public class TicketPersistence {
         ArrayList<Ticket> tickets = new ArrayList<>();
         String query = "SELECT * FROM " + TABLA + " WHERE " + CAT +  " = ?";
 
-        try (Connection connection = DBCon.getConection();
+        try (Connection connection = DBCon.getConnection();
              PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
             if (stmt != null) {
                 stmt.setInt(1, cat);

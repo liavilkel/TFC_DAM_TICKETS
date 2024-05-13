@@ -11,7 +11,7 @@ public class DBConnection {
 
     String username, password, ip, port, database;
 
-    public Connection getConection(){
+    public Connection getConnection(){
         ip = "82.223.204.116";
         database = "resolver_rocket";
         username = "tfg_user";

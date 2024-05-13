@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.tfc_dam_tickets.adapterUtils.AdapterTicket;
 import com.example.tfc_dam_tickets.model.Ticket;
@@ -34,11 +36,15 @@ public class TicketsList extends AppCompatActivity {
 
         ticketPersistence = new TicketPersistence(this);
 
-        cargarTickets();
+        Intent i = getIntent();
+
+        if (i.hasExtra("id")){
+           cargarTickets(i.getIntExtra("id", -1));
+        }
     }
-    private void cargarTickets() {
-        ArrayList<Ticket> tickets = ticketPersistence.getTicketsByCat(0);
-        adapterTicket = new AdapterTicket(tickets);
+    private void cargarTickets(int cant) {
+        ArrayList<Ticket> tickets = ticketPersistence.getTicketsByCat(cant);
+        adapterTicket = new AdapterTicket(this, tickets);
         recyclerViewTickets.setAdapter(adapterTicket);
     }
 }
