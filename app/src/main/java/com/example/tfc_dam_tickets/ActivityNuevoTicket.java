@@ -48,7 +48,8 @@ public class ActivityNuevoTicket extends AppCompatActivity {
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ActivityNuevoTicket.this, R.string.toast_cancelar_new_ticket, Toast.LENGTH_SHORT).show();
+                setResult(0);
+                finish();
             }
         });
 
@@ -68,18 +69,16 @@ public class ActivityNuevoTicket extends AppCompatActivity {
                     insert = ticketPersistence.postNewTicket(userOpen, Long.valueOf(catId), clientId, tit, desc, status);
                 } else {
                     Toast.makeText(ActivityNuevoTicket.this, R.string.all_mandaory, Toast.LENGTH_SHORT).show();
+                    insert = -100; // OTHER number SO actForResult does not finish
                 }
 
                 if (insert == 1) {
-                    Toast.makeText(ActivityNuevoTicket.this, R.string.toast_guardar_new_ticket, Toast.LENGTH_SHORT).show();
-                    etTitulo.getEditText().setText("");
-                    etDescripcion.getEditText().setText("");
-                } else {
-                    Toast.makeText(ActivityNuevoTicket.this, R.string.unable_save_ticker, Toast.LENGTH_SHORT).show();
+                    setResult(1);
+                    finish();
+                } else if (insert == -1){
+                    setResult(-1);
+                    finish();
                 }
-
-
-
             }
         });
     }
