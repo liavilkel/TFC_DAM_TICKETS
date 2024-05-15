@@ -39,12 +39,12 @@ public class UserPersistence {
 
     public int newUser(User user) {
         String query = "INSERT INTO " + TABLA
-                + " ( " + EMAIL + ", " + CONT + ", " + NOMBRE + ", " + APE + ", " + TELF + ", " + TIPO +
-                ") VALUES (?, ?, ?, ?, ?, ?)";
+                + " ( " + EMAIL + ", " + CONT + ", " + NOMBRE + ", " + APE + ", " + TELF + ", " + TIPO
+                + ", " + CLIENT_ID + ") VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         int res = 0;
 
-        try (Connection connection = DBCon.getConection();
+        try (Connection connection = DBCon.getConnection();
              PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
 
             if (stmt != null) {
@@ -57,6 +57,7 @@ public class UserPersistence {
                 stmt.setString(4, user.getLastName());
                 stmt.setString(5, user.getPhone_num());
                 stmt.setString(6, user.getType());
+                stmt.setLong(7, user.getComId());
 
                 res = stmt.executeUpdate(); // Execute the insert statement
                 Log.d("UserPersistence", "User inserted successfully");
@@ -73,7 +74,7 @@ public class UserPersistence {
 
     public boolean verifyUser(String email, String plainPassword) {
         String query = "SELECT " + CONT + " FROM " + TABLA + " WHERE " + EMAIL + " = ?";
-        try (Connection connection = DBCon.getConection();
+        try (Connection connection = DBCon.getConnection();
              PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
 
             if (stmt != null) {
@@ -91,11 +92,34 @@ public class UserPersistence {
         return false;
     }
 
+    public boolean isEmailInUse(String email) {
+        String query = "SELECT COUNT(*) FROM " + TABLA + " WHERE " + EMAIL + " = ?";
+        int count = 0;
+
+        try (Connection connection = DBCon.getConnection();
+             PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
+
+            if (stmt != null) {
+                stmt.setString(1, email);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        count = rs.getInt(1);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return count > 0;
+    }
+
+
     public void connect() {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
             try {
-                try (Connection con = DBCon.getConection()) {
+                try (Connection con = DBCon.getConnection()) {
                     if (con == null) {
                         conRes = "Unable to connect with server";
                     } else {

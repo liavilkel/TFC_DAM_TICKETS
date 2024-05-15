@@ -1,18 +1,22 @@
 package com.example.tfc_dam_tickets.autenticacion;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.tfc_dam_tickets.ActivityCategorias;
 import com.example.tfc_dam_tickets.R;
 import com.example.tfc_dam_tickets.model.User;
+import com.example.tfc_dam_tickets.persistence.ClientPersistence;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -23,14 +27,19 @@ public class RegistroFragment extends Fragment {
     EditText etEmail, etNombre, etApellidos, etPass, etConfPass, etPhoneNum, etComId;
     Button btnRegistrar;
     float v = 0;
+    int res;
 
     FirebaseAuth mAuth;
     UserPersistence userPer;
+    ClientPersistence clientPer;
+    LoginFragment login;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         userPer = new UserPersistence(getContext());
+        clientPer = new ClientPersistence();
+        login = new LoginFragment();
 
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.registro_tab_fragment,container,false);
 
@@ -51,10 +60,57 @@ public class RegistroFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                userPer.newUser(new User(etEmail.getText().toString(), etPass.getText().toString(),
-                        etNombre.getText().toString(), etApellidos.getText().toString(),
-                        etPhoneNum.getText().toString(), TIPO, null));
-
+                if (!etEmail.getText().toString().isBlank()) {
+                    if(!userPer.isEmailInUse(etEmail.getText().toString())) {
+                        if (!etNombre.getText().toString().isBlank()) {
+                            if (!etApellidos.getText().toString().isBlank()) {
+                                if (!etPass.getText().toString().isBlank()) {
+                                    if (!etConfPass.getText().toString().isBlank()) {
+                                        if (etPass.getText().toString().equals(etConfPass.getText().toString())) {
+                                            if (!etPhoneNum.getText().toString().isBlank()) {
+                                                if (!etComId.getText().toString().isBlank()) {
+                                                    if(clientPer.clientExists(etComId.getText().toString())) {
+                                                        res =userPer.newUser(new User(etEmail.getText().toString().trim(), etPass.getText().toString().trim(),
+                                                                etNombre.getText().toString().trim(), etApellidos.getText().toString().trim(),
+                                                                etPhoneNum.getText().toString().trim(), TIPO, Long.valueOf(etComId.getText().toString())));
+                                                        if (res == 1) {
+                                                            Toast.makeText(getContext(), R.string.user_registered, Toast.LENGTH_SHORT).show();
+                                                            Intent intent = new Intent(getActivity(), ActivityCategorias.class);
+                                                            intent.putExtra("email", etEmail.getText().toString().trim());
+                                                            startActivity(intent);
+                                                        } else {
+                                                            Toast.makeText(getContext(), R.string.unable_to_resgister, Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    } else {
+                                                        Toast.makeText(getContext(), R.string.unvalid_com_id, Toast.LENGTH_SHORT).show();
+                                                    }
+                                                } else {
+                                                    Toast.makeText(getContext(), R.string.no_com_id, Toast.LENGTH_SHORT).show();
+                                                }
+                                            } else {
+                                                Toast.makeText(getContext(), R.string.no_phone_num, Toast.LENGTH_SHORT).show();
+                                            }
+                                        } else {
+                                            Toast.makeText(getContext(), R.string.passw_must_match, Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(getContext(), R.string.no_pass_conf, Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    Toast.makeText(getContext(), R.string.no_password, Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(getContext(), R.string.no_lastname, Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getContext(), R.string.no_name, Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getContext(), R.string.email_in_use, Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getContext(), R.string.no_email, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

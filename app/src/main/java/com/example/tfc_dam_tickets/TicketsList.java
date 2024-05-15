@@ -8,10 +8,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.example.tfc_dam_tickets.adapterUtils.AdapterTicket;
+import com.example.tfc_dam_tickets.model.Ticket;
+import com.example.tfc_dam_tickets.persistence.TicketPersistence;
+
+import java.util.ArrayList;
 
 public class TicketsList extends AppCompatActivity {
 
     RecyclerView recyclerViewTickets;
+    AdapterTicket adapterTicket;
+    TicketPersistence ticketPersistence;
     Button btnAdd;
 
 
@@ -20,12 +29,10 @@ public class TicketsList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tickets_list);
 
-        //Inicializar el RecyclerVire de tickets
         recyclerViewTickets = findViewById(R.id.rvTicketsList);
         recyclerViewTickets.setHasFixedSize(true);
         recyclerViewTickets.setLayoutManager(new LinearLayoutManager(this));
 
-        //Inicializar el Boton de registrar nuevo ticket
         btnAdd = findViewById(R.id.btnAddTicket);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -35,5 +42,19 @@ public class TicketsList extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        ticketPersistence = new TicketPersistence(this);
+
+        Intent i = getIntent();
+
+        if (i.hasExtra("id")){
+           cargarTickets(i.getIntExtra("id", -1));
+        }
+    }
+    private void cargarTickets(int cant) {
+        ArrayList<Ticket> tickets = ticketPersistence.getTicketsByCat(cant);
+        adapterTicket = new AdapterTicket(this, tickets);
+        recyclerViewTickets.setAdapter(adapterTicket);
+
     }
 }
