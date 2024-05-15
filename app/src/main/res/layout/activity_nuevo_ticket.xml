@@ -37,28 +37,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:gravity="center_horizontal">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnCancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_candelar"
-            android:layout_marginStart="@dimen/margin_btn"/>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_bg"
+            android:textColor="@color/white"
+            android:layout_marginEnd="@dimen/margin_cardview"
+            android:text="@string/btn_candelar" />
 
         <Button
             android:id="@+id/btnAceptar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_guardar"
-            android:layout_marginEnd="@dimen/margin_btn"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_bg"
+            android:textColor="@color/white"
+            android:layout_marginStart="@dimen/margin_cardview"
+            android:text="@string/btn_guardar" />
     </LinearLayout>
-
 </RelativeLayout>

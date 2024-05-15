@@ -35,4 +35,7 @@
     <string name="toast_cancelar_new_ticket">Ticket cancelado</string>
     <string name="toast_guardar_new_ticket">Ticket guardado</string>
     <string name="incorrect_credentials">Usuario o contraseña incorrectos.</string>
+    <string name="tv_detalle_ticket">Detalle del ticket:</string>
+    <string name="tv_detalle_cliente">Detalle del cliente:</string>
+    <string name="tv_detalle_usuario">Detalle del usuario:</string>
 </resources>
