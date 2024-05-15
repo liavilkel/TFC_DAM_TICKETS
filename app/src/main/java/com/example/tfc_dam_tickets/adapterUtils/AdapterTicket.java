@@ -11,12 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tfc_dam_tickets.R;
 import com.example.tfc_dam_tickets.model.Ticket;
+import com.example.tfc_dam_tickets.persistence.ClientPersistence;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class AdapterTicket extends RecyclerView.Adapter<AdapterTicket.TicketViewHolder> {
 
     private ArrayList<Ticket> ticketsList;
+    ClientPersistence clientPersistence;
     Context context;
 
     public AdapterTicket(Context context, ArrayList<Ticket> ticketsList) {
@@ -37,17 +40,27 @@ public class AdapterTicket extends RecyclerView.Adapter<AdapterTicket.TicketView
 
     @Override
     public void onBindViewHolder(@NonNull TicketViewHolder holder, int position) {
+
+        clientPersistence = new ClientPersistence();
+
         Ticket ticket = ticketsList.get(position);
         holder.tvIdTicket.setText(String.valueOf(ticket.getTicketId()));
 
-       //TODO: FECHA Y HORA
-        holder.tvFecha.setText(String.valueOf(ticket.getTsOpen().getMonth()));
-        holder.tvHora.setText(String.valueOf(ticket.getTsOpen().getHour()));
-
-
-        holder.tvCliente.setText(String.valueOf(ticket.getClientId()));
+        holder.tvIdTicket.setText("Id: " + String.valueOf(ticket.getTicketId()));
+        holder.tvCliente.setText(clientPersistence.getNameById(ticket.getClientId()));
         holder.tvEstado.setText(ticket.getStatus());
         holder.tvTitulo.setText(ticket.getTitle());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDate = ticket.getTsOpen().format(formatter);
+        holder.tvFecha.setText(formattedDate);
+        //holder.tvFecha.setText(String.valueOf(ticket.getTsOpen().getMonth()));
+
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
+        String formattedTime = ticket.getTsOpen().format(formatter2);
+        holder.tvHora.setText(formattedTime);
+        //holder.tvHora.setText(String.valueOf(ticket.getTsOpen().getHour()));
+
     }
 
     @Override

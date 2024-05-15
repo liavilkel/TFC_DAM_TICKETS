@@ -36,5 +36,28 @@ public class ClientPersistence {
         }
         return false;
     }
+
+    public String getNameById(Long id) {
+
+        String query = "SELECT name FROM " + TABLA + " WHERE " + CLIENT_ID + " =?";
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
+
+            if (stmt != null){
+                stmt.setLong(1, id);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getString("name");
+                    }
+                }
+            }
+            return "notFound";
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 }
 
