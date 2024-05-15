@@ -32,8 +32,8 @@
     <string name="invalid_email">El formato del email no es válido</string>
 
 
-    <string name="titulo_ticket">Título: </string>
-    <string name="descripcion_ticket">"Descripción: "</string>
+    <string name="titulo_ticket">Título</string>
+    <string name="descripcion_ticket">Descripción</string>
     <string name="btn_candelar">Cancelar</string>
     <string name="btn_guardar">Guardar</string>
     <string name="new_ticket">Nuevo Ticket</string>
@@ -46,5 +46,10 @@
     <string name="tv_detalle_ticket">Detalle del ticket:</string>
     <string name="tv_detalle_cliente">Detalle del cliente:</string>
     <string name="tv_detalle_usuario">Detalle del usuario:</string>
+    <string name="toast_cancelar_detalle_ticket">Cancelando estado y comentarios del ticket.</string>
+    <string name="toast_guardar_detalle_ticket">Guardando estado y comentarios del ticket.</string>
+    <string name="mn_cerrar_sesion">Cerrar sesión</string>
+    <string name="mn_salir_app">Salir</string>
+    <string name="tv_titulo_categorias">Categorias</string>
 
 </resources>

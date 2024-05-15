@@ -29,8 +29,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint= "@string/titulo_ticket"
-                android:text=" " />
+                android:hint="@string/titulo_ticket" />
         </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Insertar Descripción -->
@@ -43,7 +42,6 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" "
                 android:hint="@string/descripcion_ticket" />
         </com.google.android.material.textfield.TextInputLayout>
 
