@@ -1,5 +1,6 @@
 package com.example.tfc_dam_tickets.autenticacion;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -47,6 +48,6 @@ public class Login extends AppCompatActivity {
         });
 
 
-
     }
+
 }

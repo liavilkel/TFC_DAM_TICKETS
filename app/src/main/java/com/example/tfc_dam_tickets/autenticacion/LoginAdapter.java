@@ -39,5 +39,7 @@ public class LoginAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return totalTabs;
     }
+
+    
 }
 
