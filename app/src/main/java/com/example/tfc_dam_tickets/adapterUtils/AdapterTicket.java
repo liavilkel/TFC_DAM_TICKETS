@@ -27,7 +27,6 @@ public class AdapterTicket extends RecyclerView.Adapter<AdapterTicket.TicketView
         this.ticketsList = ticketsList;
     }
 
-
     @NonNull
     @Override
     public TicketViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

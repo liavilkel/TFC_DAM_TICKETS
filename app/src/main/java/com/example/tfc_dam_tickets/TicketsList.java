@@ -1,5 +1,9 @@
 package com.example.tfc_dam_tickets;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +26,27 @@ public class TicketsList extends AppCompatActivity {
     AdapterTicket adapterTicket;
     TicketPersistence ticketPersistence;
     Button btnAdd;
+    Intent i;
+
+    ActivityResultLauncher<Intent> startActivityForResult = 
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                    new ActivityResultCallback<ActivityResult>() {
+                        @Override
+                        public void onActivityResult(ActivityResult ar) {
+                        
+                            int resultCode = ar.getResultCode();
+                            
+                            if (resultCode == 1) {
+                                Toast.makeText(TicketsList.this, R.string.toast_guardar_new_ticket, Toast.LENGTH_SHORT).show();
+                                cargarTickets(i.getIntExtra("catId", -1));
+                                adapterTicket.notifyDataSetChanged();
+                            } else if (resultCode == 0) {
+                                Toast.makeText(TicketsList.this, R.string.toast_cancelar_new_ticket, Toast.LENGTH_SHORT).show();
+                            } else if (resultCode == -1){
+                                Toast.makeText(TicketsList.this, R.string.unable_save_ticker, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
 
 
     @Override
@@ -37,10 +62,12 @@ public class TicketsList extends AppCompatActivity {
 
         ticketPersistence = new TicketPersistence(this);
 
-        Intent i = getIntent();
+        i = getIntent();
         if (i.hasExtra("catId")){
            cargarTickets(i.getIntExtra("catId", -1));
         }
+
+
 
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -49,13 +76,15 @@ public class TicketsList extends AppCompatActivity {
                 Intent intent = new Intent(TicketsList.this, ActivityNuevoTicket.class);
                 intent.putExtra("catId", i.getIntExtra("catId", -1));
                 intent.putExtra("email", i.getStringExtra("email"));
-                startActivity(intent);
+                startActivityForResult.launch(intent);
+
             }
         });
 
     }
     private void cargarTickets(int cant) {
         ArrayList<Ticket> tickets = ticketPersistence.getTicketsByCat(cant);
+
         adapterTicket = new AdapterTicket(this, tickets);
         recyclerViewTickets.setAdapter(adapterTicket);
     }
