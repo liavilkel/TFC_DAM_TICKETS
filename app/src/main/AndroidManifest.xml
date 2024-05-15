@@ -15,6 +15,9 @@
         android:theme="@style/Theme.TFC_DAM_TICKETS"
         tools:targetApi="31" >
         <activity
+            android:name=".ActivityDetalleTicket"
+            android:exported="false" />
+        <activity
             android:name=".ActivityNuevoTicket"
             android:exported="false" />
         <activity
@@ -22,11 +25,11 @@
             android:exported="false" />
         <activity
             android:name=".ActivityCategorias"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".autenticacion.Login"
             android:exported="true"
-            android:theme="@style/Theme.TFC_DAM_TICKETS.NoActionBar">
+            android:theme="@style/Theme.TFC_DAM_TICKETS.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
