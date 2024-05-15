@@ -16,143 +16,177 @@
         app:layout_constraintVertical_bias="1">
 
 
-        <!--CORREO-->
-        <EditText
-            android:id="@+id/etEmail"
+        <!-- Email -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/et_text"
-            android:hint="@string/email"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias=".5"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias=".3"
-            app:layout_constraintWidth_percent=".8" />
-        <!--NOMBRE-->
-        <EditText
-            android:id="@+id/etNombre"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_percent=".8"
+            android:layout_marginTop="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_text"
+                android:hint="@string/email"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="16sp"
+                app:hintEnabled="true"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!-- Nombre -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="8dp"
+            android:id="@+id/textInputLayoutNombre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/et_text"
-            android:hint="Nombre"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etEmail"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintWidth_percent=".8" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail"
+            app:layout_constraintWidth_percent=".8">  <!-- Adjust this margin as needed -->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_text"
+                android:hint="Nombre"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="16sp"
+                app:hintEnabled="true"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <!--APELLIDOS-->
-        <EditText
-            android:id="@+id/etApellidos"
+        <!-- Apellidos -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="8dp"
+            android:id="@+id/textInputLayoutApellidos"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/et_text"
-            android:hint="Apellidos"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etNombre"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintWidth_percent=".8" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNombre"
+            app:layout_constraintWidth_percent=".8">  <!-- Adjust this margin as needed -->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etApellidos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_text"
+                android:hint="Apellidos"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="16sp"
+                app:hintEnabled="true"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
+
+
+        <!--TELEF NUM-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="8dp"
+            android:id="@+id/textInputLayoutTelefono"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutApellidos"
+            app:layout_constraintWidth_percent=".8">  <!-- Adjust this margin as needed -->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPhoneNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_text"
+                android:hint="Teléfono"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="16sp"
+                app:hintEnabled="true"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!--ComID-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutComId"
+            android:layout_width="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutTelefono"
+            app:layout_constraintWidth_percent=".8">  <!-- Adjust this margin as needed -->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etComId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_text"
+                android:hint="ID de la empresa"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="16sp"
+                app:hintEnabled="true"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--PASSWORD-->
-        <EditText
-            android:id="@+id/etPassword"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="8dp"
+            android:id="@+id/textInputLayoutPassword"
             android:layout_width="0dp"
+            app:passwordToggleEnabled="true"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/et_text"
-            android:hint="@string/password"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etApellidos"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintWidth_percent=".8" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutComId"
+            app:layout_constraintWidth_percent=".8">  <!-- Adjust this margin as needed -->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_text"
+                android:hint="Contraseña"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="16sp"
+                app:hintEnabled="true"
+                android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/etConfirmPassword"
+        <!--CONFIRM PASSWORD-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="8dp"
+            android:id="@+id/textInputLayoutConfPassword"
             android:layout_width="0dp"
+            app:passwordToggleEnabled="true"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/et_text"
-            android:hint="@string/confirm_password"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etPassword"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintWidth_percent=".8"
-
-            />
-
-        <EditText
-            android:id="@+id/etPhoneNum"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/et_text"
-            android:hint="@string/phone_numer"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etConfirmPassword"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintWidth_percent=".8"
-
-            />
-
-        <EditText
-            android:id="@+id/etComId"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/et_text"
-            android:hint="@string/company_id"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etPhoneNum"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintWidth_percent=".8"
-
-            />
-
-
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword"
+            app:layout_constraintWidth_percent=".8">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_text"
+                android:hint="Confirmar contraseña"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="16sp"
+                app:hintEnabled="true"
+                android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
