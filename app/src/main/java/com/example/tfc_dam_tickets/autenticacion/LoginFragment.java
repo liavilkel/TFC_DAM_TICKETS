@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,7 @@ public class LoginFragment extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String email = etEmail.getText().toString().trim();
                 String password = etPass.getText().toString().trim();
 
@@ -67,6 +69,7 @@ public class LoginFragment extends Fragment {
                         // Opcional: mostrar error si las credenciales no son correctas
                         Toast.makeText(getContext(), "Email o contraseña incorrectos", Toast.LENGTH_LONG).show();
                     }
+
                 }
             }
         });

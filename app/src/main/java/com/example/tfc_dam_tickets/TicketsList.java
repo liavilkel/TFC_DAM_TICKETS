@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -34,6 +35,14 @@ public class TicketsList extends AppCompatActivity {
 
         btnAdd = findViewById(R.id.btnAddTicket);
 
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TicketsList.this, ActivityNuevoTicket.class);
+                startActivity(intent);
+            }
+        });
+
         ticketPersistence = new TicketPersistence(this);
 
         Intent i = getIntent();
@@ -46,5 +55,6 @@ public class TicketsList extends AppCompatActivity {
         ArrayList<Ticket> tickets = ticketPersistence.getTicketsByCat(cant);
         adapterTicket = new AdapterTicket(this, tickets);
         recyclerViewTickets.setAdapter(adapterTicket);
+
     }
 }

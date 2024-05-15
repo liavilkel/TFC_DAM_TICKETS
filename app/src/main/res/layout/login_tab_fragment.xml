@@ -9,11 +9,12 @@
         android:id="@+id/textInputLayoutEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.8">
+        app:layout_constraintWidth_percent="0.8"
+        android:layout_marginTop="60dp">
+
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/email"
         android:layout_width="match_parent"
@@ -25,7 +26,9 @@
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
         android:paddingRight="20dp"
-        android:paddingBottom="10dp" />
+        android:paddingBottom="10dp"
+        android:layout_marginTop="60dp"
+        android:text="admin@admin.com"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -50,7 +53,8 @@
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingRight="20dp"
-            android:paddingBottom="10dp"/>
+            android:paddingBottom="10dp"
+            android:text="admin123"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

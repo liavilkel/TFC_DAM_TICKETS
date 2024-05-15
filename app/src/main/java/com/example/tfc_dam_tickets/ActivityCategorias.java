@@ -49,12 +49,9 @@ public class ActivityCategorias extends AppCompatActivity {
 
 
         // Inicializar adaptador con las categorías obtenidas
-        adapterCategorias = new AdapterCategorias(categorias,this);
+        adapterCategorias = new AdapterCategorias(categorias, this);
 
         // Configurar RecyclerView con el adaptador
         rvCategorias.setAdapter(adapterCategorias);
     }
-
-
-
 }

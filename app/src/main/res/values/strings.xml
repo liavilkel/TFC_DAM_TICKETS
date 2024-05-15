@@ -26,7 +26,22 @@
     <string name="btn_add_new">+</string>
     <string name="tv_nom_categoria">Nombre de la categoría</string>
     <string name="tvCategorias">Elige una de las siguientes categorías:</string>
+
     <string name="enter_email">Introduce un correo electrónico</string>
     <string name="enter_pass">Introduce la contraseña</string>
     <string name="invalid_email">El formato del email no es válido</string>
+
+
+    <string name="titulo_ticket">Título: </string>
+    <string name="descripcion_ticket">"Descripción: "</string>
+    <string name="btn_candelar">Cancelar</string>
+    <string name="btn_guardar">Guardar</string>
+    <string name="new_ticket">Nuevo Ticket</string>
+    <string name="toast_cancelar_new_ticket">Ticket cancelado</string>
+    <string name="toast_guardar_new_ticket">Ticket guardado</string>
+    <string name="incorrect_credentials">Usuario o contraseña incorrectos.</string>
+    <string name="tv_detalle_ticket">Detalle del ticket:</string>
+    <string name="tv_detalle_cliente">Detalle del cliente:</string>
+    <string name="tv_detalle_usuario">Detalle del usuario:</string>
+
 </resources>
