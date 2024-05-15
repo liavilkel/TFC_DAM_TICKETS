@@ -39,17 +39,11 @@ public class ActivityCategorias extends AppCompatActivity {
         Intent i = getIntent();
         if (i.hasExtra("email")) {
             String email = i.getStringExtra("email");
-
-            // Retrieve category IDs allowed for the user
             List<Integer> allowedCategoryIds = permissionPersistence.getCategoryIdsByPermission(email);
-
-            // Retrieve categories based on the allowed category IDs
             categorias = categoryPersistence.getCategoryByPermission(allowedCategoryIds);
         }
 
-
-        // Inicializar adaptador con las categorías obtenidas
-        adapterCategorias = new AdapterCategorias(categorias, this);
+        adapterCategorias = new AdapterCategorias(categorias, this, i.getStringExtra("email"));
 
         // Configurar RecyclerView con el adaptador
         rvCategorias.setAdapter(adapterCategorias);

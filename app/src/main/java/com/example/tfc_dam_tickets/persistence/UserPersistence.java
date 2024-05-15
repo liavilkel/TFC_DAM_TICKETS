@@ -114,26 +114,25 @@ public class UserPersistence {
         return count > 0;
     }
 
+    public Long getClientIdByEmail(String userOpen) {
 
-    public void connect() {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(() -> {
-            try {
-                try (Connection con = DBCon.getConnection()) {
-                    if (con == null) {
-                        conRes = "Unable to connect with server";
-                    } else {
-                        conRes = "Connected with server";
+        String query = "SELECT " + CLIENT_ID + " FROM " + TABLA + " WHERE " + EMAIL + " =?";
+        Long id = -1L;
+
+        try (Connection connection = DBCon.getConnection();
+             PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
+
+            if (stmt != null) {
+                stmt.setString(1, userOpen);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        id = rs.getLong(CLIENT_ID);
                     }
                 }
-            } catch (Exception e) {
-                conRes = "Connection failed: " + e.getMessage();
             }
-
-            // Use Handler to show Toast on main thread
-            new Handler(Looper.getMainLooper()).post(() -> {
-                Toast.makeText(context, conRes, Toast.LENGTH_SHORT).show();
-            });
-        });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 }

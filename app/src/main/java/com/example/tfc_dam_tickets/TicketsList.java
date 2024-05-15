@@ -35,26 +35,28 @@ public class TicketsList extends AppCompatActivity {
 
         btnAdd = findViewById(R.id.btnAddTicket);
 
+        ticketPersistence = new TicketPersistence(this);
+
+        Intent i = getIntent();
+        if (i.hasExtra("catId")){
+           cargarTickets(i.getIntExtra("catId", -1));
+        }
+
+
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TicketsList.this, ActivityNuevoTicket.class);
+                intent.putExtra("catId", i.getIntExtra("catId", -1));
+                intent.putExtra("email", i.getStringExtra("email"));
                 startActivity(intent);
             }
         });
 
-        ticketPersistence = new TicketPersistence(this);
-
-        Intent i = getIntent();
-
-        if (i.hasExtra("id")){
-           cargarTickets(i.getIntExtra("id", -1));
-        }
     }
     private void cargarTickets(int cant) {
         ArrayList<Ticket> tickets = ticketPersistence.getTicketsByCat(cant);
         adapterTicket = new AdapterTicket(this, tickets);
         recyclerViewTickets.setAdapter(adapterTicket);
-
     }
 }

@@ -22,7 +22,7 @@ public class CategoryPersistence {
     static final String TABLA = "resolver_rocket.Categories "; // Cambiar por el nombre de tu tabla de categorías
     static final String ORDER = "orderr";
 
-    static final String NOMBRE = "name";
+    static final String NAME = "name";
     static final String ACTIVE = "active";
     static final String CAT_ID = "cat_id";
 
@@ -57,7 +57,7 @@ public class CategoryPersistence {
                 while (rs.next()) {
                     int catId = rs.getInt(CAT_ID);
                     int order = rs.getInt(ORDER);
-                    String name = rs.getString(NOMBRE);
+                    String name = rs.getString(NAME);
                     long active = rs.getLong(ACTIVE);
 
                     Category category = new Category(catId, order, name, active);
@@ -68,6 +68,26 @@ public class CategoryPersistence {
             e.printStackTrace();
         }
         return categories;
+    }
+
+    public String getNameById(Integer id) {
+
+        String query = "SELECT " + NAME + " FROM " + TABLA + " WHERE " + CAT_ID + " =?";
+        try (Connection connection = DBCon.getConnection();
+             PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
+
+            if (stmt != null){
+                stmt.setInt(1, id);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getString("name");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "notFound";
     }
 
 }

@@ -9,6 +9,7 @@ public class ClientPersistence {
 
     static final String TABLA = "Clients";
     static final String CLIENT_ID = "client_id";
+    static final String NAME = "name";
 
     DBConnection dbConnection;
 
@@ -39,7 +40,7 @@ public class ClientPersistence {
 
     public String getNameById(Long id) {
 
-        String query = "SELECT name FROM " + TABLA + " WHERE " + CLIENT_ID + " =?";
+        String query = "SELECT " + NAME + " FROM " + TABLA + " WHERE " + CLIENT_ID + " =?";
         try (Connection connection = dbConnection.getConnection();
              PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
 
@@ -51,12 +52,11 @@ public class ClientPersistence {
                     }
                 }
             }
-            return "notFound";
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return "notFound";
     }
 
 }

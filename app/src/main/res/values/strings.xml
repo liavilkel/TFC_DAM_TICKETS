@@ -35,4 +35,7 @@
     <string name="toast_cancelar_new_ticket">Ticket cancelado</string>
     <string name="toast_guardar_new_ticket">Ticket guardado</string>
     <string name="incorrect_credentials">Usuario o contraseña incorrectos.</string>
+    <string name="cat_ticket">Categoría:</string>
+    <string name="unable_save_ticker">Se ha producido un error. Ticket no guardado.</string>
+    <string name="all_mandaory">Todos los campos son obligatorios.</string>
 </resources>

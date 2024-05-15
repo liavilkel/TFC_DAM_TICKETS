@@ -22,7 +22,17 @@ import java.util.concurrent.Executors;
 public class TicketPersistence {
 
     static final String TABLA = "resolver_rocket.Tickets";
+    static final String TICKET_ID = "ticket_id";
+    static final String USER_OPEN = "user_open";
+    static final String USER_CLOSE = "user_close";
     static final String CAT = "cat_id";
+    static final String CLIENT = "client_id";
+    static final String TITLE = "title";
+    static final String DESC = "description";
+    static final String TS_OPEN = "ts_open";
+    static final String TS_CLOSE = "ts_close";
+    static final String STATUS = "status";
+    static final String SOLUTION = "solution";
 
     DBConnection DBCon;
     String conRes;
@@ -44,17 +54,17 @@ public class TicketPersistence {
                 try (ResultSet rs = stmt.executeQuery()) {
                     while (rs.next()) {
                         Ticket ticket = new Ticket(
-                                rs.getLong("ticket_id"),
-                                rs.getLong("cat_id"),
-                                rs.getLong("client_id"),
-                                rs.getString("user_open"),
-                                rs.getString("user_close"),
-                                rs.getString("title"),
-                                rs.getString("description"),
-                                rs.getString("status"),
-                                rs.getString("solution"),
-                                toLocalDateTime(rs.getTimestamp("ts_open")),
-                                toLocalDateTime(rs.getTimestamp("ts_close"))
+                                rs.getLong(TICKET_ID),
+                                rs.getLong(CAT),
+                                rs.getLong(CLIENT),
+                                rs.getString(USER_OPEN),
+                                rs.getString(USER_CLOSE),
+                                rs.getString(TITLE),
+                                rs.getString(DESC),
+                                rs.getString(STATUS),
+                                rs.getString(SOLUTION),
+                                toLocalDateTime(rs.getTimestamp(TS_OPEN)),
+                                toLocalDateTime(rs.getTimestamp(TS_CLOSE))
                         );
                         tickets.add(ticket);
                     }
@@ -66,7 +76,40 @@ public class TicketPersistence {
         return tickets;
     }
 
-    private LocalDateTime toLocalDateTime(Timestamp timestamp) {
-        return LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp.getTime()), ZoneId.systemDefault());
+    public byte postNewTicket(String userOpen, Long catId, Long clientId, String title, String desc, String status) {
+        byte response = 0;
+        String query = "INSERT INTO " + TABLA + " (" + USER_OPEN + "," + USER_CLOSE + ", " + CAT + ", " + CLIENT + ", "
+                +  TITLE + ", " + DESC + ", " + TS_OPEN + ", " + TS_CLOSE + ", " + STATUS + ", " + SOLUTION
+                + ") VALUES (?, NULL, ?, ?, ?, ?, NOW(), NULL, ?, NULL)";
+
+        try (Connection connection = DBCon.getConnection();
+             PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
+            if (stmt != null) {
+                stmt.setString(1, userOpen);
+                stmt.setLong(2, catId);
+                stmt.setLong(3, clientId);
+                stmt.setString(4, title);
+                stmt.setString(5, desc);
+                stmt.setString(6, status);
+
+                int rowsAffected = stmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    response = 1;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return response;
     }
+
+
+    private LocalDateTime toLocalDateTime(Timestamp timestamp) {
+        if (timestamp != null) {
+            return LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp.getTime()), ZoneId.systemDefault());
+        } else {
+            return null; // or any other default value you prefer
+        }
+    }
+
 }

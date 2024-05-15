@@ -19,10 +19,12 @@ import java.util.List;
 public class AdapterCategorias extends RecyclerView.Adapter<AdapterCategorias.ViewHolder> {
     private List<Category> categorias;
     Context context;
+    String email;
 
-    public AdapterCategorias(List<Category> categorias, Context context) {
+    public AdapterCategorias(List<Category> categorias, Context context, String email) {
         this.categorias = categorias;
         this.context = context;
+        this.email = email;
     }
 
     @NonNull
@@ -41,7 +43,8 @@ public class AdapterCategorias extends RecyclerView.Adapter<AdapterCategorias.Vi
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, TicketsList.class);
-                i.putExtra("id", categoria.getCatId());
+                i.putExtra("catId", categoria.getCatId());
+                i.putExtra("email", email);
                 context.startActivity(i);
             }
         });
