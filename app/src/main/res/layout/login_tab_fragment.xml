@@ -5,45 +5,58 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <EditText
-
-        android:id="@+id/email"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutEmail"
         android:layout_width="0dp"
-        android:background="@drawable/et_text"
-        android:textSize="16sp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.8"
+        android:layout_marginTop="60dp">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/email"
-        android:text="admin@admin.com"
+        android:background="@drawable/et_text"
+        app:hintEnabled="true"
+        android:textSize="16sp"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
+        android:paddingRight="20dp"
         android:paddingBottom="10dp"
-        app:layout_constraintWidth_percent=".8"
-        android:layout_marginTop="80dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-    <EditText
-        android:inputType="textPassword"
-        android:id="@+id/password"
-        android:background="@drawable/et_text"
-        android:textSize="16sp"
+        android:layout_marginTop="60dp"
+        android:text="admin@admin.com"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/password"
-        android:text="admin123"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        app:layout_constraintVertical_bias="0"
+        app:passwordToggleEnabled="true"
         android:layout_marginTop="20dp"
-        app:layout_constraintWidth_percent=".8"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.8">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:textSize="16sp"
+            android:background="@drawable/et_text"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:text="admin123"/>
 
-        />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnLogin"

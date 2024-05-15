@@ -18,16 +18,22 @@ import com.example.tfc_dam_tickets.R;
 import com.example.tfc_dam_tickets.model.User;
 import com.example.tfc_dam_tickets.persistence.ClientPersistence;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.regex.Pattern;
 
 public class RegistroFragment extends Fragment {
 
     static final String TIPO = "empleado";
 
-    EditText etEmail, etNombre, etApellidos, etPass, etConfPass, etPhoneNum, etComId;
+    TextInputEditText etEmail, etNombre, etApellidos, etPass, etConfPass, etPhoneNum, etComId;
+    TextInputLayout lEmail, lNombre, lApellidos, lPassword, lConfirmPass, lTelefono, lEmpresaId;
     Button btnRegistrar;
     float v = 0;
     int res;
+
 
     FirebaseAuth mAuth;
     UserPersistence userPer;
@@ -45,6 +51,17 @@ public class RegistroFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
 
+
+        //Layout
+        //lEmail, lNombre, lApellidos, lPassword, lConfirmPass, lTelefono, lEmpresaId;
+        lEmail = viewGroup.findViewById(R.id.textInputLayoutEmail);
+        lNombre = viewGroup.findViewById(R.id.textInputLayoutNombre);
+        lApellidos = viewGroup.findViewById(R.id.textInputLayoutApellidos);
+        lPassword = viewGroup.findViewById(R.id.textInputLayoutPassword);
+        lConfirmPass = viewGroup.findViewById(R.id.textInputLayoutConfPassword);
+        lTelefono = viewGroup.findViewById(R.id.textInputLayoutTelefono);
+        lEmpresaId = viewGroup.findViewById(R.id.textInputLayoutComId);
+
         etEmail = viewGroup.findViewById(R.id.etEmail);
         etNombre = viewGroup.findViewById(R.id.etNombre);
         etApellidos = viewGroup.findViewById(R.id.etApellidos);
@@ -59,54 +76,65 @@ public class RegistroFragment extends Fragment {
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String email = etEmail.getText().toString().trim();
+                String nombre = etNombre.getText().toString().trim();
+                String apellidos = etApellidos.getText().toString().trim();
+                String password = etPass.getText().toString();
+                String confirmPassword = etConfPass.getText().toString();
+                String phoneNumber = etPhoneNum.getText().toString().trim();
+                String companyId = etComId.getText().toString().trim();
 
-                if (!etEmail.getText().toString().isBlank()) {
-                    if(!userPer.isEmailInUse(etEmail.getText().toString())) {
-                        if (!etNombre.getText().toString().isBlank()) {
-                            if (!etApellidos.getText().toString().isBlank()) {
-                                if (!etPass.getText().toString().isBlank()) {
-                                    if (!etConfPass.getText().toString().isBlank()) {
-                                        if (etPass.getText().toString().equals(etConfPass.getText().toString())) {
-                                            if (!etPhoneNum.getText().toString().isBlank()) {
-                                                if (!etComId.getText().toString().isBlank()) {
-                                                    if(clientPer.clientExists(etComId.getText().toString())) {
-                                                        res =userPer.newUser(new User(etEmail.getText().toString().trim(), etPass.getText().toString().trim(),
-                                                                etNombre.getText().toString().trim(), etApellidos.getText().toString().trim(),
-                                                                etPhoneNum.getText().toString().trim(), TIPO, Long.valueOf(etComId.getText().toString())));
-                                                        if (res == 1) {
-                                                            Toast.makeText(getContext(), R.string.user_registered, Toast.LENGTH_SHORT).show();
-                                                            Intent intent = new Intent(getActivity(), ActivityCategorias.class);
-                                                            intent.putExtra("email", etEmail.getText().toString().trim());
-                                                            startActivity(intent);
+                if (!email.isEmpty()) {
+                    if (isValidEmail(email)) {
+                        if (!userPer.isEmailInUse(email)) {
+                            if (!nombre.isEmpty()) {
+                                if (!apellidos.isEmpty()) {
+                                    if (!password.isEmpty()) {
+                                        if (!confirmPassword.isEmpty()) {
+                                            if (password.equals(confirmPassword)) {
+                                                if (!phoneNumber.isEmpty()) {
+                                                    if (!companyId.isEmpty()) {
+                                                        if (clientPer.clientExists(companyId)) {
+                                                            User newUser = new User(email, password, nombre, apellidos, phoneNumber, TIPO, Long.parseLong(companyId));
+                                                            res = userPer.newUser(newUser);
+                                                            if (res == 1) {
+                                                                Toast.makeText(getContext(), R.string.user_registered, Toast.LENGTH_SHORT).show();
+                                                                Intent intent = new Intent(getActivity(), ActivityCategorias.class);
+                                                                intent.putExtra("email", email);
+                                                                startActivity(intent);
+                                                            } else {
+                                                                Toast.makeText(getContext(), R.string.unable_to_resgister, Toast.LENGTH_SHORT).show();
+                                                            }
                                                         } else {
-                                                            Toast.makeText(getContext(), R.string.unable_to_resgister, Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(getContext(), R.string.unvalid_com_id, Toast.LENGTH_SHORT).show();
                                                         }
                                                     } else {
-                                                        Toast.makeText(getContext(), R.string.unvalid_com_id, Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(getContext(), R.string.no_com_id, Toast.LENGTH_SHORT).show();
                                                     }
                                                 } else {
-                                                    Toast.makeText(getContext(), R.string.no_com_id, Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getContext(), R.string.no_phone_num, Toast.LENGTH_SHORT).show();
                                                 }
                                             } else {
-                                                Toast.makeText(getContext(), R.string.no_phone_num, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(), R.string.passw_must_match, Toast.LENGTH_SHORT).show();
                                             }
                                         } else {
-                                            Toast.makeText(getContext(), R.string.passw_must_match, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), R.string.no_pass_conf, Toast.LENGTH_SHORT).show();
                                         }
                                     } else {
-                                        Toast.makeText(getContext(), R.string.no_pass_conf, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), R.string.no_password, Toast.LENGTH_SHORT).show();
                                     }
                                 } else {
-                                    Toast.makeText(getContext(), R.string.no_password, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), R.string.no_lastname, Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(getContext(), R.string.no_lastname, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), R.string.no_name, Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), R.string.no_name, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), R.string.email_in_use, Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(getContext(), R.string.email_in_use, Toast.LENGTH_SHORT).show();
+                        etEmail.setError(getString(R.string.invalid_email));
+                        //Toast.makeText(getContext(), R.string.invalid_email, Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(getContext(), R.string.no_email, Toast.LENGTH_SHORT).show();
@@ -114,36 +142,38 @@ public class RegistroFragment extends Fragment {
             }
         });
 
+
         return viewGroup;
     }
 
     private void iniciarAnimacion() {
-        etEmail.setTranslationX(800);
-        etNombre.setTranslationX(800);
-        etApellidos.setTranslationX(800);
-        etPass.setTranslationX(800);
-        etConfPass.setTranslationX(800);
-        btnRegistrar.setTranslationX(800);
-        etPhoneNum.setTranslationX(800);
-        etComId.setTranslationX(800);
 
-        etEmail.setAlpha(v);
-        etNombre.setAlpha(v);
-        etApellidos.setAlpha(v);
-        etPass.setAlpha(v);
-        etConfPass.setAlpha(v);
-        btnRegistrar.setAlpha(v);
-        etPhoneNum.setAlpha(v);
-        etComId.setAlpha(v);
 
-        etEmail.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
-        etNombre.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
-        etApellidos.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
-        etPass.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
-        etConfPass.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
-        btnRegistrar.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
-        etPhoneNum.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
-        etComId.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        //lEmail, lNombre, lApellidos, lPassword, lConfirmPass, lTelefono, lEmpresaId;
+        lEmail.setTranslationX(800);
+        lNombre.setTranslationX(800);
+        lApellidos.setTranslationX(800);
+        lPassword.setTranslationX(800);
+        lConfirmPass.setTranslationX(800);
+        lTelefono.setTranslationX(800);
+        lEmpresaId.setTranslationX(800);
+
+        lEmail.setAlpha(v);
+        lNombre.setAlpha(v);
+        lApellidos.setAlpha(v);
+        lPassword.setAlpha(v);
+        lConfirmPass.setAlpha(v);
+        lTelefono.setAlpha(v);
+        lEmpresaId.setAlpha(v);
+
+        lEmail.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        lNombre.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        lApellidos.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        lPassword.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        lConfirmPass.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        lTelefono.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        lEmpresaId.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+
     }
 
 
@@ -153,6 +183,14 @@ public class RegistroFragment extends Fragment {
         if (isVisibleToUser && getView() != null) {
             iniciarAnimacion();
         }
+    }
+    public boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        if (email == null) {
+            return false;
+        }
+        return pattern.matcher(email).matches();
     }
 
 
