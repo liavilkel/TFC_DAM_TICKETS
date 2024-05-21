@@ -19,13 +19,16 @@
             android:exported="false" />
         <activity
             android:name=".ActivityNuevoTicket"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.TFC_DAM_TICKETS.NoActionBar"/>
         <activity
             android:name=".TicketsList"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.TFC_DAM_TICKETS.NoActionBar"/>
         <activity
             android:name=".ActivityCategorias"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.TFC_DAM_TICKETS.NoActionBar"/>
         <activity
             android:name=".autenticacion.Login"
             android:exported="true"

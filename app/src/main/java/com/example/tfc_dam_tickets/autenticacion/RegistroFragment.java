@@ -176,6 +176,24 @@ public class RegistroFragment extends Fragment {
 
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Aquí limpias los campos cuando la vista del Fragment se destruye
+        limpiarCampos();
+    }
+
+    void limpiarCampos() {
+        if (etEmail != null) etEmail.setText("");
+        if (etNombre != null) etNombre.setText("");
+        if (etApellidos != null) etApellidos.setText("");
+        if (etPass != null) etPass.setText("");
+        if (etConfPass != null) etConfPass.setText("");
+        if (etPhoneNum != null) etPhoneNum.setText("");
+        if (etComId != null) etComId.setText("");
+    }
+
+
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -192,7 +210,6 @@ public class RegistroFragment extends Fragment {
         }
         return pattern.matcher(email).matches();
     }
-
 
 
 

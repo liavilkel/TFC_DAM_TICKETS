@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ public class LoginFragment extends Fragment {
     private UserPersistence userPer;
     private TextInputEditText etEmail, etPass;
     private TextInputLayout layoutEmail, layoutPass;
+    TextView tvRestPass;
     private Button login;
     private float v = 0;
 
@@ -40,6 +42,7 @@ public class LoginFragment extends Fragment {
         etEmail = view.findViewById(R.id.email);
         etPass = view.findViewById(R.id.password);
         login = view.findViewById(R.id.btnLogin);
+        tvRestPass = view.findViewById(R.id.tvRestPass);
 
         iniciarAnimacion();
 
@@ -68,6 +71,14 @@ public class LoginFragment extends Fragment {
                         Toast.makeText(getContext(), "Email o contraseña incorrectos", Toast.LENGTH_LONG).show();
                     }
                 }
+            }
+        });
+
+        tvRestPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               //TODO: RESTABLECER LA CONTRASEÑA
+
             }
         });
 
@@ -109,15 +120,20 @@ int after: El número de caracteres nuevos que se reemplazarán en el texto exis
         layoutEmail.setTranslationX(800);
         layoutPass.setTranslationX(800);
         login.setTranslationX(800);
+        tvRestPass.setTranslationX(800);
+
 
         layoutEmail.setAlpha(v);
         layoutPass.setAlpha(v);
         login.setAlpha(v);
+        tvRestPass.setAlpha(v);
 
         layoutEmail.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
         layoutPass.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
         login.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        tvRestPass.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
     }
+
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -128,9 +144,18 @@ int after: El número de caracteres nuevos que se reemplazarán en el texto exis
     }
 
 
+
+//NO BORRAR!!!! LUEGO VAMOS A NECESITAR ESTE TROZO DE TARTA
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        // Aquí limpias los campos cuando la vista del Fragment se destruye
+        limpiarCampos();
+    }
+//NO BORRAR!!!! LUEGO VAMOS A NECESITAR ESTE TROZO DE TARTA
+    void limpiarCampos() {
+        if (etEmail != null) etEmail.setText("");
+        if (etPass != null) etPass.setText("");
 
     }
 

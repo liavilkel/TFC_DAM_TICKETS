@@ -58,6 +58,18 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/tvRestPass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/create_resetPass"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword"
+        app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
+        app:layout_constraintEnd_toEndOf="@id/textInputLayoutPassword"
+        android:layout_marginTop="10dp"/>
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="0dp"

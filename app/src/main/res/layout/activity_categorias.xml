@@ -6,13 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".ActivityCategorias">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/custom_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/boton"
+        app:titleTextColor="@color/white"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:navigationIconTint="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <TextView
         android:id="@+id/tvCategorias"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/tvCategorias"
         android:padding="@dimen/margin"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/custom_actionbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

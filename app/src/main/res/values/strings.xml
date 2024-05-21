@@ -51,5 +51,7 @@
     <string name="mn_cerrar_sesion">Cerrar sesión</string>
     <string name="mn_salir_app">Salir</string>
     <string name="tv_titulo_categorias">Categorias</string>
+    <string name="create_resetPass">¿Has olvidado tu contraseña?</string>
+    <string name="tv_titulo_listaTickets">Lista Tickets</string>
 
 </resources>

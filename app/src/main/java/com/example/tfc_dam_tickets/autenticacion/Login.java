@@ -34,6 +34,17 @@ public class Login extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+                // Verifica si la pestaña de registro es deseleccionada
+                if (tab.getPosition() == 1) { // Asumiendo que el Registro está en la posición 1
+                    RegistroFragment registroFragment = (RegistroFragment) adapter.instantiateItem(viewPager, 1);
+                    if (registroFragment != null) registroFragment.limpiarCampos();
+                }
+
+                /*NO BORRAR!!!! LUEGO VAMOS A NECESITAR ESTE TROZO DE TARTA
+                if (tab.getPosition() == 0) { // Asumiendo que el Registro está en la posición 1
+                    LoginFragment loginfragment = (LoginFragment) adapter.instantiateItem(viewPager, 0);
+                    if (loginfragment != null) loginfragment.limpiarCampos();
+                }*/
             }
 
             @Override

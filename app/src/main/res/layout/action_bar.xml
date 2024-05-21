@@ -3,7 +3,8 @@
     android:id="@+id/custom_actionbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/boton">
+    android:background="@color/boton"
+    >
 
     <!-- ImageButton para la flecha de retroceso -->
     <ImageButton
