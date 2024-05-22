@@ -2,6 +2,8 @@ package com.example.tfc_dam_tickets;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.example.tfc_dam_tickets.model.Ticket;
+import com.example.tfc_dam_tickets.model.User;
+import com.example.tfc_dam_tickets.persistence.ClientPersistence;
+import com.example.tfc_dam_tickets.persistence.TicketPersistence;
+import com.example.tfc_dam_tickets.persistence.UserPersistence;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class ActivityDetalleTicket extends AppCompatActivity {
@@ -40,10 +47,18 @@ public class ActivityDetalleTicket extends AppCompatActivity {
     Button btnDetalleGuardar;
     Button btnDetalleCancelar;
 
+    TicketPersistence ticketPersistence;
+    UserPersistence userPersistence;
+    ClientPersistence clientPersistence;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_ticket);
+
+        ticketPersistence = new TicketPersistence(this);
+        userPersistence = new UserPersistence(this);
+        clientPersistence = new ClientPersistence(this);
 
         // Inicialización de elementos de la vista
         tvDetalleIdTicket = findViewById(R.id.tvDetalleIdTicket);
@@ -66,6 +81,12 @@ public class ActivityDetalleTicket extends AppCompatActivity {
         etSolucionTecnico = findViewById(R.id.etSolucionTecnico);
         btnDetalleGuardar = findViewById(R.id.btnDetalleGuardar);
         btnDetalleCancelar = findViewById(R.id.btnDetalleCancelar);
+
+        Intent i = getIntent();
+        int ticketId = i.getIntExtra("ticketId", -1);
+
+        Ticket ticket = ticketPersistence.getTicketById(ticketId);
+        User user = userPersistence.getUserByEmail(ticket.getUserOpen());
 
         btnDetalleCancelar.setOnClickListener(new View.OnClickListener() {
             @Override

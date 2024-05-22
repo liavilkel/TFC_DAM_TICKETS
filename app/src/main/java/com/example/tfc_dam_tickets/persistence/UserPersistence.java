@@ -135,4 +135,35 @@ public class UserPersistence {
         }
         return id;
     }
+
+    public User getUserByEmail(String email) {
+        User user = null;
+        String query = "SELECT email, name, last_name, phone_number, type, client_id FROM Users WHERE email = ?";
+
+        try (Connection connection = DBCon.getConnection();
+             PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
+
+            if (stmt != null) {
+                stmt.setString(1, email);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {  // Expecting only one result for a unique email
+                        user = new User(
+                                rs.getString("email"),
+                                null, // Exclude password
+                                rs.getString("name"),
+                                rs.getString("last_name"),
+                                rs.getString("phone_number"),
+                                rs.getString("type"),
+                                rs.getLong("client_id")
+                        );
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+
 }
