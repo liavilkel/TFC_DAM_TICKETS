@@ -1,5 +1,7 @@
 package com.example.tfc_dam_tickets.persistence;
 
+import android.content.Context;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,9 +14,11 @@ public class ClientPersistence {
     static final String NAME = "name";
 
     DBConnection dbConnection;
+    Context context;
 
-    public ClientPersistence() {
+    public ClientPersistence(Context context) {
         dbConnection = new DBConnection();
+        this.context = context;
     }
 
 

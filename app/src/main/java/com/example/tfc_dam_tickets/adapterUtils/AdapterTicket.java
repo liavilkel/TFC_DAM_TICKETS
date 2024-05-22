@@ -1,14 +1,17 @@
 package com.example.tfc_dam_tickets.adapterUtils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tfc_dam_tickets.ActivityDetalleTicket;
 import com.example.tfc_dam_tickets.R;
 import com.example.tfc_dam_tickets.model.Ticket;
 import com.example.tfc_dam_tickets.persistence.ClientPersistence;
@@ -40,7 +43,7 @@ public class AdapterTicket extends RecyclerView.Adapter<AdapterTicket.TicketView
     @Override
     public void onBindViewHolder(@NonNull TicketViewHolder holder, int position) {
 
-        clientPersistence = new ClientPersistence();
+        clientPersistence = new ClientPersistence(context.getApplicationContext());
 
         Ticket ticket = ticketsList.get(position);
         holder.tvIdTicket.setText(String.valueOf(ticket.getTicketId()));
@@ -60,6 +63,15 @@ public class AdapterTicket extends RecyclerView.Adapter<AdapterTicket.TicketView
         holder.tvHora.setText(formattedTime);
         //holder.tvHora.setText(String.valueOf(ticket.getTsOpen().getHour()));
 
+        holder.recCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, ActivityDetalleTicket.class);
+                i.putExtra("ticketId", ticket.getTicketId());
+                context.startActivity(i);
+            }
+        });
+
     }
 
     @Override
@@ -74,6 +86,7 @@ public class AdapterTicket extends RecyclerView.Adapter<AdapterTicket.TicketView
         public TextView tvCliente;
         public TextView tvEstado;
         public TextView tvTitulo;
+        public CardView recCard;
 
         public TicketViewHolder(View view) {
             super(view);
@@ -83,7 +96,7 @@ public class AdapterTicket extends RecyclerView.Adapter<AdapterTicket.TicketView
             tvCliente = view.findViewById(R.id.tvCliente);
             tvEstado = view.findViewById(R.id.tvEstado);
             tvTitulo = view.findViewById(R.id.tvTitulo);
-            //hola
+            recCard = view.findViewById(R.id.recCardTicket);
         }
     }
 }
