@@ -151,15 +151,11 @@ public class TicketsList extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(false);
 
-            builder.setTitle("Confirmar salida");
-            builder.setMessage("¿Estás seguro de que quieres salir de la aplicación?");
+            builder.setTitle("Cerrar sesión");
+            builder.setMessage("¿Estás seguro de que quieres cerrar la sesión?");
             builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-
-                    //TODO: NO ESTOY SEGURA SI ES LA CORRECTA OPCION PARA SALIR
-                    //SharedPreferences es una forma de guardar datos en un dispositivo
-                    //Elimina los datos del usuario almacenados localmente
                     SharedPreferences preferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.remove("user_id");

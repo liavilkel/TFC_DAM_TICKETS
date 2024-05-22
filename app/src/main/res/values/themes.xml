@@ -1,6 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Base.Theme.TFC_DAM_TICKETS" parent="Theme.AppCompat.DayNight"></style>
+    <style name="Base.Theme.TFC_DAM_TICKETS" parent="Theme.AppCompat.DayNight">
+        <item name="colorPrimary">@color/verde</item>
+    </style>
 
     <style name="Theme.TFC_DAM_TICKETS.NoActionBar" parent="Base.Theme.TFC_DAM_TICKETS">
         <item name="windowActionBar">false</item>
@@ -17,4 +19,5 @@
     <style name="OverflowMenuStyle" parent="Widget.AppCompat.PopupMenu.Overflow">
         <item name="android:textColor">@android:color/white</item>
     </style>
+
 </resources>

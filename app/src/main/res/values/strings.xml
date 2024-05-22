@@ -53,5 +53,6 @@
     <string name="tv_titulo_categorias">Categorias</string>
     <string name="create_resetPass">¿Has olvidado tu contraseña?</string>
     <string name="tv_titulo_listaTickets">Lista Tickets</string>
+    <string name="tv_titulo_nuevoTicket">Nuevo ticket</string>
 
 </resources>

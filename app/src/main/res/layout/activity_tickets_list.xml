@@ -10,7 +10,7 @@
         android:id="@+id/custom_actionbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/boton"
+        android:background="@color/verde"
         app:titleTextColor="@color/white"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:navigationIconTint="@android:color/white"
@@ -44,6 +44,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:textSize="24sp"
+            android:background="@drawable/button_bg"
             android:text="@string/btn_add_new"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
