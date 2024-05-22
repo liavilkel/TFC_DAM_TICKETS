@@ -83,6 +83,7 @@ public class AdapterTicket extends RecyclerView.Adapter<AdapterTicket.TicketView
             tvCliente = view.findViewById(R.id.tvCliente);
             tvEstado = view.findViewById(R.id.tvEstado);
             tvTitulo = view.findViewById(R.id.tvTitulo);
+            //hola
         }
     }
 }
