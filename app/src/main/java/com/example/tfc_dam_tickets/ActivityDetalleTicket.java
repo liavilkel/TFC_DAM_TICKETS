@@ -24,10 +24,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.time.format.DateTimeFormatter;
 
 public class ActivityDetalleTicket extends AppCompatActivity {
-    TextInputLayout etTitulo;
-    TextInputLayout etDescripcion;
-    Button btnCancelar;
-    Button btnAceptar;
 
     TextView tvDetalleIdTicket;
     TextView tvDetalleFechaIni;
@@ -55,6 +51,8 @@ public class ActivityDetalleTicket extends AppCompatActivity {
     UserPersistence userPersistence;
     ClientPersistence clientPersistence;
 
+    String selectedItem = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +62,103 @@ public class ActivityDetalleTicket extends AppCompatActivity {
         userPersistence = new UserPersistence(this);
         clientPersistence = new ClientPersistence(this);
 
+        Intent i = getIntent();
+        Long ticketId = i.getLongExtra("ticketId", -1);
+
+        Ticket ticket = ticketPersistence.getTicketById(ticketId);
+        User user = userPersistence.getUserByEmail(ticket.getUserOpen());
+        Client client = clientPersistence.findClientById(user.getComId());
+
+        if (user.getType().equals("tecnico")) {
+            initFields(true);
+            fillInFields(ticket, user, client, true, ticketId);
+        } else {
+            initFields(false);
+            fillInFields(ticket, user, client, false, ticketId);
+        }
+
+
+        btnDetalleCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ActivityDetalleTicket.this, R.string.toast_cancelar_detalle_ticket, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnDetalleGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ActivityDetalleTicket.this, R.string.toast_guardar_detalle_ticket, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void fillInFields(Ticket ticket, User user, Client client, Boolean tecnico, Long ticketId) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
+        String formattedDate;
+        String formattedTime;
+
+        String[] items = new String[]{"Nuevo", "En proceso", "Cerrado"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedItem = parent.getItemAtPosition(position).toString();
+                // HACER EL .set del ESTADO al ITEM SI SE QUIERE GUARDAR EL CAMBIO
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        if (ticket != null && user != null && client != null) {
+            tvDetalleIdTicket.setText("#ID " + String.valueOf(ticketId));
+            formattedDate = ticket.getTsOpen().format(formatter);
+            tvDetalleFechaIni.setText("FECHA INI: " + formattedDate);
+            formattedDate = (ticket.getTsClose() != null) ? ticket.getTsClose().format(formatter) : "---";
+            tvDetalleFechaFin.setText("FECHA FIN: " + formattedDate);
+            formattedTime = ticket.getTsOpen().format(formatter2);
+            tvDetalleHoraIni.setText("HORA INI: " + formattedTime);
+            formattedTime = (ticket.getTsClose() != null) ? ticket.getTsClose().format(formatter2) : "---";
+            tvDetalleHoraFin.setText("HORA FIN: " + formattedTime);
+            tvDetalleTitulo.setText("TÍTULO: " + ticket.getTitle());
+            tvDetalleDescripcion.setText("DESCRIPCIÓN: " + ticket.getDescription());
+            spinner.setSelection(adapter.getPosition(ticket.getStatus()));
+            if (tecnico) {
+                spinner.setEnabled(true);
+                spinner.setFocusable(true);
+                etSolucionTecnico.setEnabled(true);
+            } else {
+                spinner.setEnabled(false);
+                spinner.setFocusable(false);
+                etSolucionTecnico.setEnabled(false);
+            }
+
+            tvDetalleCliente.setText("CLIENTE: " + client.getName());
+            tvDetalleCalle.setText("CALLE: " + client.getStreet());
+            tvDetalleCP.setText("CP: " + client.getZipCode());
+            tvDetalleMunicipio.setText("MUNICIPIO: " + client.getMunicipality());
+            tvDetalleProvincia.setText("PROVINCIA: " + client.getProvince());
+
+            tvDetalleNomUsuario.setText("NOMBRE: " + user.getName());
+            tvDetalleApellUsuario.setText("APELLIDOS: " + user.getLastName());
+            tvDetalleTelfUsuario.setText("TELF: " + user.getPhoneNum());
+            tvDetalleEmailUsuario.setText("EMAIL: " + user.getEmail());
+
+        } else {
+            Toast.makeText(ActivityDetalleTicket.this, R.string.toast_unable_fetch_data_detalle,
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void initFields(Boolean tecnico) {
         // Inicialización de elementos de la vista
         tvDetalleIdTicket = findViewById(R.id.tvDetalleIdTicket);
         tvDetalleFechaIni = findViewById(R.id.tvDetalleFechaIni);
@@ -87,80 +182,18 @@ public class ActivityDetalleTicket extends AppCompatActivity {
         btnDetalleCancelar = findViewById(R.id.btnDetalleCancelar);
         spinner = findViewById(R.id.spinner);
 
-        Intent i = getIntent();
-        Long ticketId = i.getLongExtra("ticketId", -1);
-
-        Ticket ticket = ticketPersistence.getTicketById(ticketId);
-        User user = userPersistence.getUserByEmail(ticket.getUserOpen());
-        Client client = clientPersistence.findClientById(user.getComId());
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm");
-        String formattedDate;
-        String formattedTime;
-
-        String[] items = new String[]{"Liana", "Will", "You", "Marry", "Me?!", "pls"};
-        //SE PUEDE CAMBIAR EL TIPO DE DISEÑO DEL SPINER HERE! TODO
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = parent.getItemAtPosition(position).toString();
-                // HACER EL .set del ESTADO al ITEM SI SE QUIERE GUARDAR EL CAMBIO
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        if (ticket != null && user != null && client != null) {
-            tvDetalleIdTicket.setText("#ID " + String.valueOf(ticketId));
-            formattedDate = ticket.getTsOpen().format(formatter);
-            tvDetalleFechaIni.setText("FECHA INI: " + formattedDate);
-            formattedDate = (ticket.getTsClose() != null) ? ticket.getTsClose().format(formatter) : "---";
-            tvDetalleFechaFin.setText("FECHA FIN: " + formattedDate);
-            formattedTime = ticket.getTsOpen().format(formatter2);
-            tvDetalleHoraIni.setText("HORA INI: " + formattedTime);
-            formattedTime = (ticket.getTsClose() != null) ? ticket.getTsClose().format(formatter2) : "---";
-            tvDetalleHoraFin.setText("HORA FIN: " + formattedTime);
-            tvDetalleTitulo.setText("TÍTULO: " + ticket.getTitle());
-            tvDetalleDescripcion.setText("DESCRIPCIÓN: " + ticket.getDescription());
-            //TODO ESTADO
-
-            tvDetalleCliente.setText("CLIENTE: " + client.getName());
-            tvDetalleCalle.setText("CALLE: " + client.getStreet());
-            tvDetalleMunicipio.setText("MUNICIPIO: " + client.getMunicipality());
-            tvDetalleProvincia.setText("PROVINCIA: " + client.getProvince());
-
-            tvDetalleNomUsuario.setText("NOMBRE: " + user.getName());
-            tvDetalleApellUsuario.setText("APELLIDOS: " + user.getLastName());
-            tvDetalleTelfUsuario.setText("TELF: " + user.getPhoneNum());
-            tvDetalleEmailUsuario.setText("EMAIL: " + user.getEmail());
-
+        if(tecnico) {
+            btnDetalleGuardar.setEnabled(true);
+            btnDetalleGuardar.setVisibility(View.VISIBLE);
+            btnDetalleCancelar.setEnabled(true);
+            btnDetalleCancelar.setVisibility(View.VISIBLE);
         } else {
-            Toast.makeText(ActivityDetalleTicket.this, R.string.toast_unable_fetch_data_detalle,
-                    Toast.LENGTH_SHORT).show();
-
+            btnDetalleGuardar.setEnabled(false);
+            btnDetalleGuardar.setVisibility(View.GONE);
+            btnDetalleCancelar.setEnabled(true);
+            btnDetalleCancelar.setVisibility(View.GONE);
         }
 
-        btnDetalleCancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(ActivityDetalleTicket.this, R.string.toast_cancelar_detalle_ticket, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        btnDetalleGuardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(ActivityDetalleTicket.this, R.string.toast_guardar_detalle_ticket, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
 
