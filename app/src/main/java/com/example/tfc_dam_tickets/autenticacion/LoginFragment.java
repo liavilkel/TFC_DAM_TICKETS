@@ -77,8 +77,9 @@ public class LoginFragment extends Fragment {
         tvRestPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //TODO: RESTABLECER LA CONTRASEÑA
-
+                // Iniciar la nueva actividad para restablecer la contraseña
+                Intent intent = new Intent(LoginFragment.this, ForgotPassword.class);
+                startActivity(intent);
             }
         });
 
