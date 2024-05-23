@@ -55,5 +55,6 @@
     <string name="tv_titulo_listaTickets">Lista Tickets</string>
     <string name="tv_titulo_nuevoTicket">Nuevo ticket</string>
     <string name="toast_unable_fetch_data_detalle">No se ha podido recuperar toda la información de la base de datos.</string>
+    <string name="tv_ticket_list_filtro">Filtrar por estado:</string>
 
 </resources>
