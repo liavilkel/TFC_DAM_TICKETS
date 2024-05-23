@@ -99,7 +99,7 @@ public class ActivityDetalleTicket extends AppCompatActivity {
         String formattedDate;
         String formattedTime;
 
-        String[] items = new String[]{"Item 1", "Item 2", "Item 3", "Item 4"};
+        String[] items = new String[]{"Liana", "Will", "You", "Marry", "Me?!", "pls"};
         //SE PUEDE CAMBIAR EL TIPO DE DISEÑO DEL SPINER HERE! TODO
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
