@@ -44,7 +44,7 @@ public class RegistroFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         userPer = new UserPersistence(getContext());
-        clientPer = new ClientPersistence();
+        clientPer = new ClientPersistence(getContext());
         login = new LoginFragment();
 
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.registro_tab_fragment,container,false);

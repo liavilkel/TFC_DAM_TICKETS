@@ -35,13 +35,45 @@ public class TicketPersistence {
     static final String SOLUTION = "solution";
 
     DBConnection DBCon;
-    String conRes;
     Context context;
 
     public TicketPersistence(Context context) {
         this.context = context;
         DBCon = new DBConnection();
     }
+
+    public Ticket getTicketById(Long id) {
+        Ticket ticket = null;
+        String query = "SELECT * FROM " + TABLA + " WHERE " + TICKET_ID +  " = ?";
+
+        try (Connection connection = DBCon.getConnection();
+             PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
+            if (stmt != null) {
+                stmt.setLong(1, id);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {  // Change this to `if` since we expect only one result
+                        ticket = new Ticket(
+                                rs.getLong(TICKET_ID),
+                                rs.getLong(CAT),
+                                rs.getLong(CLIENT),
+                                rs.getString(USER_OPEN),
+                                rs.getString(USER_CLOSE),
+                                rs.getString(TITLE),
+                                rs.getString(DESC),
+                                rs.getString(STATUS),
+                                rs.getString(SOLUTION),
+                                toLocalDateTime(rs.getTimestamp(TS_OPEN)),
+                                toLocalDateTime(rs.getTimestamp(TS_CLOSE))
+                        );
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ticket;
+    }
+
 
     public ArrayList<Ticket> getTicketsByCat(int cat) {
         ArrayList<Ticket> tickets = new ArrayList<>();

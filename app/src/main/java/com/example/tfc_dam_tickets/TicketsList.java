@@ -19,7 +19,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.tfc_dam_tickets.adapterUtils.AdapterTicket;
@@ -28,6 +31,7 @@ import com.example.tfc_dam_tickets.model.Ticket;
 import com.example.tfc_dam_tickets.persistence.TicketPersistence;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class TicketsList extends AppCompatActivity {
 
@@ -36,6 +40,8 @@ public class TicketsList extends AppCompatActivity {
     TicketPersistence ticketPersistence;
     Button btnAdd;
     Intent i;
+    Spinner spinner;
+    String selectedStatus = "Todos";
 
     ActivityResultLauncher<Intent> startActivityForResult = 
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
@@ -63,6 +69,8 @@ public class TicketsList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tickets_list);
 
+        ticketPersistence = new TicketPersistence(this);
+
         Toolbar customToolbar = findViewById(R.id.custom_actionbar);
         setSupportActionBar(customToolbar);
         initializeUI();
@@ -73,16 +81,20 @@ public class TicketsList extends AppCompatActivity {
         recyclerViewTickets.setLayoutManager(new LinearLayoutManager(this));
 
         btnAdd = findViewById(R.id.btnAddTicket);
+        spinner = findViewById(R.id.spinner_ticket_list);
 
-        ticketPersistence = new TicketPersistence(this);
+        String[] statusOptions = {"Todos", "En proceso", "Cerrado", "Nuevo"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, statusOptions
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setSelection(0);
+        spinner.setAdapter(adapter);
 
         i = getIntent();
         if (i.hasExtra("catId")){
            cargarTickets(i.getIntExtra("catId", -1));
         }
-
-
-
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,11 +107,35 @@ public class TicketsList extends AppCompatActivity {
             }
         });
 
-    }
-    private void cargarTickets(int cant) {
-        ArrayList<Ticket> tickets = ticketPersistence.getTicketsByCat(cant);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedStatus = parent.getItemAtPosition(position).toString();
+                cargarTickets(i.getIntExtra("catId", -1));
+            }
 
-        adapterTicket = new AdapterTicket(this, tickets);
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                spinner.setSelection(adapter.getPosition("Todos"));
+                cargarTickets(i.getIntExtra("catId", -1));
+            }
+        });
+
+    }
+    private void cargarTickets(int cat) {
+        ArrayList<Ticket> tickets = ticketPersistence.getTicketsByCat(cat);
+
+        if (selectedStatus.equals("Todos")) {
+            adapterTicket = new AdapterTicket(this, tickets);
+        } else {
+            ArrayList<Ticket> filteredTickets = new ArrayList<>();
+            filteredTickets.addAll(tickets.stream()
+                    .filter(t -> t.getStatus().equals(selectedStatus))
+                    .collect(Collectors.toList()));
+
+            adapterTicket = new AdapterTicket(this, filteredTickets);
+        }
+
         recyclerViewTickets.setAdapter(adapterTicket);
     }
     @Override
@@ -151,15 +187,11 @@ public class TicketsList extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(false);
 
-            builder.setTitle("Confirmar salida");
-            builder.setMessage("¿Estás seguro de que quieres salir de la aplicación?");
+            builder.setTitle("Cerrar sesión");
+            builder.setMessage("¿Estás seguro de que quieres cerrar la sesión?");
             builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-
-                    //TODO: NO ESTOY SEGURA SI ES LA CORRECTA OPCION PARA SALIR
-                    //SharedPreferences es una forma de guardar datos en un dispositivo
-                    //Elimina los datos del usuario almacenados localmente
                     SharedPreferences preferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.remove("user_id");

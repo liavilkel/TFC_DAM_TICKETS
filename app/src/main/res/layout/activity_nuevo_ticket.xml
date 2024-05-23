@@ -1,74 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/margin"
     tools:context=".ActivityNuevoTicket">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/custom_actionbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/verde"
+        app:titleTextColor="@color/white"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:navigationIconTint="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+
+        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etCat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/custom_actionbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/margin">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint= "@string/cat_ticket"
-            android:text=" "/>
+            android:hint="@string/cat_ticket"
+
+            android:text=" " />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Insertar Título -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etTitulo"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etTitulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/etCat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/margin">
+
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/etCat">
+            android:hint="@string/titulo_ticket" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/titulo_ticket" />
-        </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etDescripcion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/etTitulo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/margin">
 
-    <!-- Insertar Descripción -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etDescripcion"
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/etTitulo">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/descripcion_ticket" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:hint="@string/descripcion_ticket" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/buttonLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <Button
+            android:layout_margin="10dp"
             android:id="@+id/btnCancelar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/button_bg"
             android:textColor="@color/white"
-            android:layout_marginEnd="@dimen/margin_cardview"
-            android:text="@string/btn_candelar" />
+            android:text="@string/btn_candelar"
+            android:layout_marginEnd="@dimen/margin_cardview" />
 
         <Button
+            android:layout_margin="10dp"
             android:id="@+id/btnAceptar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/button_bg"
             android:textColor="@color/white"
-            android:layout_marginStart="@dimen/margin_cardview"
-            android:text="@string/btn_guardar" />
+            android:text="@string/btn_guardar"
+            android:layout_marginStart="@dimen/margin_cardview" />
     </LinearLayout>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

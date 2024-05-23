@@ -3,23 +3,18 @@ package com.example.tfc_dam_tickets;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import androidx.appcompat.widget.Toolbar;
-
 
 import com.example.tfc_dam_tickets.adapterUtils.AdapterCategorias;
 import com.example.tfc_dam_tickets.autenticacion.Login;
-import com.example.tfc_dam_tickets.autenticacion.LoginFragment;
 import com.example.tfc_dam_tickets.model.Category;
 import com.example.tfc_dam_tickets.persistence.CategoryPersistence;
 import com.example.tfc_dam_tickets.persistence.PermissionPersistence;
@@ -43,13 +38,13 @@ public class ActivityCategorias extends AppCompatActivity {
         Toolbar customToolbar = findViewById(R.id.custom_actionbar);
         setSupportActionBar(customToolbar);
 
-        initializeUI();
-
-
-
         // Inicializar RecyclerView
         rvCategorias = findViewById(R.id.rvCategorias);
-        rvCategorias.setLayoutManager(new LinearLayoutManager(this));
+
+        // Configurar GridLayoutManager
+        int numberOfColumns = 2;  // Define el número de columnas que deseas en la cuadrícula
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, numberOfColumns);
+        rvCategorias.setLayoutManager(gridLayoutManager);
 
         // Inicializar persistencias
         categoryPersistence = new CategoryPersistence(this);
@@ -67,6 +62,8 @@ public class ActivityCategorias extends AppCompatActivity {
 
         // Configurar RecyclerView con el adaptador
         rvCategorias.setAdapter(adapterCategorias);
+
+        initializeUI();
     }
 
     @Override
@@ -74,6 +71,7 @@ public class ActivityCategorias extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
+
     private void initializeUI() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -81,16 +79,13 @@ public class ActivityCategorias extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(false);
             actionBar.setTitle(R.string.tv_titulo_categorias);
         }
-
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // ID del botón de retroceso en la ActionBar
         if (item.getItemId() == android.R.id.home) {
-            // Finaliza la actividad actual para volver a MainActivity
             finish();
             return true;
-
         } else if (item.getItemId() == R.id.mnExit) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(false);
@@ -101,7 +96,6 @@ public class ActivityCategorias extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     finishAffinity();
                     System.exit(0);
-
                 }
             });
             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -112,21 +106,14 @@ public class ActivityCategorias extends AppCompatActivity {
             });
             AlertDialog dialog = builder.create();
             dialog.show();
-
-
         } else if (item.getItemId() == R.id.mnLogOut) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(false);
-
-            builder.setTitle("Confirmar salida");
-            builder.setMessage("¿Estás seguro de que quieres salir de la aplicación?");
+            builder.setTitle("Cerrar sesión");
+            builder.setMessage("¿Estás seguro de que quieres cerrar la sesión?");
             builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-
-                    //TODO: NO ESTOY SEGURA SI ES LA CORRECTA OPCION PARA SALIR
-                    //SharedPreferences es una forma de guardar datos en un dispositivo
-                    //Elimina los datos del usuario almacenados localmente
                     SharedPreferences preferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.remove("user_id");
@@ -147,13 +134,7 @@ public class ActivityCategorias extends AppCompatActivity {
             });
             AlertDialog dialog = builder.create();
             dialog.show();
-
-
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
 }

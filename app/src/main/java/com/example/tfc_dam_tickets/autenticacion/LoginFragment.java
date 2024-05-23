@@ -1,6 +1,7 @@
 package com.example.tfc_dam_tickets.autenticacion;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.tfc_dam_tickets.R;
@@ -43,6 +45,8 @@ public class LoginFragment extends Fragment {
         etPass = view.findViewById(R.id.password);
         login = view.findViewById(R.id.btnLogin);
         tvRestPass = view.findViewById(R.id.tvRestPass);
+
+
 
         iniciarAnimacion();
 

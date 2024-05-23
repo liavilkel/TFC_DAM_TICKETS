@@ -1,13 +1,21 @@
 package com.example.tfc_dam_tickets;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.tfc_dam_tickets.autenticacion.Login;
 import com.example.tfc_dam_tickets.persistence.CategoryPersistence;
 import com.example.tfc_dam_tickets.persistence.TicketPersistence;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
@@ -29,6 +37,10 @@ public class ActivityNuevoTicket extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevo_ticket);
+
+        Toolbar customToolbar = findViewById(R.id.custom_actionbar);
+        setSupportActionBar(customToolbar);
+        initializeUI();
 
         categoryPersistence = new CategoryPersistence(this);
         userPersistence = new UserPersistence(this);
@@ -81,5 +93,80 @@ public class ActivityNuevoTicket extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //MENU
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    private void initializeUI() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_24);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle(R.string.tv_titulo_nuevoTicket);
+        }
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // ID del botón de retroceso en la ActionBar
+        if (item.getItemId() == android.R.id.home) {
+            // Finaliza la actividad actual para volver a MainActivity
+            finish();
+            return true;
+
+        } else if (item.getItemId() == R.id.mnExit) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(false);
+            builder.setTitle("Confirmar salida");
+            builder.setMessage("¿Estás seguro de que quieres salir de la aplicación?");
+            builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finishAffinity();
+                    System.exit(0);
+
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+
+        } else if (item.getItemId() == R.id.mnLogOut) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(false);
+
+            builder.setTitle("Cerrar sesión");
+            builder.setMessage("¿Estás seguro de que quieres cerrar la sesión?");
+            builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(ActivityNuevoTicket.this, Login.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
