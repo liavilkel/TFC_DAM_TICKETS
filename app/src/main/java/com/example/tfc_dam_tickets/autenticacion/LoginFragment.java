@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.tfc_dam_tickets.R;
 import com.example.tfc_dam_tickets.ActivityCategorias;
+import com.example.tfc_dam_tickets.persistence.ForgotPassword;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -81,8 +82,9 @@ public class LoginFragment extends Fragment {
         tvRestPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //TODO: RESTABLECER LA CONTRASEÑA
-
+                // Iniciar la nueva actividad para restablecer la contraseña
+                Intent intent = new Intent(getContext(), ForgotPassword.class);
+                startActivity(intent);
             }
         });
 
