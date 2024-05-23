@@ -1,10 +1,7 @@
 package com.example.tfc_dam_tickets.persistence;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.tfc_dam_tickets.model.User;
 
@@ -14,8 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class UserPersistence {
 
@@ -55,7 +50,7 @@ public class UserPersistence {
                 stmt.setString(2, hashedPassword);
                 stmt.setString(3, user.getName());
                 stmt.setString(4, user.getLastName());
-                stmt.setString(5, user.getPhone_num());
+                stmt.setString(5, user.getPhoneNum());
                 stmt.setString(6, user.getType());
                 stmt.setLong(7, user.getComId());
 

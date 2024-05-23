@@ -2,6 +2,8 @@ package com.example.tfc_dam_tickets.persistence;
 
 import android.content.Context;
 
+import com.example.tfc_dam_tickets.model.Client;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -62,6 +64,38 @@ public class ClientPersistence {
 
         return "notFound";
     }
+
+
+
+    public Client findClientById(Long clientId) {
+        Client client = null;
+        String query = "SELECT * FROM " + TABLA + " WHERE " + CLIENT_ID + " = ?";
+
+        try (Connection connection = dbConnection.getConnection();
+             PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
+
+            if (stmt != null) {
+                stmt.setLong(1, clientId);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        client = new Client(
+                                rs.getLong("client_id"),
+                                rs.getString("name"),
+                                rs.getString("nif"),
+                                rs.getString("street"),
+                                rs.getString("zip_code"),
+                                rs.getString("province"),
+                                rs.getString("municipality")
+                        );
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return client;
+    }
+
 
 }
 

@@ -43,14 +43,14 @@ public class TicketPersistence {
         DBCon = new DBConnection();
     }
 
-    public Ticket getTicketById(int id) {
+    public Ticket getTicketById(Long id) {
         Ticket ticket = null;
         String query = "SELECT * FROM " + TABLA + " WHERE " + TICKET_ID +  " = ?";
 
         try (Connection connection = DBCon.getConnection();
              PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
             if (stmt != null) {
-                stmt.setInt(1, id);
+                stmt.setLong(1, id);
                 try (ResultSet rs = stmt.executeQuery()) {
                     if (rs.next()) {  // Change this to `if` since we expect only one result
                         ticket = new Ticket(

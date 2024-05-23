@@ -54,5 +54,6 @@
     <string name="create_resetPass">¿Has olvidado tu contraseña?</string>
     <string name="tv_titulo_listaTickets">Lista Tickets</string>
     <string name="tv_titulo_nuevoTicket">Nuevo ticket</string>
+    <string name="toast_unable_fetch_data_detalle">No se ha podido recuperar toda la información de la base de datos.</string>
 
 </resources>
