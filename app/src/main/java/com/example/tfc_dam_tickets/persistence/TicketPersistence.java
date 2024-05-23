@@ -35,7 +35,6 @@ public class TicketPersistence {
     static final String SOLUTION = "solution";
 
     DBConnection DBCon;
-    String conRes;
     Context context;
 
     public TicketPersistence(Context context) {
