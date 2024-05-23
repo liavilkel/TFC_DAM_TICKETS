@@ -46,7 +46,7 @@
     <string name="tv_detalle_ticket">Detalle del ticket:</string>
     <string name="tv_detalle_cliente">Detalle del cliente:</string>
     <string name="tv_detalle_usuario">Detalle del usuario:</string>
-    <string name="toast_cancelar_detalle_ticket">Cancelando estado y comentarios del ticket.</string>
+    <string name="toast_cancelar_detalle_ticket">No se han guardado ninguna modificación.</string>
     <string name="toast_guardar_detalle_ticket">Guardando estado y comentarios del ticket.</string>
     <string name="mn_cerrar_sesion">Cerrar sesión</string>
     <string name="mn_salir_app">Salir</string>
@@ -56,5 +56,6 @@
     <string name="tv_titulo_nuevoTicket">Nuevo ticket</string>
     <string name="toast_unable_fetch_data_detalle">No se ha podido recuperar toda la información de la base de datos.</string>
     <string name="tv_ticket_list_filtro">Filtrar por estado:</string>
+    <string name="ticket_update_fail">Error. Inténtelo más tarde.</string>
 
 </resources>

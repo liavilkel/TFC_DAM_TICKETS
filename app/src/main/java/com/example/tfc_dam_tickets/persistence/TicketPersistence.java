@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -134,6 +135,40 @@ public class TicketPersistence {
         }
         return response;
     }
+
+    public int updateTicket(Ticket ticket) {
+        String query = "UPDATE " + TABLA + " SET " +
+                STATUS + " = ?, " +
+                SOLUTION + " = ?, " +
+                TS_CLOSE + " = ? " +
+                "WHERE " + TICKET_ID + " = ?";
+
+        int rowsAffected = 0;
+        try (Connection connection = DBCon.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, ticket.getStatus());
+            stmt.setString(2, ticket.getSolution());
+
+            // Convert LocalDateTime to Timestamp properly
+            if (ticket.getTsClose() != null) {
+                stmt.setTimestamp(3, Timestamp.valueOf(ticket.getTsClose()
+                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
+            } else {
+                stmt.setNull(3, java.sql.Types.TIMESTAMP);
+            }
+
+            stmt.setLong(4, ticket.getTicketId());
+
+            rowsAffected = stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rowsAffected;
+    }
+
+
+
 
 
     private LocalDateTime toLocalDateTime(Timestamp timestamp) {
