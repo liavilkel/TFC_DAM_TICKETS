@@ -5,11 +5,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-<<<<<<< HEAD
+
 import android.annotation.SuppressLint;
-=======
 import android.content.DialogInterface;
->>>>>>> fd37f36875ab7304e13d6c9c0d692a8b108ad626
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,11 +22,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-<<<<<<< HEAD
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
-=======
 import com.example.tfc_dam_tickets.autenticacion.Login;
->>>>>>> fd37f36875ab7304e13d6c9c0d692a8b108ad626
 import com.example.tfc_dam_tickets.model.Client;
 import com.example.tfc_dam_tickets.model.Ticket;
 import com.example.tfc_dam_tickets.model.User;
@@ -117,8 +112,6 @@ public class ActivityDetalleTicket extends AppCompatActivity {
         btnDetalleGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                sendEmail();
 
                 ticket.setStatus(selectedItem);
                 if (ticket.getStatus().equals("Cerrado")){
@@ -213,31 +206,6 @@ public class ActivityDetalleTicket extends AppCompatActivity {
             dialog.show();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void sendEmail() {
-        BackgroundMail.newBuilder(this)
-                .withUsername("resolverocket2024@gmail.com")
-                .withPassword("swgi vwgx pfnb mnnp")
-                .withMailto("joanacascogalea@gmail.com")
-                .withType(BackgroundMail.TYPE_PLAIN)
-                .withSubject("joana puta")
-                .withBody("liana guapa")
-                .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
-                    @Override
-                    public void onSuccess() {
-                        Toast.makeText(ActivityDetalleTicket.this, "OLEE", Toast.LENGTH_SHORT).show();
-
-                    }
-                })
-                .withOnFailCallback(new BackgroundMail.OnFailCallback() {
-                    @Override
-                    public void onFail() {
-                        Toast.makeText(ActivityDetalleTicket.this, "VAYAAA :(", Toast.LENGTH_SHORT).show();
-
-                    }
-                })
-                .send();
     }
 
     private void fillInFields(Ticket ticket, User user, Client client, Boolean tecnico, Long ticketId) {

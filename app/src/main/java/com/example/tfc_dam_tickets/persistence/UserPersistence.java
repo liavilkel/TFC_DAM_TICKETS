@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.tfc_dam_tickets.model.User;
+import com.example.tfc_dam_tickets.utils.RandomCodeGenerator;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -22,10 +23,10 @@ public class UserPersistence {
     static final String TELF = "phone_number";
     static final String TIPO = "type";
     static final String CLIENT_ID = "client_id";
+    static final String REC_CODE = "rec_code";
 
     DBConnection DBCon;
-    String conRes;
-    Context context; // Add context
+    Context context;
 
     public UserPersistence(Context context) {
         this.context = context; // Initialize context
@@ -35,7 +36,7 @@ public class UserPersistence {
     public int newUser(User user) {
         String query = "INSERT INTO " + TABLA
                 + " ( " + EMAIL + ", " + CONT + ", " + NOMBRE + ", " + APE + ", " + TELF + ", " + TIPO
-                + ", " + CLIENT_ID + ") VALUES (?, ?, ?, ?, ?, ?, ?)";
+                + ", " + CLIENT_ID + ", " + REC_CODE + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         int res = 0;
 
@@ -53,6 +54,7 @@ public class UserPersistence {
                 stmt.setString(5, user.getPhoneNum());
                 stmt.setString(6, user.getType());
                 stmt.setLong(7, user.getComId());
+                stmt.setString(8, user.getRecCode());
 
                 res = stmt.executeUpdate(); // Execute the insert statement
                 Log.d("UserPersistence", "User inserted successfully");
@@ -133,7 +135,8 @@ public class UserPersistence {
 
     public User getUserByEmail(String email) {
         User user = null;
-        String query = "SELECT email, name, last_name, phone_number, type, client_id FROM Users WHERE email = ?";
+        String query = "SELECT " + EMAIL + ", " + NOMBRE + ", " + APE + ", " + TELF + ", " + TIPO + ", " + CLIENT_ID +
+                " FROM " + TABLA + " WHERE " + EMAIL + " = ?";
 
         try (Connection connection = DBCon.getConnection();
              PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
@@ -143,13 +146,13 @@ public class UserPersistence {
                 try (ResultSet rs = stmt.executeQuery()) {
                     if (rs.next()) {  // Expecting only one result for a unique email
                         user = new User(
-                                rs.getString("email"),
+                                rs.getString(EMAIL),
                                 null, // Exclude password
-                                rs.getString("name"),
-                                rs.getString("last_name"),
-                                rs.getString("phone_number"),
-                                rs.getString("type"),
-                                rs.getLong("client_id")
+                                rs.getString(NOMBRE),
+                                rs.getString(APE),
+                                rs.getString(TELF),
+                                rs.getString(TIPO),
+                                rs.getLong(CLIENT_ID)
                         );
                     }
                 }
@@ -159,6 +162,7 @@ public class UserPersistence {
         }
         return user;
     }
+
 
 
 }
