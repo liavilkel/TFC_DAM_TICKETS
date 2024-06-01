@@ -57,5 +57,6 @@
     <string name="toast_unable_fetch_data_detalle">No se ha podido recuperar toda la información de la base de datos.</string>
     <string name="tv_ticket_list_filtro">Filtrar por estado:</string>
     <string name="ticket_update_fail">Error. Inténtelo más tarde.</string>
+    <string name="tv_titulo_detalle">Detalle</string>
 
 </resources>
