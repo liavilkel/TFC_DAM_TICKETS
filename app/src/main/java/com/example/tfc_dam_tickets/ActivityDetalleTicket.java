@@ -5,9 +5,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+<<<<<<< HEAD
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+=======
+import android.annotation.SuppressLint;
+
+import android.content.DialogInterface;
+
+>>>>>>> ef687fb6dff299a5f176b0a557aed3d93343da43
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -23,7 +30,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
+<<<<<<< HEAD
 import com.example.tfc_dam_tickets.autenticacion.Login;
+=======
+
+import com.example.tfc_dam_tickets.autenticacion.Login;
+
+>>>>>>> ef687fb6dff299a5f176b0a557aed3d93343da43
 import com.example.tfc_dam_tickets.model.Client;
 import com.example.tfc_dam_tickets.model.Ticket;
 import com.example.tfc_dam_tickets.model.User;
@@ -75,6 +88,7 @@ public class ActivityDetalleTicket extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_ticket);
+        initializeUI();
 
         Toolbar customToolbar = findViewById(R.id.custom_actionbar);
         setSupportActionBar(customToolbar);
@@ -112,6 +126,7 @@ public class ActivityDetalleTicket extends AppCompatActivity {
         btnDetalleGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< HEAD
 
                 ticket.setStatus(selectedItem);
                 if (ticket.getStatus().equals("Cerrado")){
@@ -128,12 +143,47 @@ public class ActivityDetalleTicket extends AppCompatActivity {
                     Intent i = new Intent(ActivityDetalleTicket.this, TicketsList.class);
                     i.putExtra("catId", Integer.parseInt(String.valueOf(ticket.getCatId())));
                     startActivity(i);
+=======
+                if (selectedItem.equals("Cerrado")) {
+                    new AlertDialog.Builder(ActivityDetalleTicket.this)
+                            .setTitle("Confirmar cierre de ticket")
+                            .setMessage("¿Desea cambiar el estado a Cerrado? Una vez modificado, el ticket dejará de estar disponible.")
+                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    guardarTicket(ticket);
+                                }
+                            })
+                            .setNegativeButton("Cancelar", null)
+                            .show();
+>>>>>>> ef687fb6dff299a5f176b0a557aed3d93343da43
                 } else {
-                    Toast.makeText(ActivityDetalleTicket.this, R.string.ticket_update_fail, Toast.LENGTH_SHORT).show();
+                    guardarTicket(ticket);
                 }
             }
         });
-        initializeUI();
+    }
+
+    private void guardarTicket(Ticket ticket) {
+        sendEmail();
+
+        ticket.setStatus(selectedItem);
+        if (ticket.getStatus().equals("Cerrado")) {
+            ticket.setTsClose(LocalDateTime.now());
+        }
+        if (!etSolucionTecnico.getText().toString().isBlank()) {
+            ticket.setSolution(etSolucionTecnico.getText().toString());
+        }
+
+        int res = ticketPersistence.updateTicket(ticket);
+
+        if (res == 1) {
+            Toast.makeText(ActivityDetalleTicket.this, R.string.toast_guardar_detalle_ticket, Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(ActivityDetalleTicket.this, TicketsList.class);
+            i.putExtra("catId", Integer.parseInt(String.valueOf(ticket.getCatId())));
+            startActivity(i);
+        } else {
+            Toast.makeText(ActivityDetalleTicket.this, R.string.ticket_update_fail, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
