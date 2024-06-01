@@ -1,5 +1,6 @@
 package com.example.tfc_dam_tickets.adapterUtils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.example.tfc_dam_tickets.persistence.ClientPersistence;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+@SuppressLint("NewApi")
 public class AdapterTicket extends RecyclerView.Adapter<AdapterTicket.TicketViewHolder> {
 
     private ArrayList<Ticket> ticketsList;

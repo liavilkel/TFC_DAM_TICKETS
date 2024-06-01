@@ -1,5 +1,6 @@
 package com.example.tfc_dam_tickets.persistence;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@SuppressLint("NewApi")
 public class TicketPersistence {
 
     static final String TABLA = "resolver_rocket.Tickets";
