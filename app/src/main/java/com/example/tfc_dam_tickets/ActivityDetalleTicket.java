@@ -21,6 +21,7 @@ import com.example.tfc_dam_tickets.persistence.TicketPersistence;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ActivityDetalleTicket extends AppCompatActivity {
@@ -55,6 +56,9 @@ public class ActivityDetalleTicket extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //TODO ADEVERTENCIA TICKET SET CERRADO NO MODIFCABLE
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_ticket);
 
@@ -70,10 +74,10 @@ public class ActivityDetalleTicket extends AppCompatActivity {
         Client client = clientPersistence.findClientById(user.getComId());
 
         if (user.getType().equals("tecnico")) {
-            initFields(true);
+            initFields(true, ticket.getStatus());
             fillInFields(ticket, user, client, true, ticketId);
         } else {
-            initFields(false);
+            initFields(false, ticket.getStatus());
             fillInFields(ticket, user, client, false, ticketId);
         }
 
@@ -82,13 +86,34 @@ public class ActivityDetalleTicket extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(ActivityDetalleTicket.this, R.string.toast_cancelar_detalle_ticket, Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(ActivityDetalleTicket.this, TicketsList.class);
+                i.putExtra("catId", Integer.parseInt(String.valueOf(ticket.getCatId())));
+                startActivity(i);
             }
         });
 
         btnDetalleGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ActivityDetalleTicket.this, R.string.toast_guardar_detalle_ticket, Toast.LENGTH_SHORT).show();
+
+                ticket.setStatus(selectedItem);
+                if (ticket.getStatus().equals("Cerrado")){
+                    ticket.setTsClose(LocalDateTime.now());
+                }
+                if (!etSolucionTecnico.getText().toString().isBlank()){
+                    ticket.setSolution(etSolucionTecnico.getText().toString());
+                }
+
+                int res = ticketPersistence.updateTicket(ticket);
+
+                if (res == 1) {
+                    Toast.makeText(ActivityDetalleTicket.this, R.string.toast_guardar_detalle_ticket, Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(ActivityDetalleTicket.this, TicketsList.class);
+                    i.putExtra("catId", Integer.parseInt(String.valueOf(ticket.getCatId())));
+                    startActivity(i);
+                } else {
+                    Toast.makeText(ActivityDetalleTicket.this, R.string.ticket_update_fail, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -109,12 +134,11 @@ public class ActivityDetalleTicket extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedItem = parent.getItemAtPosition(position).toString();
-                // HACER EL .set del ESTADO al ITEM SI SE QUIERE GUARDAR EL CAMBIO
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                // Nothing to do here
             }
         });
 
@@ -131,6 +155,9 @@ public class ActivityDetalleTicket extends AppCompatActivity {
             tvDetalleTitulo.setText("TÍTULO: " + ticket.getTitle());
             tvDetalleDescripcion.setText("DESCRIPCIÓN: " + ticket.getDescription());
             spinner.setSelection(adapter.getPosition(ticket.getStatus()));
+            String sol = ticket.getDescription() != null ? ticket.getSolution() : "";
+            etSolucionTecnico.setText(sol);
+
             if (tecnico) {
                 spinner.setEnabled(true);
                 spinner.setFocusable(true);
@@ -158,7 +185,7 @@ public class ActivityDetalleTicket extends AppCompatActivity {
         }
     }
 
-    private void initFields(Boolean tecnico) {
+    private void initFields(Boolean tecnico, String status) {
         // Inicialización de elementos de la vista
         tvDetalleIdTicket = findViewById(R.id.tvDetalleIdTicket);
         tvDetalleFechaIni = findViewById(R.id.tvDetalleFechaIni);
@@ -182,7 +209,7 @@ public class ActivityDetalleTicket extends AppCompatActivity {
         btnDetalleCancelar = findViewById(R.id.btnDetalleCancelar);
         spinner = findViewById(R.id.spinner);
 
-        if(tecnico) {
+        if(tecnico && !status.equals("Cerrado")) {
             btnDetalleGuardar.setEnabled(true);
             btnDetalleGuardar.setVisibility(View.VISIBLE);
             btnDetalleCancelar.setEnabled(true);
@@ -193,8 +220,5 @@ public class ActivityDetalleTicket extends AppCompatActivity {
             btnDetalleCancelar.setEnabled(true);
             btnDetalleCancelar.setVisibility(View.GONE);
         }
-
     }
-
-
 }
