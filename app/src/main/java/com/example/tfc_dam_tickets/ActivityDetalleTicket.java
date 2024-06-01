@@ -5,11 +5,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-<<<<<<< HEAD
 import android.annotation.SuppressLint;
-=======
+
 import android.content.DialogInterface;
->>>>>>> fd37f36875ab7304e13d6c9c0d692a8b108ad626
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,11 +23,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-<<<<<<< HEAD
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
-=======
+
 import com.example.tfc_dam_tickets.autenticacion.Login;
->>>>>>> fd37f36875ab7304e13d6c9c0d692a8b108ad626
+
 import com.example.tfc_dam_tickets.model.Client;
 import com.example.tfc_dam_tickets.model.Ticket;
 import com.example.tfc_dam_tickets.model.User;
