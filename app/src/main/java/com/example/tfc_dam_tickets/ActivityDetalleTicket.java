@@ -78,6 +78,7 @@ public class ActivityDetalleTicket extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_ticket);
+        initializeUI();
 
         Toolbar customToolbar = findViewById(R.id.custom_actionbar);
         setSupportActionBar(customToolbar);
@@ -115,30 +116,45 @@ public class ActivityDetalleTicket extends AppCompatActivity {
         btnDetalleGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                sendEmail();
-
-                ticket.setStatus(selectedItem);
-                if (ticket.getStatus().equals("Cerrado")){
-                    ticket.setTsClose(LocalDateTime.now());
-                }
-                if (!etSolucionTecnico.getText().toString().isBlank()){
-                    ticket.setSolution(etSolucionTecnico.getText().toString());
-                }
-
-                int res = ticketPersistence.updateTicket(ticket);
-
-                if (res == 1) {
-                    Toast.makeText(ActivityDetalleTicket.this, R.string.toast_guardar_detalle_ticket, Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(ActivityDetalleTicket.this, TicketsList.class);
-                    i.putExtra("catId", Integer.parseInt(String.valueOf(ticket.getCatId())));
-                    startActivity(i);
+                if (selectedItem.equals("Cerrado")) {
+                    new AlertDialog.Builder(ActivityDetalleTicket.this)
+                            .setTitle("Confirmar cierre de ticket")
+                            .setMessage("¿Desea cambiar el estado a Cerrado? Una vez modificado, el ticket dejará de estar disponible.")
+                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    guardarTicket(ticket);
+                                }
+                            })
+                            .setNegativeButton("Cancelar", null)
+                            .show();
                 } else {
-                    Toast.makeText(ActivityDetalleTicket.this, R.string.ticket_update_fail, Toast.LENGTH_SHORT).show();
+                    guardarTicket(ticket);
                 }
             }
         });
-        initializeUI();
+    }
+
+    private void guardarTicket(Ticket ticket) {
+        sendEmail();
+
+        ticket.setStatus(selectedItem);
+        if (ticket.getStatus().equals("Cerrado")) {
+            ticket.setTsClose(LocalDateTime.now());
+        }
+        if (!etSolucionTecnico.getText().toString().isBlank()) {
+            ticket.setSolution(etSolucionTecnico.getText().toString());
+        }
+
+        int res = ticketPersistence.updateTicket(ticket);
+
+        if (res == 1) {
+            Toast.makeText(ActivityDetalleTicket.this, R.string.toast_guardar_detalle_ticket, Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(ActivityDetalleTicket.this, TicketsList.class);
+            i.putExtra("catId", Integer.parseInt(String.valueOf(ticket.getCatId())));
+            startActivity(i);
+        } else {
+            Toast.makeText(ActivityDetalleTicket.this, R.string.ticket_update_fail, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
