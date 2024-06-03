@@ -186,4 +186,25 @@ public class UserPersistence {
         return code;
 
     }
+
+    public boolean updatePasswordAndRecoveryCode(String email, String newPassword, String newRecoveryCode) {
+        String query = "UPDATE " + TABLA + " SET " + CONT + " = ?, " + REC_CODE + " = ? WHERE " + EMAIL + " = ?";
+        boolean success = false;
+
+        try (Connection connection = DBCon.getConnection();
+             PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
+
+            if (stmt != null) {
+                stmt.setString(1, newPassword);
+                stmt.setString(2, newRecoveryCode);
+                stmt.setString(3, email);
+                int affectedRows = stmt.executeUpdate();
+                success = affectedRows > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return success;
+    }
+
 }

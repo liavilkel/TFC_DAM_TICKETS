@@ -97,7 +97,7 @@ public class RegistroFragment extends Fragment {
                                                     if (!companyId.isEmpty()) {
                                                         if (clientPer.clientExists(companyId)) {
                                                             User newUser = new User(email, password, nombre, apellidos, phoneNumber, TIPO,
-                                                                    Long.parseLong(companyId), RandomCodeGenerator.generateRandomCode(6));
+                                                                    Long.parseLong(companyId), RandomCodeGenerator.generateRandomCode());
                                                             res = userPer.newUser(newUser);
                                                             if (res == 1) {
                                                                 Toast.makeText(getContext(), R.string.user_registered, Toast.LENGTH_SHORT).show();
