@@ -1,7 +1,6 @@
 package com.example.tfc_dam_tickets.autenticacion;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -15,12 +14,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.tfc_dam_tickets.R;
 import com.example.tfc_dam_tickets.ActivityCategorias;
-import com.example.tfc_dam_tickets.persistence.ForgotPassword;
+import com.example.tfc_dam_tickets.ForgotPasswordActivity;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -83,7 +81,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Iniciar la nueva actividad para restablecer la contraseña
-                Intent intent = new Intent(getContext(), ForgotPassword.class);
+                Intent intent = new Intent(getContext(), ForgotPasswordActivity.class);
                 startActivity(intent);
             }
         });

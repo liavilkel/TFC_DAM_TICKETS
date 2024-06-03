@@ -164,5 +164,26 @@ public class UserPersistence {
     }
 
 
+    public String getUserRecCode(String email) {
 
+        String query = "SELECT " + REC_CODE + " FROM " + TABLA + " WHERE " + EMAIL + " =?";
+        String code = null;
+
+        try (Connection connection = DBCon.getConnection();
+             PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
+
+            if (stmt != null) {
+                stmt.setString(1, email);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        code = rs.getString(REC_CODE);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return code;
+
+    }
 }
