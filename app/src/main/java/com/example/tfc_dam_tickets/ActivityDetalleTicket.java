@@ -33,6 +33,7 @@ import com.example.tfc_dam_tickets.model.User;
 import com.example.tfc_dam_tickets.persistence.ClientPersistence;
 import com.example.tfc_dam_tickets.persistence.TicketPersistence;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
+import com.example.tfc_dam_tickets.utils.EmailSender;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.LocalDateTime;
@@ -71,10 +72,13 @@ public class ActivityDetalleTicket extends AppCompatActivity {
 
     String selectedItem = null;
 
+    User user = null;
+    Ticket ticket = null;
+
+    private static final String SUBJECT1 = "Notificación: Cambio de estado en el ticket NUMEROTICKET";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        //TODO ADEVERTENCIA TICKET SET CERRADO NO MODIFCABLE
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_ticket);
@@ -90,8 +94,8 @@ public class ActivityDetalleTicket extends AppCompatActivity {
         Intent i = getIntent();
         Long ticketId = i.getLongExtra("ticketId", -1);
 
-        Ticket ticket = ticketPersistence.getTicketById(ticketId);
-        User user = userPersistence.getUserByEmail(ticket.getUserOpen());
+        ticket = ticketPersistence.getTicketById(ticketId);
+        user = userPersistence.getUserByEmail(ticket.getUserOpen());
         Client client = clientPersistence.findClientById(user.getComId());
 
         if (user.getType().equals("tecnico")) {
@@ -135,9 +139,10 @@ public class ActivityDetalleTicket extends AppCompatActivity {
     }
 
     private void guardarTicket(Ticket ticket) {
-        sendEmail();
 
+        String oldStatus = ticket.getStatus();
         ticket.setStatus(selectedItem);
+
         if (ticket.getStatus().equals("Cerrado")) {
             ticket.setTsClose(LocalDateTime.now());
         }
@@ -148,6 +153,13 @@ public class ActivityDetalleTicket extends AppCompatActivity {
         int res = ticketPersistence.updateTicket(ticket);
 
         if (res == 1) {
+
+            if (!oldStatus.equals(ticket.getStatus())){
+                String body = getString(R.string.ticket_status_update, user.getName()
+                        ,ticket.getTicketId(), ticket.getStatus());
+                EmailSender.sendEmail(this, user.getEmail(), SUBJECT1, body);
+            }
+
             Toast.makeText(ActivityDetalleTicket.this, R.string.toast_guardar_detalle_ticket, Toast.LENGTH_SHORT).show();
             Intent i = new Intent(ActivityDetalleTicket.this, TicketsList.class);
             i.putExtra("catId", Integer.parseInt(String.valueOf(ticket.getCatId())));
@@ -227,40 +239,6 @@ public class ActivityDetalleTicket extends AppCompatActivity {
             dialog.show();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void sendEmail() {
-
-        String firma = "\n\n--\nSaludos cordiales,\nEquipo de Soporte\nResolveRocket\nCorreo: resolverocket2024@gmail.com\nTeléfono: +34 123 456 789\nSitio web: www.resolverocket.com";
-        String subject1 = "Notificación: Cambio de estado en el ticket NUMEROTICKET";
-        String body = "Estimado/a [Nombre del destinatario],\n\n" +
-                "Queremos informarte que el estado del ticket [Número de ticket] ha sido actualizado.\n" +
-                "El nuevo estado del ticket es: " + "nuevoEstado" + ".\n\n" +
-                "Por favor, no dudes en contactarnos si necesitas más información o asistencia.\n\n" + firma;
-
-
-        BackgroundMail.newBuilder(this)
-                .withUsername("resolverocket2024@gmail.com")
-                .withPassword("swgi vwgx pfnb mnnp")
-                .withMailto("joanacascogalea@gmail.com")
-                .withType(BackgroundMail.TYPE_PLAIN)
-                .withSubject(subject1)
-                .withBody(body)
-                .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
-                    @Override
-                    public void onSuccess() {
-                        Toast.makeText(ActivityDetalleTicket.this, "OLEE", Toast.LENGTH_SHORT).show();
-
-                    }
-                })
-                .withOnFailCallback(new BackgroundMail.OnFailCallback() {
-                    @Override
-                    public void onFail() {
-                        Toast.makeText(ActivityDetalleTicket.this, "VAYAAA :(", Toast.LENGTH_SHORT).show();
-
-                    }
-                })
-                .send();
     }
 
     private void fillInFields(Ticket ticket, User user, Client client, Boolean tecnico, Long ticketId) {
