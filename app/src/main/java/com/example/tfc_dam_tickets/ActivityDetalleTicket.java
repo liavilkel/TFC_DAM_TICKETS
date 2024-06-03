@@ -5,16 +5,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-<<<<<<< HEAD
-
-import android.annotation.SuppressLint;
-import android.content.DialogInterface;
-=======
 import android.annotation.SuppressLint;
 
 import android.content.DialogInterface;
 
->>>>>>> ef687fb6dff299a5f176b0a557aed3d93343da43
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,13 +24,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
-<<<<<<< HEAD
-import com.example.tfc_dam_tickets.autenticacion.Login;
-=======
 
 import com.example.tfc_dam_tickets.autenticacion.Login;
 
->>>>>>> ef687fb6dff299a5f176b0a557aed3d93343da43
 import com.example.tfc_dam_tickets.model.Client;
 import com.example.tfc_dam_tickets.model.Ticket;
 import com.example.tfc_dam_tickets.model.User;
@@ -126,24 +116,6 @@ public class ActivityDetalleTicket extends AppCompatActivity {
         btnDetalleGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD
-
-                ticket.setStatus(selectedItem);
-                if (ticket.getStatus().equals("Cerrado")){
-                    ticket.setTsClose(LocalDateTime.now());
-                }
-                if (!etSolucionTecnico.getText().toString().isBlank()){
-                    ticket.setSolution(etSolucionTecnico.getText().toString());
-                }
-
-                int res = ticketPersistence.updateTicket(ticket);
-
-                if (res == 1) {
-                    Toast.makeText(ActivityDetalleTicket.this, R.string.toast_guardar_detalle_ticket, Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(ActivityDetalleTicket.this, TicketsList.class);
-                    i.putExtra("catId", Integer.parseInt(String.valueOf(ticket.getCatId())));
-                    startActivity(i);
-=======
                 if (selectedItem.equals("Cerrado")) {
                     new AlertDialog.Builder(ActivityDetalleTicket.this)
                             .setTitle("Confirmar cierre de ticket")
@@ -155,7 +127,6 @@ public class ActivityDetalleTicket extends AppCompatActivity {
                             })
                             .setNegativeButton("Cancelar", null)
                             .show();
->>>>>>> ef687fb6dff299a5f176b0a557aed3d93343da43
                 } else {
                     guardarTicket(ticket);
                 }
@@ -256,6 +227,40 @@ public class ActivityDetalleTicket extends AppCompatActivity {
             dialog.show();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void sendEmail() {
+
+        String firma = "\n\n--\nSaludos cordiales,\nEquipo de Soporte\nResolveRocket\nCorreo: resolverocket2024@gmail.com\nTeléfono: +34 123 456 789\nSitio web: www.resolverocket.com";
+        String subject1 = "Notificación: Cambio de estado en el ticket NUMEROTICKET";
+        String body = "Estimado/a [Nombre del destinatario],\n\n" +
+                "Queremos informarte que el estado del ticket [Número de ticket] ha sido actualizado.\n" +
+                "El nuevo estado del ticket es: " + "nuevoEstado" + ".\n\n" +
+                "Por favor, no dudes en contactarnos si necesitas más información o asistencia.\n\n" + firma;
+
+
+        BackgroundMail.newBuilder(this)
+                .withUsername("resolverocket2024@gmail.com")
+                .withPassword("swgi vwgx pfnb mnnp")
+                .withMailto("joanacascogalea@gmail.com")
+                .withType(BackgroundMail.TYPE_PLAIN)
+                .withSubject(subject1)
+                .withBody(body)
+                .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(ActivityDetalleTicket.this, "OLEE", Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                .withOnFailCallback(new BackgroundMail.OnFailCallback() {
+                    @Override
+                    public void onFail() {
+                        Toast.makeText(ActivityDetalleTicket.this, "VAYAAA :(", Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                .send();
     }
 
     private void fillInFields(Ticket ticket, User user, Client client, Boolean tecnico, Long ticketId) {
