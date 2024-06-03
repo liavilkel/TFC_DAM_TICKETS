@@ -230,13 +230,22 @@ public class ActivityDetalleTicket extends AppCompatActivity {
     }
 
     private void sendEmail() {
+
+        String firma = "\n\n--\nSaludos cordiales,\nEquipo de Soporte\nResolveRocket\nCorreo: resolverocket2024@gmail.com\nTeléfono: +34 123 456 789\nSitio web: www.resolverocket.com";
+        String subject1 = "Notificación: Cambio de estado en el ticket NUMEROTICKET";
+        String body = "Estimado/a [Nombre del destinatario],\n\n" +
+                "Queremos informarte que el estado del ticket [Número de ticket] ha sido actualizado.\n" +
+                "El nuevo estado del ticket es: " + "nuevoEstado" + ".\n\n" +
+                "Por favor, no dudes en contactarnos si necesitas más información o asistencia.\n\n" + firma;
+
+
         BackgroundMail.newBuilder(this)
                 .withUsername("resolverocket2024@gmail.com")
                 .withPassword("swgi vwgx pfnb mnnp")
                 .withMailto("joanacascogalea@gmail.com")
                 .withType(BackgroundMail.TYPE_PLAIN)
-                .withSubject("joana puta")
-                .withBody("liana guapa")
+                .withSubject(subject1)
+                .withBody(body)
                 .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
                     @Override
                     public void onSuccess() {
