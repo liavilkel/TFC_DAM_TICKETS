@@ -2,7 +2,7 @@ package com.example.tfc_dam_tickets.model;
 
 public class User {
 
-    String email, password, name, lastName, phoneNum, type;
+    String email, password, name, lastName, phoneNum, type, recCode;
     Long comId;
 
     public User(String email, String password, String name, String lastName, String phone_num, String type, Long comId) {
@@ -13,6 +13,17 @@ public class User {
         this.phoneNum = phone_num;
         this.type = type;
         this.comId = comId;
+    }
+
+    public User(String email, String password, String name, String lastName, String phone_num, String type, Long comId, String recCode) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.lastName = lastName;
+        this.phoneNum = phone_num;
+        this.type = type;
+        this.comId = comId;
+        this.recCode = recCode;
     }
 
     public String getEmail() {
@@ -66,4 +77,12 @@ public class User {
     public Long getComId() {return comId;}
 
     public void setComId(Long comId) {this.comId = comId;}
+
+    public String getRecCode() {
+        return recCode;
+    }
+
+    public void setRecCode(String recCode) {
+        this.recCode = recCode;
+    }
 }

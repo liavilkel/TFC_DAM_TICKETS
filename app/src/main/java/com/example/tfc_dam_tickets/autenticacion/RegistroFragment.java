@@ -18,6 +18,7 @@ import com.example.tfc_dam_tickets.R;
 import com.example.tfc_dam_tickets.model.User;
 import com.example.tfc_dam_tickets.persistence.ClientPersistence;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
+import com.example.tfc_dam_tickets.utils.RandomCodeGenerator;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -95,7 +96,8 @@ public class RegistroFragment extends Fragment {
                                                 if (!phoneNumber.isEmpty()) {
                                                     if (!companyId.isEmpty()) {
                                                         if (clientPer.clientExists(companyId)) {
-                                                            User newUser = new User(email, password, nombre, apellidos, phoneNumber, TIPO, Long.parseLong(companyId));
+                                                            User newUser = new User(email, password, nombre, apellidos, phoneNumber, TIPO,
+                                                                    Long.parseLong(companyId), RandomCodeGenerator.generateRandomCode(6));
                                                             res = userPer.newUser(newUser);
                                                             if (res == 1) {
                                                                 Toast.makeText(getContext(), R.string.user_registered, Toast.LENGTH_SHORT).show();
