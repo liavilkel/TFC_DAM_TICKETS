@@ -45,7 +45,7 @@ public class SetNewPasswordActivity extends AppCompatActivity {
                     Boolean success = userPersistence.updatePasswordAndRecoveryCode
                             (email, hashedPassword, RandomCodeGenerator.generateRandomCode());
                 } else {
-                    // CHECK FOR PASSWORD
+                    Toast.makeText(SetNewPasswordActivity.this, R.string.no_password, Toast.LENGTH_SHORT).show();
                 }
             }
         });

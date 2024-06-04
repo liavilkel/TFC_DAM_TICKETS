@@ -126,14 +126,14 @@ public class TicketsList extends AppCompatActivity {
         ArrayList<Ticket> tickets = ticketPersistence.getTicketsByCat(cat);
 
         if (selectedStatus.equals("Todos")) {
-            adapterTicket = new AdapterTicket(this, tickets);
+            adapterTicket = new AdapterTicket(this, tickets, i.getStringExtra("email"));
         } else {
             ArrayList<Ticket> filteredTickets = new ArrayList<>();
             filteredTickets.addAll(tickets.stream()
                     .filter(t -> t.getStatus().equals(selectedStatus))
                     .collect(Collectors.toList()));
 
-            adapterTicket = new AdapterTicket(this, filteredTickets);
+            adapterTicket = new AdapterTicket(this, filteredTickets, i.getStringExtra("email"));
         }
 
         recyclerViewTickets.setAdapter(adapterTicket);

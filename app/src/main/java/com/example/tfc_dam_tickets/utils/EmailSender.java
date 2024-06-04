@@ -16,7 +16,7 @@ public class EmailSender {
                 .withMailto(toEmail)
                 .withType(BackgroundMail.TYPE_PLAIN)
                 .withSubject(subject)
-                .withBody(body)
+                .withBody(body + signature)
                 .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
                     @Override
                     public void onSuccess() {

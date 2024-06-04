@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -73,6 +74,7 @@ public class ActivityDetalleTicket extends AppCompatActivity {
     String selectedItem = null;
 
     User user = null;
+    User loggedUser = null;
     Ticket ticket = null;
 
     private static final String SUBJECT1 = "Notificación: Cambio de estado en el ticket NUMEROTICKET";
@@ -93,12 +95,14 @@ public class ActivityDetalleTicket extends AppCompatActivity {
 
         Intent i = getIntent();
         Long ticketId = i.getLongExtra("ticketId", -1);
+        String loggedEmail = i.getStringExtra("loggedEmail");
 
         ticket = ticketPersistence.getTicketById(ticketId);
         user = userPersistence.getUserByEmail(ticket.getUserOpen());
+        loggedUser = userPersistence.getUserByEmail(loggedEmail);
         Client client = clientPersistence.findClientById(user.getComId());
 
-        if (user.getType().equals("tecnico")) {
+        if (loggedUser.getType().equals("tecnico")) {
             initFields(true, ticket.getStatus());
             fillInFields(ticket, user, client, true, ticketId);
         } else {
@@ -113,6 +117,7 @@ public class ActivityDetalleTicket extends AppCompatActivity {
                 Toast.makeText(ActivityDetalleTicket.this, R.string.toast_cancelar_detalle_ticket, Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(ActivityDetalleTicket.this, TicketsList.class);
                 i.putExtra("catId", Integer.parseInt(String.valueOf(ticket.getCatId())));
+                i.putExtra("email", loggedUser.getEmail());
                 startActivity(i);
             }
         });
@@ -163,6 +168,7 @@ public class ActivityDetalleTicket extends AppCompatActivity {
             Toast.makeText(ActivityDetalleTicket.this, R.string.toast_guardar_detalle_ticket, Toast.LENGTH_SHORT).show();
             Intent i = new Intent(ActivityDetalleTicket.this, TicketsList.class);
             i.putExtra("catId", Integer.parseInt(String.valueOf(ticket.getCatId())));
+            i.putExtra("email", loggedUser.getEmail());
             startActivity(i);
         } else {
             Toast.makeText(ActivityDetalleTicket.this, R.string.ticket_update_fail, Toast.LENGTH_SHORT).show();
@@ -337,11 +343,26 @@ public class ActivityDetalleTicket extends AppCompatActivity {
             btnDetalleGuardar.setVisibility(View.VISIBLE);
             btnDetalleCancelar.setEnabled(true);
             btnDetalleCancelar.setVisibility(View.VISIBLE);
+            spinner.setEnabled(true);
+            spinner.setFocusable(true);
         } else {
             btnDetalleGuardar.setEnabled(false);
             btnDetalleGuardar.setVisibility(View.GONE);
             btnDetalleCancelar.setEnabled(true);
             btnDetalleCancelar.setVisibility(View.GONE);
+            etSolucionTecnico.setEnabled(false);
+            etSolucionTecnico.setFocusable(false);
+            etSolucionTecnico.setFocusableInTouchMode(false);
+            etSolucionTecnico.setAlpha(0.5f);
+            spinner.setEnabled(false);
+            spinner.setFocusable(false);
+            spinner.setAlpha(0.5f); // Optional: Make it look disabled by changing its opacity
+            spinner.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    return true; // Consume touch events
+                }
+            });
         }
     }
 }

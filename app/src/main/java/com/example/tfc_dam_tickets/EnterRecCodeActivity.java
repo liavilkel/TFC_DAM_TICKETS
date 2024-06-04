@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
+import com.example.tfc_dam_tickets.utils.EmailSender;
 
 public class EnterRecCodeActivity extends AppCompatActivity {
 
@@ -35,16 +36,15 @@ public class EnterRecCodeActivity extends AppCompatActivity {
         if (userPersistence.isEmailInUse(email)) {
             legit = true;
             code = userPersistence.getUserRecCode(email);
-            Toast.makeText(EnterRecCodeActivity.this, code, Toast.LENGTH_LONG).show();
+            EmailSender.sendEmail(this, email, "rec code", code);
         }
 
         btnCheckCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (legit) {
-                    if(etRecRode.getText().toString().equals(code)) {
-                        //TODO GENERATE NEW CODE
-                        //TODO SET NEW PASSWORD IN HASH
+                    if(etRecRode.getText().toString().trim().equals(code)) {
+                        Toast.makeText(EnterRecCodeActivity.this, R.string.correct_rec_code, Toast.LENGTH_LONG).show();
                         Intent i = new Intent(EnterRecCodeActivity.this, SetNewPasswordActivity.class);
                         i.putExtra("email", email);
                         startActivity(i);

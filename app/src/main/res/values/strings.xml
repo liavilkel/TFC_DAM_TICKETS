@@ -60,5 +60,6 @@
     <string name="tv_titulo_detalle">Detalle</string>
     <string name="ticket_status_update">Estimado/a %1$s,\n\nQueremos informarte que el estado del ticket con ID: %2$d ha sido actualizado.\nEl nuevo estado del ticket es: %3$s.\n\nPor favor, no dudes en contactarnos si necesitas más información o asistencia.</string>
     <string name="incorrect_rec_code">Código incorrecto.</string>
+    <string name="correct_rec_code">Código correcto.</string>
 
 </resources>

@@ -26,10 +26,13 @@ public class AdapterTicket extends RecyclerView.Adapter<AdapterTicket.TicketView
     private ArrayList<Ticket> ticketsList;
     ClientPersistence clientPersistence;
     Context context;
+    String userLoggedEmail;
 
-    public AdapterTicket(Context context, ArrayList<Ticket> ticketsList) {
+
+    public AdapterTicket(Context context, ArrayList<Ticket> ticketsList, String userLoggedEmail) {
         this.context = context;
         this.ticketsList = ticketsList;
+        this.userLoggedEmail = userLoggedEmail;
     }
 
     @NonNull
@@ -70,6 +73,7 @@ public class AdapterTicket extends RecyclerView.Adapter<AdapterTicket.TicketView
             public void onClick(View v) {
                 Intent i = new Intent(context, ActivityDetalleTicket.class);
                 i.putExtra("ticketId", ticket.getTicketId());
+                i.putExtra("loggedEmail", userLoggedEmail);
                 context.startActivity(i);
             }
         });
