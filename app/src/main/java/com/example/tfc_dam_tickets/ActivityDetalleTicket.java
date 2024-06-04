@@ -77,8 +77,6 @@ public class ActivityDetalleTicket extends AppCompatActivity {
     User loggedUser = null;
     Ticket ticket = null;
 
-    private static final String SUBJECT1 = "Notificación: Cambio de estado en el ticket NUMEROTICKET";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -162,7 +160,8 @@ public class ActivityDetalleTicket extends AppCompatActivity {
             if (!oldStatus.equals(ticket.getStatus())){
                 String body = getString(R.string.ticket_status_update, user.getName()
                         ,ticket.getTicketId(), ticket.getStatus());
-                EmailSender.sendEmail(this, user.getEmail(), SUBJECT1, body);
+                String subject = getString(R.string.ticket_status_update_subject, ticket.getTicketId());
+                EmailSender.sendEmail(this, user.getEmail(), subject, body);
             }
 
             Toast.makeText(ActivityDetalleTicket.this, R.string.toast_guardar_detalle_ticket, Toast.LENGTH_SHORT).show();

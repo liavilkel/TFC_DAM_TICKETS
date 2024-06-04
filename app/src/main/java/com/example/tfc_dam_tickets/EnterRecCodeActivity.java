@@ -13,6 +13,7 @@ import com.example.tfc_dam_tickets.persistence.UserPersistence;
 import com.example.tfc_dam_tickets.utils.EmailSender;
 
 public class EnterRecCodeActivity extends AppCompatActivity {
+    private static final String SUBJECT = "Código de recuperación ResolverRocket";
 
     EditText etRecRode;
     Button btnCheckCode;
@@ -36,7 +37,8 @@ public class EnterRecCodeActivity extends AppCompatActivity {
         if (userPersistence.isEmailInUse(email)) {
             legit = true;
             code = userPersistence.getUserRecCode(email);
-            EmailSender.sendEmail(this, email, "rec code", code);
+            String body = getString(R.string.verification_body, code);
+            EmailSender.sendEmail(this, email, SUBJECT, body);
         }
 
         btnCheckCode.setOnClickListener(new View.OnClickListener() {
@@ -48,12 +50,13 @@ public class EnterRecCodeActivity extends AppCompatActivity {
                         Intent i = new Intent(EnterRecCodeActivity.this, SetNewPasswordActivity.class);
                         i.putExtra("email", email);
                         startActivity(i);
+                    } else {
+                        Toast.makeText(EnterRecCodeActivity.this, R.string.incorrect_rec_code, Toast.LENGTH_LONG).show();
                     }
                 } else {
                     Toast.makeText(EnterRecCodeActivity.this, R.string.incorrect_rec_code, Toast.LENGTH_LONG).show();
                 }
             }
         });
-
     }
 }

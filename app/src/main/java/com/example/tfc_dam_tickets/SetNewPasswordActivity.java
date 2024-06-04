@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.tfc_dam_tickets.autenticacion.Login;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
+import com.example.tfc_dam_tickets.utils.EmailSender;
 import com.example.tfc_dam_tickets.utils.RandomCodeGenerator;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -17,7 +19,7 @@ import org.mindrot.jbcrypt.BCrypt;
 public class SetNewPasswordActivity extends AppCompatActivity {
 
     UserPersistence userPersistence;
-    EditText etNewPassword;
+    EditText etNewPassword, etConfPassword;
     Button btnSetPassword;
     String email;
 
@@ -32,23 +34,45 @@ public class SetNewPasswordActivity extends AppCompatActivity {
         email = i.getStringExtra("email");
 
         etNewPassword = findViewById(R.id.etNewPassword);
+        etConfPassword = findViewById(R.id.etNewPasswordConf);
         btnSetPassword = findViewById(R.id.btnSetNewPassword);
 
         btnSetPassword.setOnClickListener(new View.OnClickListener() {
 
-            // TODO check password, SEND EMAIL, CHECK IT ACTUALLY WORKS LOL
-
             @Override
             public void onClick(View v) {
                 if (!etNewPassword.getText().toString().isBlank()) {
-                    String hashedPassword = BCrypt.hashpw(etNewPassword.getText().toString(), BCrypt.gensalt());
-                    Boolean success = userPersistence.updatePasswordAndRecoveryCode
-                            (email, hashedPassword, RandomCodeGenerator.generateRandomCode());
+                    if (!etConfPassword.getText().toString().isBlank()) {
+                        if (etNewPassword.getText().toString().equals(etConfPassword.getText().toString())){
+                            setNewData();
+                        } else {
+                            Toast.makeText(SetNewPasswordActivity.this, R.string.passw_must_match, Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(SetNewPasswordActivity.this, R.string.no_password_conf, Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(SetNewPasswordActivity.this, R.string.no_password, Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+    }
+
+    private void setNewData() {
+        String hashedPassword = BCrypt.hashpw(etNewPassword.getText().toString(), BCrypt.gensalt());
+        Boolean success = userPersistence.updatePasswordAndRecoveryCode
+                (email, hashedPassword, RandomCodeGenerator.generateRandomCode());
+
+        if (success){
+            EmailSender.sendEmail(this,email, getString(R.string.password_changed_email_subject)
+                    , getString(R.string.password_changed_email_body));
+            Toast.makeText(SetNewPasswordActivity.this, R.string.password_changed_success, Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(SetNewPasswordActivity.this, Login.class);
+            startActivity(i);
+        } else {
+            Toast.makeText(SetNewPasswordActivity.this, R.string.password_changed_fail, Toast.LENGTH_SHORT).show();
+        }
 
     }
 }
