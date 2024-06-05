@@ -17,8 +17,10 @@ import android.widget.Toast;
 
 import com.example.tfc_dam_tickets.autenticacion.Login;
 import com.example.tfc_dam_tickets.persistence.CategoryPersistence;
+import com.example.tfc_dam_tickets.persistence.ClientPersistence;
 import com.example.tfc_dam_tickets.persistence.TicketPersistence;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
+import com.example.tfc_dam_tickets.utils.EmailSender;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.LocalDateTime;
@@ -32,6 +34,7 @@ public class ActivityNuevoTicket extends AppCompatActivity {
     CategoryPersistence categoryPersistence;
     UserPersistence userPersistence;
     TicketPersistence ticketPersistence;
+    ClientPersistence clientPersistence;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class ActivityNuevoTicket extends AppCompatActivity {
         categoryPersistence = new CategoryPersistence(this);
         userPersistence = new UserPersistence(this);
         ticketPersistence = new TicketPersistence(this);
+        clientPersistence = new ClientPersistence(this);
 
         Intent i = getIntent();
 
@@ -81,10 +85,12 @@ public class ActivityNuevoTicket extends AppCompatActivity {
                     insert = ticketPersistence.postNewTicket(userOpen, Long.valueOf(catId), clientId, tit, desc, status);
                 } else {
                     Toast.makeText(ActivityNuevoTicket.this, R.string.all_mandaory, Toast.LENGTH_SHORT).show();
-                    insert = -100; // OTHER number SO actForResult does not finish
+                    insert = -100; // OTHER number so actForResult does not finish
                 }
 
                 if (insert == 1) {
+                    EmailSender.notifyAdmins(getApplicationContext(), userPersistence.getUserByEmail(userOpen),
+                            ticketPersistence.getLatestTicketByUser(userOpen), clientPersistence.findClientById(clientId));
                     setResult(1);
                     finish();
                 } else if (insert == -1){

@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserPersistence {
 
@@ -206,5 +208,35 @@ public class UserPersistence {
         }
         return success;
     }
+
+    public List<User> getTecUsers() {
+        List<User> adminUsers = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLA + " WHERE " + TIPO + " = 'tecnico'";
+
+        try (Connection connection = DBCon.getConnection();
+             PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
+            if (stmt != null) {
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        User user = new User(
+                                rs.getString(EMAIL),
+                                rs.getString(null),
+                                rs.getString(NOMBRE),
+                                rs.getString(APE),
+                                rs.getString(TELF),
+                                rs.getString(TIPO),
+                                rs.getLong(CLIENT_ID)
+                        );
+                        adminUsers.add(user);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return adminUsers;
+    }
+
+
 
 }

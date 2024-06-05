@@ -169,9 +169,37 @@ public class TicketPersistence {
         return rowsAffected;
     }
 
+    public Ticket getLatestTicketByUser(String userOpen) {
+        Ticket ticket = null;
+        String query = "SELECT * FROM " + TABLA + " WHERE " + USER_OPEN + " = ? ORDER BY " + TS_OPEN + " DESC LIMIT 1";
 
-
-
+        try (Connection connection = DBCon.getConnection();
+             PreparedStatement stmt = connection != null ? connection.prepareStatement(query) : null) {
+            if (stmt != null) {
+                stmt.setString(1, userOpen);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {  // If a result is found
+                        ticket = new Ticket(
+                                rs.getLong(TICKET_ID),
+                                rs.getLong(CAT),
+                                rs.getLong(CLIENT),
+                                rs.getString(USER_OPEN),
+                                rs.getString(USER_CLOSE),
+                                rs.getString(TITLE),
+                                rs.getString(DESC),
+                                rs.getString(STATUS),
+                                rs.getString(SOLUTION),
+                                toLocalDateTime(rs.getTimestamp(TS_OPEN)),
+                                toLocalDateTime(rs.getTimestamp(TS_CLOSE))
+                        );
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ticket;
+    }
 
     private LocalDateTime toLocalDateTime(Timestamp timestamp) {
         if (timestamp != null) {
