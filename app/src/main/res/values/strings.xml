@@ -70,5 +70,16 @@
     <string name="password_changed_fail">Se ha producido un error.</string>
     <string name="signature">"\n\n\n\n--\nSaludos cordiales,\nEquipo de Soporte\nResolveRocket\nCorreo: " +
                 "resolverocket2024@gmail.com\nTeléfono: +34 123 456 789\nSitio web: www.resolverocket.com"</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="recordaste_contraseña">¿Recordaste tu contraseña?</string>
+    <string name="btn_enviar">Enviar</string>
+    <string name="recuperar_contrasenia">Recuperar contraseña</string>
+    <string name="te_enviaremos_mail">Te enviaremos un email para restablecer tu contraseña.</string>
+    <string name="codigo_recuperacion">Código de recuperación</string>
+    <string name="introduce_codigo">Por favor, introduce el código de recuperación enviado a tu correo electrónico.</string>
+    <string name="no_recibiste_codigo">¿No recibiste el código?</string>
+    <string name="pulsa_aqui">Pulsa aquí.</string>
+    <string name="cambiar_contrasenia">Cambiar contraseña</string>
+    <string name="introduce_contraseña">Ingrese y verifique su nueva contraseña.</string>
 
 </resources>

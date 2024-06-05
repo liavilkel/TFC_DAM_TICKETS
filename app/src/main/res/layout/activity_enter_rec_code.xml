@@ -4,20 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/margin"
     android:orientation="vertical"
+    android:background="@drawable/wave"
     android:gravity="center"
     tools:context=".EnterRecCodeActivity">
 
-    <EditText
-        android:id="@+id/etRecCode"
+    <TextView
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginBottom="@dimen/margin"
+        android:id="@+id/tv_instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Código de recuperación"
+        android:text="@string/introduce_codigo"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:id="@+id/etRecCode"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginBottom="@dimen/margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/baseline_security_24"
+        android:drawablePadding="15dp"
+        android:hint="@string/codigo_recuperacion"
+        android:textSize="@dimen/text_size"
         android:layout_gravity="center"/>
 
     <Button
         android:id="@+id/btnCheckRecCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Comprobar"/>
+        android:background="@drawable/button_bg"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="@string/btn_enviar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.4"
+            android:text="@string/no_recibiste_codigo"
+            android:layout_marginTop="20dp"
+            android:gravity="end"
+            android:textSize="@dimen/text_size_hint" />
+
+        <TextView
+            android:id="@+id/tvPulseAquiRecCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="@string/pulsa_aqui"
+            android:textSize="@dimen/text_size_hint"
+            android:textStyle="bold" />
+    </LinearLayout>
 </LinearLayout>

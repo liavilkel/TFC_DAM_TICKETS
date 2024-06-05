@@ -7,12 +7,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.tfc_dam_tickets.autenticacion.Login;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
     EditText etEmail;
     Button recPassword;
+    TextView tvIniciarSesion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +25,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         etEmail = findViewById(R.id.etRecuperarPass);
         recPassword = findViewById(R.id.btnRecuperarPass);
+        tvIniciarSesion = findViewById(R.id.tvIniciarSesionRecuperarPass);
 
         recPassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +39,15 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     startActivity(i);
                 }
 
+            }
+        });
+
+        tvIniciarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), Login.class);
+                startActivity(i);
+                finish();
             }
         });
 

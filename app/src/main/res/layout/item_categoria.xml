@@ -6,17 +6,16 @@
     android:id="@+id/recCard"
     app:cardElevation="8dp"
     app:cardCornerRadius="4dp"
-    android:layout_margin="8dp"
-    >
+    android:layout_margin="8dp">
 
     <TextView
-
         android:id="@+id/tv_nom_categoria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:padding="@dimen/margin"
         android:textStyle="bold"
-        android:textSize="18sp"
+        android:textSize="@dimen/text_size_categorias"
         android:gravity="center"
         android:text="@string/tv_nom_categoria"/>
+
 </androidx.cardview.widget.CardView>
