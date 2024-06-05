@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tfc_dam_tickets.autenticacion.Login;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
 import com.example.tfc_dam_tickets.utils.EmailSender;
 
@@ -18,6 +20,7 @@ public class EnterRecCodeActivity extends AppCompatActivity {
     EditText etRecRode;
     Button btnCheckCode;
     UserPersistence userPersistence;
+    TextView tvPulseAqui;
 
     Boolean legit = false;
     String code = null;
@@ -30,6 +33,7 @@ public class EnterRecCodeActivity extends AppCompatActivity {
         userPersistence = new UserPersistence(this);
         etRecRode = findViewById(R.id.etRecCode);
         btnCheckCode = findViewById(R.id.btnCheckRecCode);
+        tvPulseAqui = findViewById(R.id.tvPulseAquiRecCode);
 
         Intent i = getIntent();
         String email = i.getStringExtra("email");
@@ -56,6 +60,15 @@ public class EnterRecCodeActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(EnterRecCodeActivity.this, R.string.incorrect_rec_code, Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        tvPulseAqui.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
+                startActivity(i);
+                finish();
             }
         });
     }
