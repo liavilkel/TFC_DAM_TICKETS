@@ -3,20 +3,19 @@ package com.example.tfc_dam_tickets.utils;
 import android.content.Context;
 
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
+import com.example.tfc_dam_tickets.R;
 
 public class EmailSender {
     public static void sendEmail(Context context, String toEmail, String subject, String body) {
 
-        String signature = "\n\n\n\n--\nSaludos cordiales,\nEquipo de Soporte\nResolveRocket\nCorreo: " +
-                "resolverocket2024@gmail.com\nTeléfono: +34 123 456 789\nSitio web: www.resolverocket.com";
-
-        BackgroundMail.newBuilder(context)
+        //BackgroundMail.newBuilder(context)
+        CustomBackgroundMail.newBuilder(context)
                 .withUsername(SenderEmailInfo.EMAIL)
                 .withPassword(SenderEmailInfo.PASSWORD)
                 .withMailto(toEmail)
                 .withType(BackgroundMail.TYPE_PLAIN)
                 .withSubject(subject)
-                .withBody(body + signature)
+                .withBody(body + R.string.signature)
                 .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
                     @Override
                     public void onSuccess() {
