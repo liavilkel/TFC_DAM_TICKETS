@@ -20,15 +20,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+
+
     <!-- CardView 1 -->
     <androidx.cardview.widget.CardView
+        app:layout_constraintTop_toBottomOf="@id/custom_actionbar"
         android:id="@+id/CVDetalleTicket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
-        app:layout_constraintTop_toBottomOf="@id/custom_actionbar">
+       >
 
         <!-- Content inside CardView 1 -->
         <LinearLayout
@@ -254,17 +257,18 @@
                 android:layout_marginTop="@dimen/margin_cardview"
                 android:text="EMAIL"/>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
+        </androidx.cardview.widget.CardView>
     <!-- Botones -->
     <LinearLayout
+        android:id="@+id/llBotones"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="10dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+>
 
         <Button
             android:id="@+id/btnDetalleGuardar"
