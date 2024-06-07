@@ -82,10 +82,9 @@ public class ActivityDetalleTicket extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_ticket);
-        initializeUI();
-
         Toolbar customToolbar = findViewById(R.id.custom_actionbar);
         setSupportActionBar(customToolbar);
+        initializeUI();
 
         ticketPersistence = new TicketPersistence(this);
         userPersistence = new UserPersistence(this);
