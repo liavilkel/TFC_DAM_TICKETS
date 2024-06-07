@@ -4,4 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="boton">#FF0D200E</color>
     <color name="verde">#64D76B</color>
+    <!--Colores validacion contraseña-->
+    <color name="red">#C61A0D</color>
+    <color name="green">#64D66B</color>
+
 </resources>

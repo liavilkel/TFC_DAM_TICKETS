@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import com.example.tfc_dam_tickets.R;
 import com.example.tfc_dam_tickets.model.User;
 import com.example.tfc_dam_tickets.persistence.ClientPersistence;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
+import com.example.tfc_dam_tickets.utils.PasswordValidator;
 import com.example.tfc_dam_tickets.utils.RandomCodeGenerator;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -31,6 +33,7 @@ public class RegistroFragment extends Fragment {
 
     TextInputEditText etEmail, etNombre, etApellidos, etPass, etConfPass, etPhoneNum, etComId;
     TextInputLayout lEmail, lNombre, lApellidos, lPassword, lConfirmPass, lTelefono, lEmpresaId;
+    TextView tvContenidoPasswordR, tvPasswordLengthR, tvPasswordUppercaseR, tvPasswordLowercaseR, tvPasswordDigitR, tvPasswordSpecialCharR;
     Button btnRegistrar;
     float v = 0;
     int res;
@@ -72,6 +75,15 @@ public class RegistroFragment extends Fragment {
         etComId = viewGroup.findViewById(R.id.etComId);
         btnRegistrar = viewGroup.findViewById(R.id.btnRegistrarse);
 
+        tvContenidoPasswordR = viewGroup.findViewById(R.id.tvContenidoPasswordR);
+        tvPasswordLengthR = viewGroup.findViewById(R.id.tvPasswordLengthR);
+        tvPasswordUppercaseR = viewGroup.findViewById(R.id.tvPasswordUppercaseR);
+        tvPasswordLowercaseR = viewGroup.findViewById(R.id.tvPasswordLowercaseR);
+        tvPasswordDigitR = viewGroup.findViewById(R.id.tvPasswordDigitR);
+        tvPasswordSpecialCharR = viewGroup.findViewById(R.id.tvPasswordSpecialCharR);
+
+        PasswordValidator.addPasswordValidation(getContext(), etPass, tvPasswordLengthR, tvPasswordUppercaseR,
+                tvPasswordLowercaseR, tvPasswordDigitR, tvPasswordSpecialCharR);
         iniciarAnimacion();
 
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
@@ -149,8 +161,6 @@ public class RegistroFragment extends Fragment {
     }
 
     private void iniciarAnimacion() {
-
-
         //lEmail, lNombre, lApellidos, lPassword, lConfirmPass, lTelefono, lEmpresaId;
         lEmail.setTranslationX(800);
         lNombre.setTranslationX(800);
@@ -159,6 +169,12 @@ public class RegistroFragment extends Fragment {
         lConfirmPass.setTranslationX(800);
         lTelefono.setTranslationX(800);
         lEmpresaId.setTranslationX(800);
+        tvContenidoPasswordR.setTranslationX(800);
+        tvPasswordLengthR.setTranslationX(800);
+        tvPasswordUppercaseR.setTranslationX(800);
+        tvPasswordLowercaseR.setTranslationX(800);
+        tvPasswordDigitR.setTranslationX(800);
+        tvPasswordSpecialCharR.setTranslationX(800);
 
         lEmail.setAlpha(v);
         lNombre.setAlpha(v);
@@ -167,6 +183,12 @@ public class RegistroFragment extends Fragment {
         lConfirmPass.setAlpha(v);
         lTelefono.setAlpha(v);
         lEmpresaId.setAlpha(v);
+        tvContenidoPasswordR.setAlpha(v);
+        tvPasswordLengthR.setAlpha(v);
+        tvPasswordUppercaseR.setAlpha(v);
+        tvPasswordLowercaseR.setAlpha(v);
+        tvPasswordDigitR.setAlpha(v);
+        tvPasswordSpecialCharR.setAlpha(v);
 
         lEmail.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
         lNombre.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
@@ -175,8 +197,14 @@ public class RegistroFragment extends Fragment {
         lConfirmPass.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
         lTelefono.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
         lEmpresaId.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
-
+        tvContenidoPasswordR.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        tvPasswordLengthR.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        tvPasswordUppercaseR.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        tvPasswordLowercaseR.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        tvPasswordDigitR.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        tvPasswordSpecialCharR.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
     }
+
 
     @Override
     public void onDestroyView() {

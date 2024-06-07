@@ -31,8 +31,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_percent=".8"
-            android:layout_marginTop="20dp">
+            app:layout_constraintWidth_percent=".8">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEmail"
@@ -51,7 +50,6 @@
 
         <!-- Nombre -->
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="8dp"
             android:id="@+id/textInputLayoutNombre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -74,7 +72,6 @@
 
         <!-- Apellidos -->
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="8dp"
             android:id="@+id/textInputLayoutApellidos"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -99,7 +96,6 @@
 
         <!--TELEF NUM-->
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="8dp"
             android:id="@+id/textInputLayoutTelefono"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -125,7 +121,6 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutComId"
             android:layout_width="0dp"
-            android:layout_marginTop="8dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -147,7 +142,6 @@
 
         <!--PASSWORD-->
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="8dp"
             android:id="@+id/textInputLayoutPassword"
             android:layout_width="0dp"
             app:passwordToggleEnabled="true"
@@ -172,7 +166,6 @@
 
         <!--CONFIRM PASSWORD-->
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_marginTop="8dp"
             android:id="@+id/textInputLayoutConfPassword"
             android:layout_width="0dp"
             app:passwordToggleEnabled="true"
@@ -181,6 +174,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword"
             app:layout_constraintWidth_percent=".8">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etConfirmPassword"
                 android:layout_width="match_parent"
@@ -193,7 +187,73 @@
                 android:textSize="16sp"
                 app:hintEnabled="true"
                 android:inputType="textPassword"/>
+
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvContenidoPasswordR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutConfPassword"
+            android:text="@string/contenido_contrasenia"/>
+        <TextView
+            android:id="@+id/tvPasswordLengthR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/password_length"
+            android:textColor="@color/red"
+            android:paddingLeft="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvContenidoPasswordR"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvPasswordUppercaseR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/password_uppercase"
+            android:textColor="@color/red"
+            android:paddingLeft="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvPasswordLengthR"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvPasswordLowercaseR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/password_lowercase"
+            android:textColor="@color/red"
+            android:paddingLeft="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvPasswordUppercaseR"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvPasswordDigitR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/password_digit"
+            android:textColor="@color/red"
+            android:paddingLeft="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvPasswordLowercaseR"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvPasswordSpecialCharR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/password_special_char"
+            android:textColor="@color/red"
+            android:paddingLeft="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvPasswordDigitR"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="@dimen/margin"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
@@ -212,9 +272,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-
-
-
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

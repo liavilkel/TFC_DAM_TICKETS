@@ -82,4 +82,12 @@
     <string name="cambiar_contrasenia">Cambiar contraseña</string>
     <string name="introduce_contraseña">Ingrese y verifique su nueva contraseña.</string>
 
+    <string name="contenido_contrasenia">Tu contraseña debe contener al menos:</string>
+    <string name="password_length">8 caracteres.</string>
+    <string name="password_uppercase">1 letra mayúscula.</string>
+    <string name="password_lowercase">1 letra minúscula.</string>
+    <string name="password_digit">1 número.</string>
+    <string name="password_special_char">1 carácter especial (@#$%^&amp;+=).</string>
+    <string name="invalid_password">La contraseña no cumple con todos los requisitos.</string>
+
 </resources>
