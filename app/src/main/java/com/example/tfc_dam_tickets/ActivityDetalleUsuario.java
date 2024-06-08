@@ -3,66 +3,27 @@ package com.example.tfc_dam_tickets;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import androidx.appcompat.widget.Toolbar;
 
-import com.example.tfc_dam_tickets.adapterUtils.AdapterCategorias;
 import com.example.tfc_dam_tickets.autenticacion.Login;
-import com.example.tfc_dam_tickets.model.Category;
-import com.example.tfc_dam_tickets.persistence.CategoryPersistence;
-import com.example.tfc_dam_tickets.persistence.PermissionPersistence;
 
-import java.util.List;
-
-public class ActivityCategorias extends AppCompatActivity {
-
-    RecyclerView rvCategorias;
-    AdapterCategorias adapterCategorias;
-    CategoryPersistence categoryPersistence;
-    PermissionPersistence permissionPersistence;
-
-    List<Category> categorias;
+public class ActivityDetalleUsuario extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_categorias);
+        setContentView(R.layout.activity_detalle_usuario);
 
+        //ACTION BAR
         Toolbar customToolbar = findViewById(R.id.custom_actionbar);
         setSupportActionBar(customToolbar);
-
-        // Inicializar RecyclerView
-        rvCategorias = findViewById(R.id.rvCategorias);
-
-        // Configurar GridLayoutManager
-        int numberOfColumns = 2;  // Define el número de columnas que deseas en la cuadrícula
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, numberOfColumns);
-        rvCategorias.setLayoutManager(gridLayoutManager);
-
-        // Inicializar persistencias
-        categoryPersistence = new CategoryPersistence(this);
-        permissionPersistence = new PermissionPersistence(this);
-
-        // Obtener categorías desde la base de datos
-        Intent i = getIntent();
-        if (i.hasExtra("email")) {
-            String email = i.getStringExtra("email");
-            List<Integer> allowedCategoryIds = permissionPersistence.getCategoryIdsByPermission(email);
-            categorias = categoryPersistence.getCategoryByPermission(allowedCategoryIds);
-        }
-
-        adapterCategorias = new AdapterCategorias(categorias, this, i.getStringExtra("email"));
-
-        // Configurar RecyclerView con el adaptador
-        rvCategorias.setAdapter(adapterCategorias);
-
         initializeUI();
     }
 
@@ -76,9 +37,10 @@ public class ActivityCategorias extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_24);
-            actionBar.setDisplayHomeAsUpEnabled(false);
-            actionBar.setTitle(R.string.tv_titulo_categorias);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle(R.string.tv_titulo_datos_usuario);
         }
+
     }
 
     @Override
@@ -120,7 +82,7 @@ public class ActivityCategorias extends AppCompatActivity {
                     editor.remove("session_token");
                     editor.apply();
 
-                    Intent intent = new Intent(ActivityCategorias.this, Login.class);
+                    Intent intent = new Intent(ActivityDetalleUsuario.this, Login.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
@@ -134,11 +96,6 @@ public class ActivityCategorias extends AppCompatActivity {
             });
             AlertDialog dialog = builder.create();
             dialog.show();
-
-        }else if (item.getItemId() == R.id.mnDatos) {
-            Intent intent = new Intent(ActivityCategorias.this, ActivityDetalleUsuario.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -89,5 +89,9 @@
     <string name="password_digit">1 número.</string>
     <string name="password_special_char">1 carácter especial (@#$%^&amp;+=).</string>
     <string name="invalid_password">La contraseña no cumple con todos los requisitos.</string>
+    <string name="tv_datos_usuario">Datos del usuario</string>
+    <string name="btn_cambiar_contr">Cambiar la contraseña</string>
+    <string name="tv_titulo_datos_usuario">Datos del usuario</string>
+    <string name="mn_datos_usuario">Datos del usuario</string>
 
 </resources>
