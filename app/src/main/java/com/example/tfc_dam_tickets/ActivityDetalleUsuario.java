@@ -110,6 +110,16 @@ public class ActivityDetalleUsuario extends BaseActivity {
         }
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuItem mnDatosItem = menu.findItem(R.id.mnDatos);
+        if (mnDatosItem != null) {
+            mnDatosItem.setEnabled(false);
+        }
+
+        return true;
+    }
 
 
 }
