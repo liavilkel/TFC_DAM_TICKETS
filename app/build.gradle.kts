@@ -38,7 +38,6 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.navigation:navigation-fragment:2.7.6")
     implementation("androidx.navigation:navigation-ui:2.7.6")
-    implementation("com.google.firebase:firebase-auth:23.0.0")
 
     //DB CONNECTION
     implementation("mysql:mysql-connector-java:5.1.49")

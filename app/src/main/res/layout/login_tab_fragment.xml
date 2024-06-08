@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.8"
         android:layout_marginTop="70dp"
-        app:startIconDrawable="@drawable/ic_person">
+        app:startIconDrawable="@drawable/baseline_email_24">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/email"

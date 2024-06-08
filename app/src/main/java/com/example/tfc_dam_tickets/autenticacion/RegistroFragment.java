@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +22,7 @@ import com.example.tfc_dam_tickets.utils.PasswordValidator;
 import com.example.tfc_dam_tickets.utils.RandomCodeGenerator;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
+
 
 import java.util.regex.Pattern;
 
@@ -38,8 +37,6 @@ public class RegistroFragment extends Fragment {
     float v = 0;
     int res;
 
-
-    FirebaseAuth mAuth;
     UserPersistence userPer;
     ClientPersistence clientPer;
     LoginFragment login;
@@ -53,7 +50,6 @@ public class RegistroFragment extends Fragment {
 
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.registro_tab_fragment,container,false);
 
-        mAuth = FirebaseAuth.getInstance();
 
 
         //Layout

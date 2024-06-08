@@ -271,6 +271,16 @@
 >
 
         <Button
+            android:id="@+id/btnDetalleCancelar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_bg"
+            android:textColor="@color/white"
+            android:layout_marginStart="@dimen/margin_cardview"
+            android:text="@string/btn_candelar"/>
+
+        <Button
             android:id="@+id/btnDetalleGuardar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -280,14 +290,5 @@
             android:layout_marginEnd="@dimen/margin_cardview"
             android:text="@string/btn_guardar"/>
 
-        <Button
-            android:id="@+id/btnDetalleCancelar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/button_bg"
-            android:textColor="@color/white"
-            android:layout_marginStart="@dimen/margin_cardview"
-            android:text="@string/btn_candelar"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
