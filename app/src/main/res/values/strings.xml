@@ -68,7 +68,7 @@
     <string name="password_changed_email_body">Estimado usuario,\n\nLa contraseña de acceso a su cuenta ResolverRocket ha sido modificada.\nPor favor, si usted no he reaalizado este cambio póngase en contacto con nosotros inmediatemente.</string>
     <string name="password_changed_success">Contraseña cambiada satisfactoriamente.</string>
     <string name="password_changed_fail">Se ha producido un error.</string>
-    <string name="signature">"\n\n\n\n--\nSaludos cordiales,\nEquipo de Soporte\nResolveRocket\nCorreo: " +
+    <string name="signature">"\n\n--\nSaludos cordiales,\nEquipo de Soporte\nResolveRocket\nCorreo: " +
                 "resolverocket2024@gmail.com\nTeléfono: +34 123 456 789\nSitio web: www.resolverocket.com"</string>
     <string name="iniciar_sesion">Iniciar sesión</string>
     <string name="recordaste_contraseña">¿Recordaste tu contraseña?</string>
@@ -89,5 +89,34 @@
     <string name="password_digit">1 número.</string>
     <string name="password_special_char">1 carácter especial (@#$%^&amp;+=).</string>
     <string name="invalid_password">La contraseña no cumple con todos los requisitos.</string>
+
+    <string name="new_ticket_notification">Información del Ticket:\n
+    ID del Ticket: %1$d\n
+    Categoría: %2$d\n
+    ID del Cliente: %3$d\n
+    Abierto por: %4$s\n
+    Título: %5$s\n
+    Descripción: %6$s\n
+    Estado: %7$s\n
+    Abierto: %8$s\n\n
+    --------------\n\n
+    Información del Usuario:\n
+    Email: %9$s\n
+    Nombre: %10$s\n
+    Apellido: %11$s\n
+    Teléfono: %12$s\n
+    Tipo: %13$s\n\n
+    --------------\n\n
+    Información del Cliente:\n
+    ID del Cliente: %14$d\n
+    Nombre: %15$s\n
+    NIF: %16$s\n
+    Calle: %17$s\n
+    Código Postal: %18$s\n
+    Provincia: %19$s\n
+    Municipio: %20$s\n
+</string>
+
+
 
 </resources>
