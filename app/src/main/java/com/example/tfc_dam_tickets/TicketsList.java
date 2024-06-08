@@ -33,7 +33,7 @@ import com.example.tfc_dam_tickets.persistence.TicketPersistence;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class TicketsList extends AppCompatActivity {
+public class TicketsList extends BaseActivity {
 
     RecyclerView recyclerViewTickets;
     AdapterTicket adapterTicket;
@@ -43,21 +43,21 @@ public class TicketsList extends AppCompatActivity {
     Spinner spinner;
     String selectedStatus = "Todos";
 
-    ActivityResultLauncher<Intent> startActivityForResult = 
+    ActivityResultLauncher<Intent> startActivityForResult =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                     new ActivityResultCallback<ActivityResult>() {
                         @Override
                         public void onActivityResult(ActivityResult ar) {
-                        
+
                             int resultCode = ar.getResultCode();
-                            
+
                             if (resultCode == 1) {
                                 Toast.makeText(TicketsList.this, R.string.toast_guardar_new_ticket, Toast.LENGTH_SHORT).show();
                                 cargarTickets(i.getIntExtra("catId", -1));
                                 adapterTicket.notifyDataSetChanged();
                             } else if (resultCode == 0) {
                                 Toast.makeText(TicketsList.this, R.string.toast_cancelar_new_ticket, Toast.LENGTH_SHORT).show();
-                            } else if (resultCode == -1){
+                            } else if (resultCode == -1) {
                                 Toast.makeText(TicketsList.this, R.string.unable_save_ticker, Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -92,8 +92,8 @@ public class TicketsList extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
         i = getIntent();
-        if (i.hasExtra("catId")){
-           cargarTickets(i.getIntExtra("catId", -1));
+        if (i.hasExtra("catId")) {
+            cargarTickets(i.getIntExtra("catId", -1));
         }
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +122,7 @@ public class TicketsList extends AppCompatActivity {
         });
 
     }
+
     private void cargarTickets(int cat) {
         ArrayList<Ticket> tickets = ticketPersistence.getTicketsByCat(cat);
 
@@ -138,11 +139,7 @@ public class TicketsList extends AppCompatActivity {
 
         recyclerViewTickets.setAdapter(adapterTicket);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
+
     private void initializeUI() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -151,70 +148,5 @@ public class TicketsList extends AppCompatActivity {
             actionBar.setTitle(R.string.tv_titulo_listaTickets);
         }
 
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // ID del botón de retroceso en la ActionBar
-        if (item.getItemId() == android.R.id.home) {
-            // Finaliza la actividad actual para volver a MainActivity
-            finish();
-            return true;
-
-        } else if (item.getItemId() == R.id.mnExit) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setCancelable(false);
-            builder.setTitle("Confirmar salida");
-            builder.setMessage("¿Estás seguro de que quieres salir de la aplicación?");
-            builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finishAffinity();
-                    System.exit(0);
-
-                }
-            });
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-
-
-        } else if (item.getItemId() == R.id.mnLogOut) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setCancelable(false);
-
-            builder.setTitle("Cerrar sesión");
-            builder.setMessage("¿Estás seguro de que quieres cerrar la sesión?");
-            builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    SharedPreferences preferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.remove("user_id");
-                    editor.remove("session_token");
-                    editor.apply();
-
-                    Intent intent = new Intent(TicketsList.this, Login.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-
-
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

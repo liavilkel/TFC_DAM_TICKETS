@@ -25,7 +25,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.LocalDateTime;
 
-public class ActivityNuevoTicket extends AppCompatActivity {
+public class ActivityNuevoTicket extends BaseActivity {
     TextInputLayout etTitulo, etDescripcion, etCat;
     Button btnCancelar;
     Button btnAceptar;
@@ -101,12 +101,6 @@ public class ActivityNuevoTicket extends AppCompatActivity {
         });
     }
 
-    //MENU
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
     private void initializeUI() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -115,64 +109,5 @@ public class ActivityNuevoTicket extends AppCompatActivity {
             actionBar.setTitle(R.string.tv_titulo_nuevoTicket);
         }
 
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // ID del botón de retroceso en la ActionBar
-        if (item.getItemId() == android.R.id.home) {
-            // Finaliza la actividad actual para volver a MainActivity
-            finish();
-            return true;
-
-        } else if (item.getItemId() == R.id.mnExit) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setCancelable(false);
-            builder.setTitle("Confirmar salida");
-            builder.setMessage("¿Estás seguro de que quieres salir de la aplicación?");
-            builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finishAffinity();
-                    System.exit(0);
-
-                }
-            });
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-
-
-        } else if (item.getItemId() == R.id.mnLogOut) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setCancelable(false);
-
-            builder.setTitle("Cerrar sesión");
-            builder.setMessage("¿Estás seguro de que quieres cerrar la sesión?");
-            builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(ActivityNuevoTicket.this, Login.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-
-
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

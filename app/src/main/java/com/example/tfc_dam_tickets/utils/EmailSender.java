@@ -30,17 +30,36 @@ public class EmailSender {
     public static void notifyAdmins(Context context, User user, Ticket ticket, Client client) {
         List<User> adminUsers = new UserPersistence(context).getTecUsers();
 
-        String subject = "New Ticket Created";
-        String body = "Dear tec,\n\nA new ticket has been created by " + user.getName() + " " + user.getLastName()
-                + " for client " + client.getName() + ".\n\nTicket details:\n"
-                + "Title: " + ticket.getTitle() + "\nDescription: " + ticket.getDescription()
-                + "\n\nPlease take necessary actions.\n\nRegards,\nYour App";
-
+        String subject = "Nuevo Ticket - #" + ticket.getTicketId();
+        String body = context.getString(
+                R.string.new_ticket_notification,
+                ticket.getTicketId(),
+                ticket.getCatId(),
+                ticket.getClientId(),
+                ticket.getUserOpen(),
+                ticket.getTitle(),
+                ticket.getDescription(),
+                ticket.getStatus(),
+                ticket.getTsOpen() != null ? ticket.getTsOpen().toString() : "N/A",
+                user.getEmail(),
+                user.getName(),
+                user.getLastName(),
+                user.getPhoneNum(),
+                user.getType(),
+                client.getClientId(),
+                client.getName(),
+                client.getNif(),
+                client.getStreet(),
+                client.getZipCode(),
+                client.getProvince(),
+                client.getMunicipality()
+        );
 
         for (User adminUser : adminUsers) {
             sendEmail(context, adminUser.getEmail(), subject, body);
         }
     }
+
 
 
 }

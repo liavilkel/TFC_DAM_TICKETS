@@ -16,17 +16,21 @@
         android:theme="@style/Theme.TFC_DAM_TICKETS"
         tools:targetApi="31">
         <activity
+            android:name=".ActivityDetalleUsuario"
+            android:exported="false"
+            android:theme="@style/Theme.TFC_DAM_TICKETS.NoActionBar" />
+        <activity
             android:name=".SetNewPasswordActivity"
             android:exported="false"
-            android:theme="@style/Theme.TFC_DAM_TICKETS.NoActionBar"/>
+            android:theme="@style/Theme.TFC_DAM_TICKETS.NoActionBar" />
         <activity
             android:name=".EnterRecCodeActivity"
             android:exported="false"
-            android:theme="@style/Theme.TFC_DAM_TICKETS.NoActionBar"/>
+            android:theme="@style/Theme.TFC_DAM_TICKETS.NoActionBar" />
         <activity
             android:name=".ForgotPasswordActivity"
             android:exported="false"
-            android:theme="@style/Theme.TFC_DAM_TICKETS.NoActionBar"/>
+            android:theme="@style/Theme.TFC_DAM_TICKETS.NoActionBar" />
         <activity
             android:name=".ActivityDetalleTicket"
             android:exported="false"

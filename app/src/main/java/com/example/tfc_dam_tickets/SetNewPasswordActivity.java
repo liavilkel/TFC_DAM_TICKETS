@@ -22,6 +22,7 @@ public class SetNewPasswordActivity extends AppCompatActivity {
     TextView tvPasswordLength, tvPasswordUppercase, tvPasswordLowercase, tvPasswordDigit, tvPasswordSpecialChar;
     Button btnSetPassword;
     String email;
+    String outcome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class SetNewPasswordActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         email = i.getStringExtra("email");
+        outcome = i.getStringExtra("outcome");
 
         etNewPassword = findViewById(R.id.etNewPassword);
         etConfPassword = findViewById(R.id.etNewPasswordConf);
@@ -73,8 +75,14 @@ public class SetNewPasswordActivity extends AppCompatActivity {
         if (success) {
             EmailSender.sendEmail(this, email, getString(R.string.password_changed_email_subject), getString(R.string.password_changed_email_body));
             Toast.makeText(SetNewPasswordActivity.this, R.string.password_changed_success, Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(SetNewPasswordActivity.this, Login.class);
-            startActivity(i);
+
+            if (outcome.equals("login")) {
+                Intent i = new Intent(SetNewPasswordActivity.this, Login.class);
+                startActivity(i);
+            } else if (outcome.equals("userInfo")){
+                Intent i = new Intent(SetNewPasswordActivity.this, ActivityDetalleUsuario.class);
+                startActivity(i);
+            }
         } else {
             Toast.makeText(SetNewPasswordActivity.this, R.string.password_changed_fail, Toast.LENGTH_SHORT).show();
         }

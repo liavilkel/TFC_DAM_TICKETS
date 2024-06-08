@@ -14,7 +14,7 @@ public class PasswordValidator {
     private static final Pattern PASSWORD_PATTERN_UPPERCASE = Pattern.compile(".*[A-Z].*");
     private static final Pattern PASSWORD_PATTERN_LOWERCASE = Pattern.compile(".*[a-z].*");
     private static final Pattern PASSWORD_PATTERN_DIGIT = Pattern.compile(".*[0-9].*");
-    private static final Pattern PASSWORD_PATTERN_SPECIAL = Pattern.compile(".*[.@#$%^&+=].*");
+    private static final Pattern PASSWORD_PATTERN_SPECIAL = Pattern.compile(".*[!¡¿?.@#$%^&+=].*");
 
     public static void addPasswordValidation(final Context context, final EditText passwordEditText,
                                              final TextView tvPasswordLength, final TextView tvPasswordUppercase,

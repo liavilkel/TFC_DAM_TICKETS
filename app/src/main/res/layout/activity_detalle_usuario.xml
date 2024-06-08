@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityDetalleUsuario">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/custom_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/verde"
+        app:titleTextColor="@color/white"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:navigationIconTint="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.cardview.widget.CardView
+        app:layout_constraintTop_toBottomOf="@id/custom_actionbar"
+        android:id="@+id/CVDetalleUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            android:padding="16dp">
+            <TextView
+                android:id="@+id/tituloDatos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text= "@string/tv_datos_usuario"
+                android:textSize="@dimen/title_text_size"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textStyle="bold"/>
+
+            <!--EMAIL-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_cardview"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.4"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text="Email:"/>
+                <TextView
+                    android:id="@+id/tvDatosEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text=""/>
+            </LinearLayout>
+
+            <!--NOMBRE-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_cardview"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text="Nombre:"/>
+
+                <TextView
+                    android:id="@+id/tvDatosNombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text=""/>
+            </LinearLayout>
+
+            <!--Apellidos-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_cardview"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text="Apellidos:"/>
+
+                <TextView
+                    android:id="@+id/tvDatosApe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text=""/>
+            </LinearLayout>
+
+            <!--Numero de telefono-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_cardview"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text="Teléfono:"/>
+                <TextView
+                    android:id="@+id/tvDatosTelef"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text=""/>
+            </LinearLayout>
+
+            <!--Tipo usuario-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_cardview"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.6"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text="Tipo:"/>
+                <TextView
+                    android:id="@+id/tvDatosTipo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text=""/>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        app:layout_constraintTop_toBottomOf="@id/CVDetalleUsuario"
+        android:id="@+id/CVDetalleEmpresa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!--ID Empresa-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.6"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text="ID empresa:"/>
+                <TextView
+                    android:id="@+id/tvDatosIdEmpresa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text=""/>
+            </LinearLayout>
+
+            <!--Nombre Empresa-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.3"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text="Empresa:"/>
+                <TextView
+                    android:id="@+id/tvDatosNombreEmp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text=""/>
+            </LinearLayout>
+
+            <!--Calle Empresa-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.6"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text="Calle:"/>
+                <TextView
+                    android:id="@+id/tvDatosCalleEmpresa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text=""/>
+            </LinearLayout>
+
+            <!--Provinica Empresa-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.6"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text="Provincia:"/>
+                <TextView
+                    android:id="@+id/tvDatosProvinciaEmpresa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text=""/>
+            </LinearLayout>
+
+            <!--Municipio Empresa-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.6"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text="Municipio:"/>
+                <TextView
+                    android:id="@+id/tvDatosMunicipioEmpresa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text=""/>
+            </LinearLayout>
+
+            <!--Código postal Empresa-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.6"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text="CP:"/>
+                <TextView
+                    android:id="@+id/tvDatosZipEmpresa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:layout_marginTop="@dimen/margin"
+                    android:text=""/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+
+        android:id="@+id/btnCambiarPw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_bg"
+        android:textColor="@color/white"
+        android:text="@string/btn_cambiar_contr"
+        app:layout_constraintTop_toBottomOf="@id/CVDetalleEmpresa"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_margin="@dimen/margin"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
