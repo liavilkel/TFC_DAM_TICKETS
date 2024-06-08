@@ -220,7 +220,7 @@ public class UserPersistence {
                     while (rs.next()) {
                         User user = new User(
                                 rs.getString(EMAIL),
-                                rs.getString(null),
+                                rs.getString("password"),
                                 rs.getString(NOMBRE),
                                 rs.getString(APE),
                                 rs.getString(TELF),

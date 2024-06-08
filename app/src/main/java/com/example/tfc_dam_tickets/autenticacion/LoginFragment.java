@@ -20,6 +20,7 @@ import com.example.tfc_dam_tickets.R;
 import com.example.tfc_dam_tickets.ActivityCategorias;
 import com.example.tfc_dam_tickets.ForgotPasswordActivity;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
+import com.example.tfc_dam_tickets.utils.SessionManager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -67,6 +68,7 @@ public class LoginFragment extends Fragment {
                     }
                 } else {
                     if (userPer.verifyUser(email, password)) {
+                        SessionManager.setLoggedInUserEmail(email);
                         Intent intent = new Intent(getActivity(), ActivityCategorias.class);
                         intent.putExtra("email", email);
                         startActivity(intent);
