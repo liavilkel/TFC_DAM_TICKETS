@@ -50,9 +50,9 @@ public class EnterRecCodeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (legit) {
                     if(etRecRode.getText().toString().trim().equals(code)) {
-                        Toast.makeText(EnterRecCodeActivity.this, R.string.correct_rec_code, Toast.LENGTH_LONG).show();
                         Intent i = new Intent(EnterRecCodeActivity.this, SetNewPasswordActivity.class);
                         i.putExtra("email", email);
+                        i.putExtra("outcome", "login");
                         startActivity(i);
                     } else {
                         Toast.makeText(EnterRecCodeActivity.this, R.string.incorrect_rec_code, Toast.LENGTH_LONG).show();
