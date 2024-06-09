@@ -1,29 +1,20 @@
 package com.example.tfc_dam_tickets;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.tfc_dam_tickets.autenticacion.Login;
 import com.example.tfc_dam_tickets.persistence.CategoryPersistence;
 import com.example.tfc_dam_tickets.persistence.ClientPersistence;
 import com.example.tfc_dam_tickets.persistence.TicketPersistence;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
 import com.example.tfc_dam_tickets.utils.EmailSender;
 import com.google.android.material.textfield.TextInputLayout;
-
-import java.time.LocalDateTime;
 
 public class ActivityNuevoTicket extends BaseActivity {
     TextInputLayout etTitulo, etDescripcion, etCat;
@@ -108,6 +99,5 @@ public class ActivityNuevoTicket extends BaseActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(R.string.tv_titulo_nuevoTicket);
         }
-
     }
 }

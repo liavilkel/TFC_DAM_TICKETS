@@ -64,7 +64,7 @@
     <string name="incorrect_rec_code">Código incorrecto.</string>
     <string name="correct_rec_code">Código correcto.</string>
     <string name="no_password_conf">Por favor confirme su contraseña.</string>
-    <string name="password_changed_email_subject">!Su contraseña ha cambiado!</string>
+    <string name="password_changed_email_subject">¡Su contraseña ha cambiado!</string>
     <string name="password_changed_email_body">Estimado usuario,\n\nLa contraseña de acceso a su cuenta ResolverRocket ha sido modificada.\nPor favor, si usted no he reaalizado este cambio póngase en contacto con nosotros inmediatemente.</string>
     <string name="password_changed_success">Contraseña cambiada satisfactoriamente.</string>
     <string name="password_changed_fail">Se ha producido un error.</string>
@@ -120,7 +120,41 @@
     Provincia: %19$s\n
     Municipio: %20$s\n
 </string>
-
+    <string name="registrarse">Registrarse</string>
+    <string name="introduce_el_correo">Introduce el correo electrónico.</string>
+    <string name="introduce_la_contrasenia">Introduce la contraseña.</string>
+    <string name="email_o_contrasenia_incorrectos">Email o contraseña incorrectos.</string>
+    <string name="subject_new_ticket">Nuevo Ticket - #</string>
+    <string name="gestionando_permisos">Se están gestionando los permisos para su usuario. En un plazo de 24h tendrá acceso a la aplicación.</string>
+    <string name="cerrado">Cerrado</string>
+    <string name="confirmar_cierre_ticket">Confirmar cierre de ticket.</string>
+    <string name="desea_cambiar_el_estado">¿Desea cambiar el estado a Cerrado? Una vez modificado, el ticket dejará de estar disponible.</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="nuevo">Nuevo</string>
+    <string name="en_proceso">En proceso</string>
+    <string name="fecha_ini">FECHA INI: </string>
+    <string name="fecha_fin">FECHA FIN: </string>
+    <string name="hora_ini">"HORA INI: "</string>
+    <string name="hora_fin">"HORA FIN: "</string>
+    <string name="titulo">"TÍTULO: "</string>
+    <string name="descripcion">"DESCRIPCIÓN: "</string>
+    <string name="cliente">"CLIENTE: "</string>
+    <string name="calle">"CALLE: "</string>
+    <string name="cp">"CP: "</string>
+    <string name="municipio">"MUNICIPIO: "</string>
+    <string name="provincia">"PROVINCIA: "</string>
+    <string name="nombre">"NOMBRE: "</string>
+    <string name="apellidos">"APELLIDOS: "</string>
+    <string name="telf">"TELF: "</string>
+    <string name="email_detalle">"EMAIL: "</string>
+    <string name="confirmar_salida">Confirmar salida</string>
+    <string name="seguro_quieres_salir">¿Estás seguro de que quieres salir de la aplicación?</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
+    <string name="seguro_cerrar_sesion">¿Estás seguro de que quieres cerrar la sesión?</string>
+    <string name="subject_codigo_rec">Código de recuperación ResolverRocket</string>
+    <string name="todos">Todos</string>
 
 
 </resources>

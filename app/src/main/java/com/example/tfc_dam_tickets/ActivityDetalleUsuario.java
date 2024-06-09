@@ -1,13 +1,9 @@
 package com.example.tfc_dam_tickets;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.tfc_dam_tickets.autenticacion.Login;
 import com.example.tfc_dam_tickets.model.Client;
 import com.example.tfc_dam_tickets.model.User;
 import com.example.tfc_dam_tickets.persistence.ClientPersistence;
@@ -55,7 +50,6 @@ public class ActivityDetalleUsuario extends BaseActivity {
                 startActivity(i);
             }
         });
-
     }
 
     private void initFields() {
@@ -73,7 +67,6 @@ public class ActivityDetalleUsuario extends BaseActivity {
         tvClientZip = findViewById(R.id.tvDatosZipEmpresa);
 
         btnChangePw = findViewById(R.id.btnCambiarPw);
-
     }
 
     private void fillInFields(User user, Client client) {
@@ -99,8 +92,6 @@ public class ActivityDetalleUsuario extends BaseActivity {
         initializeUI();
     }
 
-
-
     private void initializeUI() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -108,7 +99,6 @@ public class ActivityDetalleUsuario extends BaseActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(R.string.tv_titulo_datos_usuario);
         }
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -119,9 +109,6 @@ public class ActivityDetalleUsuario extends BaseActivity {
             mnDatosItem.setVisible(false);
 
         }
-
         return true;
     }
-
-
 }

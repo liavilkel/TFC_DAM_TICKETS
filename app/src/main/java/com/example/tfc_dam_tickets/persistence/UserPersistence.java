@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.tfc_dam_tickets.model.User;
-import com.example.tfc_dam_tickets.utils.RandomCodeGenerator;
 
 import org.mindrot.jbcrypt.BCrypt;
 

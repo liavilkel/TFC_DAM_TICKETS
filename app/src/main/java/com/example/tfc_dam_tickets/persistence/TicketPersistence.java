@@ -2,9 +2,6 @@ package com.example.tfc_dam_tickets.persistence;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
-import android.widget.Toast;
 
 import com.example.tfc_dam_tickets.model.Ticket;
 
@@ -18,8 +15,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 @SuppressLint("NewApi")
 public class TicketPersistence {
