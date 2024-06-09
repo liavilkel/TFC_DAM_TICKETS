@@ -1,22 +1,15 @@
 package com.example.tfc_dam_tickets;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.tfc_dam_tickets.adapterUtils.AdapterCategorias;
-import com.example.tfc_dam_tickets.autenticacion.Login;
 import com.example.tfc_dam_tickets.model.Category;
 import com.example.tfc_dam_tickets.persistence.CategoryPersistence;
 import com.example.tfc_dam_tickets.persistence.PermissionPersistence;
@@ -45,7 +38,7 @@ public class ActivityCategorias extends BaseActivity{
         tvHeader = findViewById(R.id.tvCategorias);
 
         // Configurar GridLayoutManager
-        int numberOfColumns = 2;  // Define el número de columnas que deseas en la cuadrícula
+        int numberOfColumns = 2;
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, numberOfColumns);
         rvCategorias.setLayoutManager(gridLayoutManager);
 
@@ -62,7 +55,7 @@ public class ActivityCategorias extends BaseActivity{
         }
 
         if (categorias.isEmpty()) {
-            tvHeader.setText("Se están gestionando los permisos para su usuario. En un plazo de 24h tendrá acceso a la aplicación.");
+            tvHeader.setText(R.string.gestionando_permisos);
         }
 
         adapterCategorias = new AdapterCategorias(categorias, this, i.getStringExtra("email"));
@@ -79,8 +72,7 @@ public class ActivityCategorias extends BaseActivity{
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_24);
             actionBar.setDisplayHomeAsUpEnabled(false);
-            actionBar.setTitle(R.string.tv_titulo_categorias);
+            actionBar.setTitle( R.string.tv_titulo_categorias);
         }
     }
-
 }

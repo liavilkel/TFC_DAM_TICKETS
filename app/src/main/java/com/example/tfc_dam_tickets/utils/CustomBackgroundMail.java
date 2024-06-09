@@ -11,7 +11,6 @@ import com.creativityapps.gmailbackgroundlibrary.util.GmailSender;
 import com.creativityapps.gmailbackgroundlibrary.util.Utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CustomBackgroundMail {

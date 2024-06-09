@@ -30,7 +30,9 @@ public class EmailSender {
     public static void notifyAdmins(Context context, User user, Ticket ticket, Client client) {
         List<User> adminUsers = new UserPersistence(context).getTecUsers();
 
-        String subject = "Nuevo Ticket - #" + ticket.getTicketId();
+        String subjectNewTicket = context.getString(R.string.subject_new_ticket);
+
+        String subject = subjectNewTicket + ticket.getTicketId();
         String body = context.getString(
                 R.string.new_ticket_notification,
                 ticket.getTicketId(),
@@ -59,7 +61,4 @@ public class EmailSender {
             sendEmail(context, adminUser.getEmail(), subject, body);
         }
     }
-
-
-
 }

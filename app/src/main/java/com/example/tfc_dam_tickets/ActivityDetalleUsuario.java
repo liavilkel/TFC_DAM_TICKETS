@@ -4,9 +4,12 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+<<<<<<< HEAD
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+=======
+>>>>>>> feb64f72a839d4b15d5d233e12b42446f7118b81
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +17,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.tfc_dam_tickets.autenticacion.Login;
 import com.example.tfc_dam_tickets.model.Client;
 import com.example.tfc_dam_tickets.model.User;
 import com.example.tfc_dam_tickets.persistence.ClientPersistence;
@@ -55,6 +57,7 @@ public class ActivityDetalleUsuario extends BaseActivity {
                 startActivity(i);
             }
         });
+<<<<<<< HEAD
 
         btnSpanish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +72,8 @@ public class ActivityDetalleUsuario extends BaseActivity {
                 setLocale("en");
             }
         });
+=======
+>>>>>>> feb64f72a839d4b15d5d233e12b42446f7118b81
     }
 
     private void initFields() {
@@ -86,8 +91,11 @@ public class ActivityDetalleUsuario extends BaseActivity {
         tvClientZip = findViewById(R.id.tvDatosZipEmpresa);
 
         btnChangePw = findViewById(R.id.btnCambiarPw);
+<<<<<<< HEAD
         btnSpanish = findViewById(R.id.btnSpanish);
         btnEnglish = findViewById(R.id.btnEnglish);
+=======
+>>>>>>> feb64f72a839d4b15d5d233e12b42446f7118b81
     }
 
     private void fillInFields(User user, Client client) {
@@ -130,6 +138,7 @@ public class ActivityDetalleUsuario extends BaseActivity {
         }
         return true;
     }
+<<<<<<< HEAD
 
     private void setLocale(String lang) {
         Locale locale = new Locale(lang);
@@ -150,3 +159,6 @@ public class ActivityDetalleUsuario extends BaseActivity {
         startActivity(intent);
     }
 }
+=======
+}
+>>>>>>> feb64f72a839d4b15d5d233e12b42446f7118b81

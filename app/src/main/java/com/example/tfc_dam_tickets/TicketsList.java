@@ -5,19 +5,12 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,7 +19,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.tfc_dam_tickets.adapterUtils.AdapterTicket;
-import com.example.tfc_dam_tickets.autenticacion.Login;
 import com.example.tfc_dam_tickets.model.Ticket;
 import com.example.tfc_dam_tickets.persistence.TicketPersistence;
 
@@ -41,7 +33,7 @@ public class TicketsList extends BaseActivity {
     Button btnAdd;
     Intent i;
     Spinner spinner;
-    String selectedStatus = "Todos";
+    String selectedStatus;
 
     ActivityResultLauncher<Intent> startActivityForResult =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
@@ -70,6 +62,7 @@ public class TicketsList extends BaseActivity {
         setContentView(R.layout.activity_tickets_list);
 
         ticketPersistence = new TicketPersistence(this);
+        selectedStatus = getString(R.string.todos);
 
         Toolbar customToolbar = findViewById(R.id.custom_actionbar);
         setSupportActionBar(customToolbar);
@@ -83,7 +76,7 @@ public class TicketsList extends BaseActivity {
         btnAdd = findViewById(R.id.btnAddTicket);
         spinner = findViewById(R.id.spinner_ticket_list);
 
-        String[] statusOptions = {"Todos", "En proceso", "Cerrado", "Nuevo"};
+        String[] statusOptions = {getString(R.string.todos), getString(R.string.en_proceso), getString(R.string.cerrado), getString(R.string.nuevo)};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, statusOptions
         );
@@ -116,7 +109,7 @@ public class TicketsList extends BaseActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                spinner.setSelection(adapter.getPosition("Todos"));
+                spinner.setSelection(adapter.getPosition(getString(R.string.todos)));
                 cargarTickets(i.getIntExtra("catId", -1));
             }
         });
@@ -126,7 +119,7 @@ public class TicketsList extends BaseActivity {
     private void cargarTickets(int cat) {
         ArrayList<Ticket> tickets = ticketPersistence.getTicketsByCat(cat);
 
-        if (selectedStatus.equals("Todos")) {
+        if (selectedStatus.equals(getString(R.string.todos))) {
             adapterTicket = new AdapterTicket(this, tickets, i.getStringExtra("email"));
         } else {
             ArrayList<Ticket> filteredTickets = new ArrayList<>();

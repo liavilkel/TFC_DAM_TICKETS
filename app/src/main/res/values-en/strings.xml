@@ -132,5 +132,44 @@
     <string name="tv_municipio_usuario">"Municipality: "</string>
     <string name="tv_cp_usuario">"Postal Code: "</string>
 
+    <string name="btn_espaniol">Spanish</string>
+    <string name="btn_ingles">English</string>
+    <string name="btn_ruso">Russian</string>
+
+    <string name="registrarse">Register</string>
+    <string name="introduce_el_correo">Enter your email.</string>
+    <string name="introduce_la_contrasenia">Enter the password.</string>
+    <string name="email_o_contrasenia_incorrectos">Incorrect email or password.</string>
+    <string name="subject_new_ticket">New Ticket - #</string>
+    <string name="gestionando_permisos">Permissions for your user are being managed. You will have access to the application within 24 hours.</string>
+    <string name="cerrado">Closed</string>
+    <string name="confirmar_cierre_ticket">Confirm ticket closure.</string>
+    <string name="desea_cambiar_el_estado">Do you want to change the status to Closed? Once modified, the ticket will no longer be available.</string>
+    <string name="aceptar">Accept</string>
+    <string name="cancelar">Cancel</string>
+    <string name="nuevo">New</string>
+    <string name="en_proceso">In process</string>
+    <string name="fecha_ini">START DATE: </string>
+    <string name="fecha_fin">END DATE: </string>
+    <string name="hora_ini">"START TIME: "</string>
+    <string name="hora_fin">"END TIME: "</string>
+    <string name="titulo">"TITLE: "</string>
+    <string name="descripcion">"DESCRIPTION: "</string>
+    <string name="cliente">"CLIENT: "</string>
+    <string name="calle">"STREET: "</string>
+    <string name="cp">"POSTAL CODE: "</string>
+    <string name="municipio">"MUNICIPALITY: "</string>
+    <string name="provincia">"PROVINCE: "</string>
+    <string name="nombre">"NAME: "</string>
+    <string name="apellidos">"LAST NAME: "</string>
+    <string name="telf">"PHONE: "</string>
+    <string name="email_detalle">"EMAIL: "</string>
+    <string name="confirmar_salida">Confirm exit</string>
+    <string name="seguro_quieres_salir">Are you sure you want to exit the application?</string>
+    <string name="si">Yes</string>
+    <string name="no">No</string>
+    <string name="seguro_cerrar_sesion">Are you sure you want to log out?</string>
+    <string name="subject_codigo_rec">Recovery code ResolverRocket</string>
+    <string name="todos">All</string>
 
 </resources>

@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tfc_dam_tickets.ActivityCategorias;
 import com.example.tfc_dam_tickets.TicketsList;
 import com.example.tfc_dam_tickets.model.Category;
 import com.example.tfc_dam_tickets.R;
