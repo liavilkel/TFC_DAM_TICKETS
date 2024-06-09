@@ -33,7 +33,7 @@ public class TicketsList extends BaseActivity {
     Button btnAdd;
     Intent i;
     Spinner spinner;
-    String selectedStatus = getString(R.string.todos);
+    String selectedStatus;
 
     ActivityResultLauncher<Intent> startActivityForResult =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
@@ -62,6 +62,7 @@ public class TicketsList extends BaseActivity {
         setContentView(R.layout.activity_tickets_list);
 
         ticketPersistence = new TicketPersistence(this);
+        selectedStatus = getString(R.string.todos);
 
         Toolbar customToolbar = findViewById(R.id.custom_actionbar);
         setSupportActionBar(customToolbar);

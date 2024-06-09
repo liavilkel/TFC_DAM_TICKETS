@@ -263,7 +263,7 @@ public class ActivityDetalleTicket extends BaseActivity {
         btnDetalleCancelar = findViewById(R.id.btnDetalleCancelar);
         spinner = findViewById(R.id.spinner);
 
-        if(tecnico && !status.equals(R.string.cerrado)) {
+        if(tecnico && !status.equals(getString(R.string.cerrado))) {
             btnDetalleGuardar.setEnabled(true);
             btnDetalleGuardar.setVisibility(View.VISIBLE);
             btnDetalleCancelar.setEnabled(true);
