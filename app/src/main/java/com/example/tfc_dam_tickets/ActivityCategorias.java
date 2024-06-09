@@ -11,6 +11,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.tfc_dam_tickets.adapterUtils.AdapterCategorias;
@@ -27,6 +29,7 @@ public class ActivityCategorias extends BaseActivity{
     AdapterCategorias adapterCategorias;
     CategoryPersistence categoryPersistence;
     PermissionPersistence permissionPersistence;
+    TextView tvHeader;
 
     List<Category> categorias;
 
@@ -38,8 +41,8 @@ public class ActivityCategorias extends BaseActivity{
         Toolbar customToolbar = findViewById(R.id.custom_actionbar);
         setSupportActionBar(customToolbar);
 
-        // Inicializar RecyclerView
         rvCategorias = findViewById(R.id.rvCategorias);
+        tvHeader = findViewById(R.id.tvCategorias);
 
         // Configurar GridLayoutManager
         int numberOfColumns = 2;  // Define el número de columnas que deseas en la cuadrícula
@@ -56,6 +59,10 @@ public class ActivityCategorias extends BaseActivity{
             String email = i.getStringExtra("email");
             List<Integer> allowedCategoryIds = permissionPersistence.getCategoryIdsByPermission(email);
             categorias = categoryPersistence.getCategoryByPermission(allowedCategoryIds);
+        }
+
+        if (categorias.isEmpty()) {
+            tvHeader.setText("Se están gestionando los permisos para su usuario. En un plazo de 24h tendrá acceso a la aplicación.");
         }
 
         adapterCategorias = new AdapterCategorias(categorias, this, i.getStringExtra("email"));
