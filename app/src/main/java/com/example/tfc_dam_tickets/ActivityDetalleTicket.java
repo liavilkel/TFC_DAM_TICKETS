@@ -281,11 +281,11 @@ public class ActivityDetalleTicket extends BaseActivity {
             etSolucionTecnico.setAlpha(0.5f);
             spinner.setEnabled(false);
             spinner.setFocusable(false);
-            spinner.setAlpha(0.5f); // Optional: Make it look disabled by changing its opacity
+            spinner.setAlpha(0.5f);
             spinner.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    return true; // Consume touch events
+                    return true;
                 }
             });
         }
