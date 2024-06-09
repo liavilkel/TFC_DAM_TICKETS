@@ -118,5 +118,18 @@
     Código Postal: %18$s\n
     Provincia: %19$s\n
     Municipio: %20$s\n
-</string>
+    </string>
+
+    <string name="tv_nombre_usuario">"Nombre: "</string>
+    <string name="tv_apellidos_usuario">"Apellidos: "</string>
+    <string name="tv_telefono_usuario">"Teléfono: "</string>
+    <string name="tv_tipo_usuario">"Tipo: "</string>
+    <string name="tv_idempresa_usuario">"ID Empresa: "</string>
+    <string name="tv_empresa_usuario">"Empresa: "</string>
+    <string name="tv_calle_usuario">"Calle: "</string>
+    <string name="tv_provincia_usuario">"Provincia: "</string>
+    <string name="tv_municipio_usuario">"Municipio: "</string>
+    <string name="tv_cp_usuario">"CP: "</string>
+
+
 </resources>

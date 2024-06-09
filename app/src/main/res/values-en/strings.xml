@@ -119,5 +119,18 @@
     Postal Code: %18$s\n
     Province: %19$s\n
     Municipality: %20$s\n
-</string>
+    </string>
+
+    <string name="tv_nombre_usuario">"Name: "</string>
+    <string name="tv_apellidos_usuario">"Last Name: "</string>
+    <string name="tv_telefono_usuario">"Phone: "</string>
+    <string name="tv_tipo_usuario">"Type: "</string>
+    <string name="tv_idempresa_usuario">"Company ID: "</string>
+    <string name="tv_empresa_usuario">"Company: "</string>
+    <string name="tv_calle_usuario">"Street: "</string>
+    <string name="tv_provincia_usuario">"Province: "</string>
+    <string name="tv_municipio_usuario">"Municipality: "</string>
+    <string name="tv_cp_usuario">"Postal Code: "</string>
+
+
 </resources>

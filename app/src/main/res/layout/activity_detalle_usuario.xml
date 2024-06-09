@@ -52,14 +52,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.1"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="Email:"/>
+                    android:text="Email:"
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/tvDatosEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="@dimen/margin"
                     android:text=""/>
             </LinearLayout>
@@ -73,15 +73,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.8"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="Nombre:"/>
+                    android:text="@string/tv_nombre_usuario"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/tvDatosNombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="@dimen/margin"
                     android:text=""/>
             </LinearLayout>
@@ -95,15 +95,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="Apellidos:"/>
+                    android:text="@string/tv_apellidos_usuario"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/tvDatosApe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="@dimen/margin"
                     android:text=""/>
             </LinearLayout>
@@ -117,14 +117,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="Teléfono:"/>
+                    android:text="@string/tv_telefono_usuario"
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/tvDatosTelef"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="@dimen/margin"
                     android:text=""/>
             </LinearLayout>
@@ -138,14 +138,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.8"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="Tipo:"/>
+                    android:text="@string/tv_tipo_usuario"
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/tvDatosTipo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="@dimen/margin"
                     android:text=""/>
             </LinearLayout>
@@ -181,14 +181,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.9"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="ID empresa:"/>
+                    android:text="@string/tv_idempresa_usuario"
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/tvDatosIdEmpresa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="8"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="@dimen/margin"
                     android:text=""/>
             </LinearLayout>
@@ -201,14 +201,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.1"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="Empresa:"/>
+                    android:text="@string/tv_empresa_usuario"
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/tvDatosNombreEmp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="@dimen/margin"
                     android:text=""/>
             </LinearLayout>
@@ -221,14 +221,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3.2"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="Calle:"/>
+                    android:text="@string/tv_calle_usuario"
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/tvDatosCalleEmpresa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="@dimen/margin"
                     android:text=""/>
             </LinearLayout>
@@ -241,14 +241,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.1"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="Provincia:"/>
+                    android:text="@string/tv_provincia_usuario"
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/tvDatosProvinciaEmpresa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="@dimen/margin"
                     android:text=""/>
             </LinearLayout>
@@ -261,14 +261,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.2"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="Municipio:"/>
+                    android:text="@string/tv_municipio_usuario"
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/tvDatosMunicipioEmpresa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="@dimen/margin"
                     android:text=""/>
             </LinearLayout>
@@ -281,14 +281,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3.6"
                     android:layout_marginTop="@dimen/margin"
-                    android:text="CP:"/>
+                    android:text="@string/tv_cp_usuario"
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/tvDatosZipEmpresa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="10"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="@dimen/margin"
                     android:text=""/>
             </LinearLayout>
@@ -309,6 +309,42 @@
         android:layout_marginTop="@dimen/margin"
         android:layout_margin="@dimen/margin"
         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/btnCambiarPw"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <Button
+            android:id="@+id/btnSpain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Español"
+
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnEnglish"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Inglés"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
