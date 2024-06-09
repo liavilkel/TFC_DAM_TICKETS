@@ -1,3 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Resolver Rocket</string>
+    <string name="login">Log In</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="btn_login">Log In</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="btn_registrarse">Register</string>
+    <string name="phone_numer">Phone Number</string>
+    <string name="company_id">Company ID</string>
+
+    <string name="no_email">Please enter an email address.</string>
+    <string name="no_name">Please enter a name.</string>
+    <string name="no_lastname">Please enter your last name.</string>
+    <string name="no_password">Please enter a password.</string>
+    <string name="no_pass_conf">Please confirm your password.</string>
+    <string name="passw_must_match">Passwords must match.</string>
+    <string name="no_phone_num">Please enter a phone number.</string>
+    <string name="no_com_id">Please enter a company ID.</string>
+    <string name="unvalid_com_id">Please enter a valid company ID.</string>
+    <string name="user_registered">User successfully registered.</string>
+    <string name="unable_to_resgister">User could not be registered.</string>
+    <string name="email_in_use">The email address is already in use.</string>
+
+    <string name="btn_add_new">+</string>
+    <string name="tv_nom_categoria">Category Name</string>
+    <string name="tvCategorias">Please choose one of the following categories:</string>
+
+    <string name="enter_email">Please enter an email address</string>
+    <string name="enter_pass">Please enter the password</string>
+    <string name="invalid_email">The email format is not valid.</string>
+
+    <string name="titulo_ticket">Title</string>
+    <string name="descripcion_ticket">Description</string>
+    <string name="btn_candelar">Cancel</string>
+    <string name="btn_guardar">Save</string>
+    <string name="new_ticket">New Ticket</string>
+    <string name="toast_cancelar_new_ticket">Ticket canceled</string>
+    <string name="toast_guardar_new_ticket">Ticket saved</string>
+    <string name="incorrect_credentials">Incorrect username or password.</string>
+    <string name="cat_ticket">Category:</string>
+    <string name="unable_save_ticker">An error occurred. Ticket not saved.</string>
+    <string name="all_mandaory">All fields are mandatory.</string>
+    <string name="tv_detalle_ticket">Ticket Details:</string>
+    <string name="tv_detalle_cliente">Client Details:</string>
+    <string name="tv_detalle_usuario">User Details:</string>
+    <string name="toast_cancelar_detalle_ticket">No changes were saved.</string>
+    <string name="toast_guardar_detalle_ticket">Saving ticket status and comments.</string>
+    <string name="mn_cerrar_sesion">Log Out</string>
+    <string name="mn_salir_app">Exit</string>
+    <string name="tv_titulo_categorias">Categories</string>
+    <string name="create_resetPass">Forgot your password?</string>
+    <string name="tv_titulo_listaTickets">Ticket List</string>
+    <string name="tv_titulo_nuevoTicket">New Ticket</string>
+    <string name="toast_unable_fetch_data_detalle">Unable to retrieve all information from the database.</string>
+    <string name="tv_ticket_list_filtro">Filter by status:</string>
+    <string name="ticket_update_fail">Error. Please try again later.</string>
+    <string name="tv_titulo_detalle">Details</string>
+    <string name="ticket_status_update">Dear %1$s,\n\nWe would like to inform you that the status of the ticket with ID: %2$d has been updated.\nThe new status of the ticket is: %3$s.\n\nPlease feel free to contact us if you need more information or assistance.</string>
+    <string name="ticket_status_update_subject">"Notification: Status Change for Ticket ID: %1$d"</string>
+    <string name="verification_body">Hello!\nYour verification code is: %s</string>
+    <string name="incorrect_rec_code">Incorrect code.</string>
+    <string name="correct_rec_code">Correct code.</string>
+    <string name="no_password_conf">Please confirm your password.</string>
+    <string name="password_changed_email_subject">Your password has been changed!</string>
+    <string name="password_changed_email_body">Dear user,\n\nThe password for your Resolver Rocket account has been changed.\nPlease contact us immediately if you did not make this change.</string>
+    <string name="password_changed_success">Password successfully changed.</string>
+    <string name="password_changed_fail">An error occurred.</string>
+    <string name="signature">"\n\n--\nBest regards,\nSupport Team\nResolver Rocket\nEmail: " +
+                "resolverocket2024@gmail.com\nPhone: +34 123 456 789\nWebsite: www.resolverocket.com"</string>
+    <string name="iniciar_sesion">Log In</string>
+    <string name="recordaste_contraseña">Remembered your password?</string>
+    <string name="btn_enviar">Send</string>
+    <string name="recuperar_contrasenia">Recover Password</string>
+    <string name="te_enviaremos_mail">We will send you an email to reset your password.</string>
+    <string name="codigo_recuperacion">Recovery Code</string>
+    <string name="introduce_codigo">Please enter the recovery code sent to your email.</string>
+    <string name="no_recibiste_codigo">Didn\'t receive the code?</string>
+    <string name="pulsa_aqui">Click here.</string>
+    <string name="cambiar_contrasenia">Change Password</string>
+    <string name="introduce_contraseña">Enter and verify your new password.</string>
+
+    <string name="contenido_contrasenia">Your password must contain at least:</string>
+    <string name="password_length">8 characters.</string>
+    <string name="password_uppercase">1 uppercase letter.</string>
+    <string name="password_lowercase">1 lowercase letter.</string>
+    <string name="password_digit">1 number.</string>
+    <string name="password_special_char">1 special character (.@#$%^&amp;+=¡!?+¿?).</string>
+    <string name="invalid_password">The password does not meet all requirements.</string>
+    <string name="tv_datos_usuario">User Information</string>
+    <string name="btn_cambiar_contr">Change Password</string>
+    <string name="tv_titulo_datos_usuario">User Information</string>
+    <string name="mn_datos_usuario">User Information</string>
+
+    <string name="new_ticket_notification">Ticket Information:\n
+    Ticket ID: %1$d\n
+    Category: %2$d\n
+    Client ID: %3$d\n
+    Opened by: %4$s\n
+    Title: %5$s\n
+    Description: %6$s\n
+    Status: %7$s\n
+    Opened: %8$s\n\n
+    --------------\n\n
+    User Information:\n
+    Email: %9$s\n
+    First Name: %10$s\n
+    Last Name: %11$s\n
+    Phone: %12$s\n
+    Type: %13$s\n\n
+    --------------\n\n
+    Client Information:\n
+    Client ID: %14$d\n
+    Name: %15$s\n
+    NIF: %16$s\n
+    Street: %17$s\n
+    Postal Code: %18$s\n
+    Province: %19$s\n
+    Municipality: %20$s\n
+</string>
 </resources>
