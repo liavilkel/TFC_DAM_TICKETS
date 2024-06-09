@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F2F2F2"
     tools:context=".ActivityDetalleUsuario">
 
     <androidx.appcompat.widget.Toolbar
@@ -328,8 +329,9 @@
             android:layout_margin="8dp"
             android:gravity="center"
             android:padding="16dp"
-            android:text="Español"
-
+            android:text="@string/btn_espaniol"
+            android:background="@null"
+            android:drawableTop="@drawable/sp50"
             android:textColor="@color/black"
             android:textSize="12sp" />
 
@@ -341,7 +343,22 @@
             android:layout_margin="8dp"
             android:gravity="center"
             android:padding="16dp"
-            android:text="Inglés"
+            android:text="@string/btn_ingles"
+            android:background="@null"
+            android:drawableTop="@drawable/uk50"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+        <Button
+            android:id="@+id/btnRuso"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="@string/btn_ruso"
+            android:background="@null"
+            android:drawableTop="@drawable/ru50"
             android:textColor="@color/black"
             android:textSize="12sp" />
     </LinearLayout>
