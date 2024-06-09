@@ -59,14 +59,14 @@ public class ActivityDetalleUsuario extends BaseActivity {
         btnSpanish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setLocale("es");
+                //setLocale("es");
             }
         });
 
         btnEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setLocale("en");
+                //setLocale("en");
             }
         });
 
