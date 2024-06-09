@@ -130,9 +130,6 @@
     <string name="tv_provincia_usuario">"Provincia: "</string>
     <string name="tv_municipio_usuario">"Municipio: "</string>
     <string name="tv_cp_usuario">"CP: "</string>
-    <string name="btn_espaniol">Español</string>
-    <string name="btn_ingles">Inglés</string>
-    <string name="btn_ruso">Ruso</string>
 
 
 </resources>
