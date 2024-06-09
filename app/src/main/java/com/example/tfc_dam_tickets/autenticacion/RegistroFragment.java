@@ -50,8 +50,6 @@ public class RegistroFragment extends Fragment {
 
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.registro_tab_fragment,container,false);
 
-
-
         //Layout
         //lEmail, lNombre, lApellidos, lPassword, lConfirmPass, lTelefono, lEmpresaId;
         lEmail = viewGroup.findViewById(R.id.textInputLayoutEmail);
@@ -152,7 +150,6 @@ public class RegistroFragment extends Fragment {
             }
         });
 
-
         return viewGroup;
     }
 
@@ -201,7 +198,6 @@ public class RegistroFragment extends Fragment {
         tvPasswordSpecialCharR.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
     }
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -219,8 +215,6 @@ public class RegistroFragment extends Fragment {
         if (etComId != null) etComId.setText("");
     }
 
-
-
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -228,6 +222,7 @@ public class RegistroFragment extends Fragment {
             iniciarAnimacion();
         }
     }
+
     public boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         Pattern pattern = Pattern.compile(emailRegex);
@@ -236,7 +231,5 @@ public class RegistroFragment extends Fragment {
         }
         return pattern.matcher(email).matches();
     }
-
-
 
 }

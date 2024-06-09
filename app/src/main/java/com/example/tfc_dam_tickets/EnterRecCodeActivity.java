@@ -10,13 +10,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tfc_dam_tickets.autenticacion.Login;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
 import com.example.tfc_dam_tickets.utils.EmailSender;
 
 public class EnterRecCodeActivity extends AppCompatActivity {
-    private static final String SUBJECT = "Código de recuperación ResolverRocket";
-
+    //private static final String SUBJECT = "Código de recuperación ResolverRocket";
     EditText etRecRode;
     Button btnCheckCode;
     UserPersistence userPersistence;
@@ -24,11 +22,14 @@ public class EnterRecCodeActivity extends AppCompatActivity {
 
     Boolean legit = false;
     String code = null;
+    String subject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_rec_code);
+
+        subject = getString(R.string.subject_codigo_rec);
 
         userPersistence = new UserPersistence(this);
         etRecRode = findViewById(R.id.etRecCode);
@@ -42,7 +43,7 @@ public class EnterRecCodeActivity extends AppCompatActivity {
             legit = true;
             code = userPersistence.getUserRecCode(email);
             String body = getString(R.string.verification_body, code);
-            EmailSender.sendEmail(this, email, SUBJECT, body);
+            EmailSender.sendEmail(this, email, subject, body);
         }
 
         btnCheckCode.setOnClickListener(new View.OnClickListener() {

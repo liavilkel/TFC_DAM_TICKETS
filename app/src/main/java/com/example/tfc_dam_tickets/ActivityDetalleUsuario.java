@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.tfc_dam_tickets.autenticacion.Login;
 import com.example.tfc_dam_tickets.model.Client;
 import com.example.tfc_dam_tickets.model.User;
 import com.example.tfc_dam_tickets.persistence.ClientPersistence;
@@ -69,6 +69,7 @@ public class ActivityDetalleUsuario extends BaseActivity {
                 setLocale("en");
             }
         });
+
     }
 
     private void initFields() {
@@ -88,6 +89,7 @@ public class ActivityDetalleUsuario extends BaseActivity {
         btnChangePw = findViewById(R.id.btnCambiarPw);
         btnSpanish = findViewById(R.id.btnSpanish);
         btnEnglish = findViewById(R.id.btnEnglish);
+
     }
 
     private void fillInFields(User user, Client client) {

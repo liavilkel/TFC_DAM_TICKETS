@@ -1,6 +1,5 @@
 package com.example.tfc_dam_tickets.autenticacion;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -21,8 +20,8 @@ public class Login extends AppCompatActivity {
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
 
-        tabLayout.addTab(tabLayout.newTab().setText("Iniciar sesión"));
-        tabLayout.addTab(tabLayout.newTab().setText("Registrarse"));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.iniciar_sesion));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.registrarse));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final LoginAdapter adapter = new LoginAdapter(getSupportFragmentManager(),this,tabLayout.getTabCount());
@@ -39,12 +38,6 @@ public class Login extends AppCompatActivity {
                     RegistroFragment registroFragment = (RegistroFragment) adapter.instantiateItem(viewPager, 1);
                     if (registroFragment != null) registroFragment.limpiarCampos();
                 }
-
-                /*NO BORRAR!!!! LUEGO VAMOS A NECESITAR ESTE TROZO DE TARTA
-                if (tab.getPosition() == 0) { // Asumiendo que el Registro está en la posición 1
-                    LoginFragment loginfragment = (LoginFragment) adapter.instantiateItem(viewPager, 0);
-                    if (loginfragment != null) loginfragment.limpiarCampos();
-                }*/
             }
 
             @Override
@@ -57,8 +50,5 @@ public class Login extends AppCompatActivity {
 
             }
         });
-
-
     }
-
 }

@@ -46,8 +46,6 @@ public class LoginFragment extends Fragment {
         login = view.findViewById(R.id.btnLogin);
         tvRestPass = view.findViewById(R.id.tvRestPass);
 
-
-
         iniciarAnimacion();
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -58,11 +56,11 @@ public class LoginFragment extends Fragment {
 
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                     if (TextUtils.isEmpty(email)) {
-                        etEmail.setError("Introduce el correo electrónico");
+                        etEmail.setError(getString(R.string.introduce_el_correo));
                         return;
                     }
                     if (TextUtils.isEmpty(password)) {
-                        etPass.setError("Introduce la contraseña");
+                        etPass.setError(getString(R.string.introduce_la_contrasenia));
                         layoutPass.setEndIconVisible(false);
                         return;
                     }
@@ -73,7 +71,7 @@ public class LoginFragment extends Fragment {
                         intent.putExtra("email", email);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(getContext(), "Email o contraseña incorrectos", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), R.string.email_o_contrasenia_incorrectos, Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -95,10 +93,10 @@ public class LoginFragment extends Fragment {
             @Override
             //Este método se llama antes de que el texto sea cambiado.
             /*
-* CharSequence s: La secuencia de caracteres del texto antes de cualquier cambio.
-int start: La posición en el texto donde comenzará el cambio.
-int count: El número de caracteres que serán reemplazados.
-int after: El número de caracteres nuevos que se reemplazarán en el texto existente.*/
+            * CharSequence s: La secuencia de caracteres del texto antes de cualquier cambio.
+            int start: La posición en el texto donde comenzará el cambio.
+            int count: El número de caracteres que serán reemplazados.
+            int after: El número de caracteres nuevos que se reemplazarán en el texto existente.*/
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
@@ -149,21 +147,15 @@ int after: El número de caracteres nuevos que se reemplazarán en el texto exis
         }
     }
 
-
-
-//NO BORRAR!!!! LUEGO VAMOS A NECESITAR ESTE TROZO DE TARTA
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         // Aquí limpias los campos cuando la vista del Fragment se destruye
         limpiarCampos();
     }
-//NO BORRAR!!!! LUEGO VAMOS A NECESITAR ESTE TROZO DE TARTA
+
     void limpiarCampos() {
         if (etEmail != null) etEmail.setText("");
         if (etPass != null) etPass.setText("");
-
     }
-
-
 }

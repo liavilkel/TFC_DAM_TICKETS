@@ -2,7 +2,6 @@ package com.example.tfc_dam_tickets;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
@@ -10,10 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,10 +20,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
-
-import com.example.tfc_dam_tickets.autenticacion.Login;
-
 import com.example.tfc_dam_tickets.model.Client;
 import com.example.tfc_dam_tickets.model.Ticket;
 import com.example.tfc_dam_tickets.model.User;
@@ -35,12 +27,9 @@ import com.example.tfc_dam_tickets.persistence.ClientPersistence;
 import com.example.tfc_dam_tickets.persistence.TicketPersistence;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
 import com.example.tfc_dam_tickets.utils.EmailSender;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-
 
 @SuppressLint("NewApi")
 public class ActivityDetalleTicket extends BaseActivity {
@@ -122,16 +111,16 @@ public class ActivityDetalleTicket extends BaseActivity {
         btnDetalleGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedItem.equals("Cerrado")) {
+                if (selectedItem.equals(getString(R.string.cerrado))) {
                     new AlertDialog.Builder(ActivityDetalleTicket.this)
-                            .setTitle("Confirmar cierre de ticket")
-                            .setMessage("¿Desea cambiar el estado a Cerrado? Una vez modificado, el ticket dejará de estar disponible.")
-                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                            .setTitle(R.string.confirmar_cierre_ticket)
+                            .setMessage(R.string.desea_cambiar_el_estado)
+                            .setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     guardarTicket(ticket);
                                 }
                             })
-                            .setNegativeButton("Cancelar", null)
+                            .setNegativeButton(R.string.cancelar, null)
                             .show();
                 } else {
                     guardarTicket(ticket);
@@ -145,7 +134,7 @@ public class ActivityDetalleTicket extends BaseActivity {
         String oldStatus = ticket.getStatus();
         ticket.setStatus(selectedItem);
 
-        if (ticket.getStatus().equals("Cerrado")) {
+        if (ticket.getStatus().equals(getString(R.string.cerrado))) {
             ticket.setTsClose(LocalDateTime.now());
         }
         if (!etSolucionTecnico.getText().toString().isBlank()) {
@@ -190,7 +179,7 @@ public class ActivityDetalleTicket extends BaseActivity {
         String formattedDate;
         String formattedTime;
 
-        String[] items = new String[]{"Nuevo", "En proceso", "Cerrado"};
+        String[] items = new String[]{getString((R.string.nuevo)), getString((R.string.en_proceso)), getString((R.string.cerrado))};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -210,15 +199,15 @@ public class ActivityDetalleTicket extends BaseActivity {
         if (ticket != null && user != null && client != null) {
             tvDetalleIdTicket.setText("#ID " + String.valueOf(ticketId));
             formattedDate = ticket.getTsOpen().format(formatter);
-            tvDetalleFechaIni.setText("FECHA INI: " + formattedDate);
+            tvDetalleFechaIni.setText(getString(R.string.fecha_ini) + formattedDate);
             formattedDate = (ticket.getTsClose() != null) ? ticket.getTsClose().format(formatter) : "---";
-            tvDetalleFechaFin.setText("FECHA FIN: " + formattedDate);
+            tvDetalleFechaFin.setText(getString(R.string.fecha_fin) + formattedDate);
             formattedTime = ticket.getTsOpen().format(formatter2);
-            tvDetalleHoraIni.setText("HORA INI: " + formattedTime);
+            tvDetalleHoraIni.setText(getString(R.string.hora_ini) + formattedTime);
             formattedTime = (ticket.getTsClose() != null) ? ticket.getTsClose().format(formatter2) : "---";
-            tvDetalleHoraFin.setText("HORA FIN: " + formattedTime);
-            tvDetalleTitulo.setText("TÍTULO: " + ticket.getTitle());
-            tvDetalleDescripcion.setText("DESCRIPCIÓN: " + ticket.getDescription());
+            tvDetalleHoraFin.setText(getString(R.string.hora_fin)+ formattedTime);
+            tvDetalleTitulo.setText(getString(R.string.titulo) + ticket.getTitle());
+            tvDetalleDescripcion.setText(getString(R.string.descripcion)+ ticket.getDescription());
             spinner.setSelection(adapter.getPosition(ticket.getStatus()));
             String sol = ticket.getDescription() != null ? ticket.getSolution() : "";
             etSolucionTecnico.setText(sol);
@@ -233,16 +222,16 @@ public class ActivityDetalleTicket extends BaseActivity {
                 etSolucionTecnico.setEnabled(false);
             }
 
-            tvDetalleCliente.setText("CLIENTE: " + client.getName());
-            tvDetalleCalle.setText("CALLE: " + client.getStreet());
-            tvDetalleCP.setText("CP: " + client.getZipCode());
-            tvDetalleMunicipio.setText("MUNICIPIO: " + client.getMunicipality());
-            tvDetalleProvincia.setText("PROVINCIA: " + client.getProvince());
+            tvDetalleCliente.setText(getString(R.string.cliente) + client.getName());
+            tvDetalleCalle.setText(getString(R.string.calle) + client.getStreet());
+            tvDetalleCP.setText(getString(R.string.cp) + client.getZipCode());
+            tvDetalleMunicipio.setText(getString(R.string.municipio) + client.getMunicipality());
+            tvDetalleProvincia.setText(getString(R.string.provincia)+ client.getProvince());
 
-            tvDetalleNomUsuario.setText("NOMBRE: " + user.getName());
-            tvDetalleApellUsuario.setText("APELLIDOS: " + user.getLastName());
-            tvDetalleTelfUsuario.setText("TELF: " + user.getPhoneNum());
-            tvDetalleEmailUsuario.setText("EMAIL: " + user.getEmail());
+            tvDetalleNomUsuario.setText(getString(R.string.nombre) + user.getName());
+            tvDetalleApellUsuario.setText(getString(R.string.apellidos) + user.getLastName());
+            tvDetalleTelfUsuario.setText(getString(R.string.telf) + user.getPhoneNum());
+            tvDetalleEmailUsuario.setText(getString(R.string.email_detalle) + user.getEmail());
 
         } else {
             Toast.makeText(ActivityDetalleTicket.this, R.string.toast_unable_fetch_data_detalle,
@@ -274,7 +263,7 @@ public class ActivityDetalleTicket extends BaseActivity {
         btnDetalleCancelar = findViewById(R.id.btnDetalleCancelar);
         spinner = findViewById(R.id.spinner);
 
-        if(tecnico && !status.equals("Cerrado")) {
+        if(tecnico && !status.equals(getString(R.string.cerrado))) {
             btnDetalleGuardar.setEnabled(true);
             btnDetalleGuardar.setVisibility(View.VISIBLE);
             btnDetalleCancelar.setEnabled(true);
@@ -292,11 +281,11 @@ public class ActivityDetalleTicket extends BaseActivity {
             etSolucionTecnico.setAlpha(0.5f);
             spinner.setEnabled(false);
             spinner.setFocusable(false);
-            spinner.setAlpha(0.5f); // Optional: Make it look disabled by changing its opacity
+            spinner.setAlpha(0.5f);
             spinner.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    return true; // Consume touch events
+                    return true;
                 }
             });
         }

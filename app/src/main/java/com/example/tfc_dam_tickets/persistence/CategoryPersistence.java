@@ -1,10 +1,6 @@
 package com.example.tfc_dam_tickets.persistence;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.example.tfc_dam_tickets.model.Category;
 
@@ -14,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class CategoryPersistence {
 
