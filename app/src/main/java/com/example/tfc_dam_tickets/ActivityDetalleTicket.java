@@ -179,7 +179,7 @@ public class ActivityDetalleTicket extends BaseActivity {
         String formattedDate;
         String formattedTime;
 
-        String[] items = new String[]{String.valueOf((R.string.nuevo)), String.valueOf((R.string.en_proceso)), String.valueOf((R.string.cerrado))};
+        String[] items = new String[]{getString((R.string.nuevo)), getString((R.string.en_proceso)), getString((R.string.cerrado))};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
