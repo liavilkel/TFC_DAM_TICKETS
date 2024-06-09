@@ -65,10 +65,10 @@
     <string name="no_password_conf">Por favor confirme su contraseña.</string>
     <string name="password_changed_email_subject">¡Su contraseña ha cambiado!</string>
     <string name="password_changed_email_body">Estimado usuario,\n\nLa contraseña de acceso a su cuenta ResolverRocket ha sido modificada.\nPor favor, si usted no he reaalizado este cambio póngase en contacto con nosotros inmediatemente.</string>
-    <string name="password_changed_success">Contraseña cambiada satisfactoriamente.</string>
+    <string name="password_changed_success">Contraseña cambiadasatisfactoriamente.</string>
     <string name="password_changed_fail">Se ha producido un error.</string>
-    <string name="signature">"\n\n--\nSaludos cordiales,\nEquipo de Soporte\nResolver Rocket\nCorreo: " +
-                "resolverocket2024@gmail.com\nTeléfono: +34 123 456 789\nSitio web: www.resolverocket.com"</string>
+    <string name="signature">\n\n--\nSaludos cordiales,\nEquipo de Soporte\nResolver Rocket\nCorreo:
+        resolverocket2024@gmail.com\nTeléfono: +34 123 456 789\nSitio web: www.resolverocket.com</string>
     <string name="iniciar_sesion">Iniciar sesión</string>
     <string name="recordaste_contraseña">¿Recordaste tu contraseña?</string>
     <string name="btn_enviar">Enviar</string>
