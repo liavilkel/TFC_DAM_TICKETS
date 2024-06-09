@@ -261,9 +261,8 @@
     <!-- Botones -->
     <LinearLayout
         android:id="@+id/llBotones"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -274,6 +273,7 @@
             android:id="@+id/btnDetalleCancelar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/button_bg"
             android:textColor="@color/white"
@@ -284,6 +284,7 @@
             android:id="@+id/btnDetalleGuardar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/button_bg"
             android:textColor="@color/white"
