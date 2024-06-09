@@ -321,7 +321,7 @@
         app:layout_constraintRight_toRightOf="parent">
 
         <Button
-            android:id="@+id/btnSpain"
+            android:id="@+id/btnSpanish"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
