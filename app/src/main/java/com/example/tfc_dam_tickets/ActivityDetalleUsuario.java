@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tfc_dam_tickets.model.Client;
 import com.example.tfc_dam_tickets.model.User;
@@ -27,7 +28,7 @@ public class ActivityDetalleUsuario extends BaseActivity {
 
     TextView tvEmail, tvNombre, tvApellidos, tvTelf, tvTipo, tvIdClient, tvClientName,
             tvClientStreet, tvClientProv, tvClientMun, tvClientZip;
-    Button btnChangePw, btnSpanish, btnEnglish;
+    Button btnChangePw, btnSpanish, btnEnglish, btnRussian;
     UserPersistence userPersistence;
     ClientPersistence clientPersistence;
 
@@ -60,6 +61,7 @@ public class ActivityDetalleUsuario extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //setLocale("es");
+                Toast.makeText(ActivityDetalleUsuario.this, R.string.working_on_it, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -67,6 +69,14 @@ public class ActivityDetalleUsuario extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //setLocale("en");
+                Toast.makeText(ActivityDetalleUsuario.this, R.string.working_on_it, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnRussian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ActivityDetalleUsuario.this, R.string.working_on_it, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -89,6 +99,7 @@ public class ActivityDetalleUsuario extends BaseActivity {
         btnChangePw = findViewById(R.id.btnCambiarPw);
         btnSpanish = findViewById(R.id.btnSpanish);
         btnEnglish = findViewById(R.id.btnEnglish);
+        btnRussian = findViewById(R.id.btnRussian);
 
     }
 

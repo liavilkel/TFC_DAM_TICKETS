@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tfc_dam_tickets.autenticacion.Login;
+import com.example.tfc_dam_tickets.utils.Validator;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
@@ -31,14 +32,17 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (etEmail.getText().toString().isBlank()) {
-                    Toast.makeText(ForgotPasswordActivity.this, R.string.no_email, Toast.LENGTH_SHORT).show();
+                if (Validator.isEmailValid(etEmail.getText().toString())) {
+                    if (etEmail.getText().toString().isBlank()) {
+                        Toast.makeText(ForgotPasswordActivity.this, R.string.no_email, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent i = new Intent(ForgotPasswordActivity.this, EnterRecCodeActivity.class);
+                        i.putExtra("email", etEmail.getText().toString());
+                        startActivity(i);
+                    }
                 } else {
-                    Intent i = new Intent(ForgotPasswordActivity.this, EnterRecCodeActivity.class);
-                    i.putExtra("email", etEmail.getText().toString());
-                    startActivity(i);
+                    Toast.makeText(ForgotPasswordActivity.this, R.string.invalid_email, Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 

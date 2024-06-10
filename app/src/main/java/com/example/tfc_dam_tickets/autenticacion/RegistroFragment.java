@@ -18,13 +18,11 @@ import com.example.tfc_dam_tickets.R;
 import com.example.tfc_dam_tickets.model.User;
 import com.example.tfc_dam_tickets.persistence.ClientPersistence;
 import com.example.tfc_dam_tickets.persistence.UserPersistence;
+import com.example.tfc_dam_tickets.utils.Validator;
 import com.example.tfc_dam_tickets.utils.PasswordValidator;
 import com.example.tfc_dam_tickets.utils.RandomCodeGenerator;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-
-
-import java.util.regex.Pattern;
 
 public class RegistroFragment extends Fragment {
 
@@ -50,8 +48,6 @@ public class RegistroFragment extends Fragment {
 
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.registro_tab_fragment,container,false);
 
-        //Layout
-        //lEmail, lNombre, lApellidos, lPassword, lConfirmPass, lTelefono, lEmpresaId;
         lEmail = viewGroup.findViewById(R.id.textInputLayoutEmail);
         lNombre = viewGroup.findViewById(R.id.textInputLayoutNombre);
         lApellidos = viewGroup.findViewById(R.id.textInputLayoutApellidos);
@@ -92,7 +88,7 @@ public class RegistroFragment extends Fragment {
                 String companyId = etComId.getText().toString().trim();
 
                 if (!email.isEmpty()) {
-                    if (isValidEmail(email)) {
+                    if (Validator.isEmailValid(email)) {
                         if (!userPer.isEmailInUse(email)) {
                             if (!nombre.isEmpty()) {
                                 if (!apellidos.isEmpty()) {
@@ -222,14 +218,4 @@ public class RegistroFragment extends Fragment {
             iniciarAnimacion();
         }
     }
-
-    public boolean isValidEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        Pattern pattern = Pattern.compile(emailRegex);
-        if (email == null) {
-            return false;
-        }
-        return pattern.matcher(email).matches();
-    }
-
 }

@@ -171,5 +171,6 @@
     <string name="seguro_cerrar_sesion">¿Estás seguro de que quieres cerrar la sesión?</string>
     <string name="subject_codigo_rec">Código de recuperación ResolverRocket</string>
     <string name="todos">Todos</string>
+    <string name="working_on_it">!Estamos trabajando en ello!</string>
 
 </resources>
