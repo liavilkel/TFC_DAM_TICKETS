@@ -38,36 +38,33 @@
             android:id="@+id/spinner_ticket_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTicketsList"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintTop_toBottomOf="@id/llFiltro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/llFiltro">
 
-    <LinearLayout
-        android:id="@+id/llBoton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTicketsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
 
-        <Button
-            android:id="@+id/btnAddTicket"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:textSize="24sp"
-            android:background="@drawable/button_bg"
-            android:text="@string/btn_add_new"/>
-    </LinearLayout>
+    <Button
+        android:id="@+id/btnAddTicket"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:textSize="24sp"
+        android:background="@drawable/button_bg"
+        android:text="@string/btn_add_new"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="10dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
