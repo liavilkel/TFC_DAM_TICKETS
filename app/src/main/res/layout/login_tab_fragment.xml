@@ -29,8 +29,7 @@
         android:paddingTop="10dp"
         android:paddingRight="20dp"
         android:paddingBottom="10dp"
-        android:layout_marginTop="60dp"
-        android:text="admin@admin.com" />
+        android:layout_marginTop="60dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -58,8 +57,6 @@
             android:paddingTop="10dp"
             android:paddingRight="20dp"
             android:paddingBottom="10dp"
-            android:text="admin123"
-
             />
 
     </com.google.android.material.textfield.TextInputLayout>

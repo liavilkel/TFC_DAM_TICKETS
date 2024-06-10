@@ -42,7 +42,6 @@ public class ActivityCategorias extends BaseActivity{
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, numberOfColumns);
         rvCategorias.setLayoutManager(gridLayoutManager);
 
-        // Inicializar persistencias
         categoryPersistence = new CategoryPersistence(this);
         permissionPersistence = new PermissionPersistence(this);
 
